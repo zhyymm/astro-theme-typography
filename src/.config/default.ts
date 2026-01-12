@@ -7,8 +7,8 @@ export const defaultConfig: ThemeConfig = {
   site: {
     title: '福智双修',
     subtitle: '原始佛教的宁静之旅',
-    author: 'Moeyua',
-    description: 'Rediscory the beauty of typography',
+    author: '福智双修',
+    description: '本网站致力于弘扬原始佛教正法，以四圣谛、八正道、三法印为核心，忆念释迦牟尼佛的原始教导，行于无常、苦、无我之道，趣向涅槃寂静。',
     website: 'https://fzsx.de5.net/',
     pageSize: 5,
     socialLinks: [
@@ -32,11 +32,10 @@ export const defaultConfig: ThemeConfig = {
         href: '/about',
       },
     ],
-    categoryMap: [{ name: '胡适', path: 'hu-shi' }],
+    categoryMap: [{ name: 'fuzhi', path: 'fuzhi' }],
     footer: [
-      '© %year <a target="_blank" href="%website">%author</a>',
-      'Theme <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography">Typography</a> by <a target="_blank" href="https://moeyua.com">Moeyua</a>',
-      'Proudly published with <a target="_blank" href="https://astro.build/">Astro</a>',
+      '© %year ','All Rights Reserved. by <a target="_blank" href="https://fzsx.de5.net/">福智双修</a>',
+
     ],
   },
   appearance: {
