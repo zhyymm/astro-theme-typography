@@ -1,95 +1,84 @@
 ---
-import { getCollection } from 'astro:content';
+// src/pages/tags/[...tag].astro
 
-import Layout from '../../layouts/LayoutDefault.astro';
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import { formatDate } from '~/utils';
+import type { Post } from '~/types';
+import { generateSlug } from '~/utils/slugify';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts');
+  const allPosts = await getCollection('posts', post => !post.data.draft);
+  const tagMap = new Map<string, { name: string, posts: Post[] }>();
 
-  const uniqueTags = new Set<string>();
+  allPosts.forEach((post: Post) => {
+    const tags: string[] = post.data.tags ?? [];
+    tags.forEach((chineseTag: string) => {
+      // 这里的生成逻辑必须与全站保持绝对一致
+      const rawSlug = generateSlug(chineseTag);
+      const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseTag;
 
-  allPosts.forEach(post => {
-    if (!post.data.draft) {
-      post.data.tags?.forEach(tag => {
-        if (tag && typeof tag === 'string') {
-          uniqueTags.add(tag.trim());
-        }
-      });
-    }
+      if (slug) {
+        const entry = tagMap.get(slug) || { name: chineseTag, posts: [] };
+        entry.posts.push(post);
+        tagMap.set(slug, entry);
+      }
+    });
   });
 
-  return Array.from(uniqueTags).map(tag => ({
-    params: { tag }
+  return Array.from(tagMap.entries()).map(([slug, data]) => ({
+    params: { tag: slug },
+    props: { posts: data.posts, name: data.name },
   }));
 }
 
-const { tag } = Astro.params;
+// 这里的 name 是标签的中文名，posts 是该标签下的文章数组
+const { posts, name } = Astro.props as { posts: Post[], name: string };
 
-const posts = (await getCollection('posts'))
-  .filter(post => 
-    !post.data.draft && 
-    post.data.tags?.includes(tag)
-  )
-  .sort((a, b) => {
-    const dateA = a.data.modDate ?? a.data.pubDate;
-    const dateB = b.data.modDate ?? b.data.pubDate;
-    return dateB.valueOf() - dateA.valueOf();
-  });
+// 格式化列表项数据
+function getListItems(posts: Post[]) {
+  return posts.map((post: Post) => ({
+    title: post.data.title,
+    href: `/posts/${post.slug || post.id}/`,
+    date: formatDate(post.data.pubDate),
+  }));
+}
+
+const listItems = getListItems(posts);
 ---
 
-<Layout title={`#${tag} - 福智双修`}>
-  <main class="container mx-auto px-3 py-12">
-    <h1 class="text-2xl font-bold mb-3 flex items-center gap-3">
-      <span>🏷️</span> #{tag}
-    </h1>
+<LayoutDefault>
+  <section class="container mx-auto px-4 py-12">
+    <div class="mb-8 border-b pb-4">
+      <h1 class="text-3xl md:text-3xl font-bold text-center md:text-left">
+        # {name}
+      </h1>
+      <p class="text-gray-500 mt-2 text-center md:text-left">
+        共计 {posts.length} 篇文章
+      </p>
+    </div>
 
-    <a href="/tags/" class="text-blue-600 hover:underline mb-8 inline-block">
-      ← 返回所有标签
-    </a>
+    <ul class="pl-6 py-3 space-y-6">
+      {
+        listItems.map((item) => (
+          <li class="flex flex-col md:flex-row md:items-baseline gap-2">
+            <time class="text-gray-400 text-sm tabular-nums min-w-[100px]">
+              {item.date}
+            </time>
+            <h3 class="post-title text-xl font-medium">
+              <a href={item.href} class="hover:text-primary transition-colors">
+                {item.title}
+              </a>
+            </h3>
+          </li>
+        ))
+      }
+    </ul>
 
-    <p class="text-lg text-gray-600 mb-2">
-      共找到 {posts.length} 篇文章
-    </p>
-
-    {posts.length === 0 ? (
-      <div class="text-center py-12 text-gray-500">
-        这个标签下暂时没有文章...
-      </div>
-    ) : (
-      <div class="space-y-8">
-        {posts.map(post => (
-          <article class="border-b border-gray-200 pb-6 last:border-0">
-            <a
-              href={`/posts/${post.id}/`}
-              class="block hover:opacity-80 transition-opacity"
-            >
-              <h2 class="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">
-                {post.data.title}
-              </h2>
-            </a>
-
-            <div class="text-sm text-gray-600 flex flex-wrap gap-3">
-              <time>
-                {(post.data.modDate ?? post.data.pubDate).toLocaleDateString('zh-CN')}
-              </time>
-
-              {post.data.categories?.length > 0 && (
-                <>
-                  ·
-                  {post.data.categories.map(cat => (
-                    <a
-                      href={`/categories/${cat}`}
-                      class="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
-                    >
-                      {cat}
-                    </a>
-                  ))}
-                </>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
+    {posts.length === 0 && (
+        <p class="text-center text-gray-500 py-12 text-lg">
+            该标签下暂无文章。
+        </p>
     )}
-  </main>
-</Layout>
+  </section>
+</LayoutDefault>

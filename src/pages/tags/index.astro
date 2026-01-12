@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/LayoutDefault.astro';
+import Layout from '../../layouts/LayoutDefault.astro';  // 保持和 [tag] 一样的 Layout 路径
 
 const allPosts = await getCollection('posts');
 
@@ -8,8 +8,8 @@ const tagCountMap = new Map<string, number>();
 
 allPosts.forEach(post => {
   if (!post.data.draft) {
-    post.data.tags?.forEach(tag => {
-      tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
+    post.data.tags?.forEach((tag: string) => { // <-- 必须使用圆括号包裹带类型注解的参数
+        tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
     });
   }
 });
@@ -19,28 +19,24 @@ const sortedTags = [...tagCountMap.entries()]
 ---
 
 <Layout title="所有标签 - 福智双修">
-  <main class="container mx-auto px-4 py-10"> <!-- py-12 → py-10 稍收紧 -->
-    <!-- h1 调小一号：text-4xl → text-3xl -->
-    <h1 class="text-3xl font-bold mb-6 text-center">
-      所有标签
-    </h1>
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center md:text-left">所有标签</h1>
 
     {sortedTags.length === 0 ? (
-      <p class="text-center text-gray-600 py-10 text-base">
+      <p class="text-center text-gray-600 py-12">
         还没有任何标签，快去文章里添加 tags 吧～
       </p>
     ) : (
-      <div class="flex flex-wrap gap-3 justify-center">
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
         {sortedTags.map(([tag, count]) => (
           <a
             href={`/tags/${tag}/`}
-            class="inline-flex items-center px-4 py-1.5 bg-gray-100 hover:bg-gray-200
-                   dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full text-sm
-                   font-medium transition-colors duration-200 shadow-sm hover:shadow"
+            class="inline-flex items-center px-5 py-2.5 bg-gray-100 hover:bg-gray-200 
+                   dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full text-base 
+                   font-medium transition-colors duration-200 shadow-sm"
           >
             <span class="font-semibold">#{tag}</span>
-            <!-- 数量字体再小一号：text-sm → text-xs -->
-            <span class="ml-1.5 text-xs text-gray-500 dark:text-gray-400">({count})</span>
+            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">({count})</span>
           </a>
         ))}
       </div>

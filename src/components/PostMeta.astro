@@ -1,42 +1,72 @@
 ---
+// src/components/PostMeta.astro
+
 import type { Post } from '~/types'
 import { formatDate } from '~/utils'
 import PostCategory from './PostCategory.astro'
+import { generateSlug } from '~/utils/slugify'
 
 interface Props {
   post: Post
 }
 
+interface LinkData {
+    name: string;
+    slug: string;
+}
+
 const { post } = Astro.props
 const { translate: t } = Astro.locals
 
-const categoryList = post.data.categories ?? []
-const tagList = post.data.tags ?? []
+// 1. 获取基础列表
+const categoryList: string[] = post.data.categories ?? []
+const tagList: string[] = post.data.tags ?? []
+
+// 2. ⭐ 核心改进：添加安全回退机制 (Fallback)
+const categoryLinkData: LinkData[] = categoryList.map((name: string) => {
+    const generated = generateSlug(name);
+    return {
+        name: name,
+        // 如果 generated 为空字符串，则直接编码中文名作为路径
+        slug: (generated && generated.trim() !== '') ? generated : encodeURIComponent(name)
+    };
+});
+
+// 3. ⭐ 核心改进：对标签也应用相同的逻辑
+const tagLinkData: LinkData[] = tagList.map((name: string) => {
+    const generated = generateSlug(name);
+    return {
+        name: name,
+        slug: (generated && generated.trim() !== '') ? generated : encodeURIComponent(name)
+    };
+});
 ---
 
 <header flex="~ col gap-2">
   <h1 class="post-title">
-    <a class="not-prose" href={`/posts/${post.id}/`}>{post.data.title}</a>
-  </h1>
+      <a class="not-prose" href={`/posts/${post.slug || post.id}/`}>{post.data.title}</a>
+    </h1>
 
-  <div class="text-3.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-    <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
-    <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
+    <div class="text-3.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+      <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
+      <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
 
-    {categoryList.map((category) => <PostCategory category={category} />)}
+      {categoryLinkData.map((category: LinkData) => (
+        <PostCategory category={{ name: category.name, slug: category.slug }} />
+      ))}
 
-    {tagList.length > 0 && (
-      <>
-        <span class="text-gray-400 mx-1">|</span>
-        {tagList.map((tag) => (
-          <a
-            href={`/tags/${tag}/`}
-            class="text-primary hover:underline whitespace-nowrap"
-          >
-            #{tag}
-          </a>
-        ))}
-      </>
-    )}
-  </div>
+      {tagLinkData.length > 0 && (
+        <>
+          <span class="text-gray-400 mx-1">|</span>
+          {tagLinkData.map((tag: LinkData) => (
+            <a
+              href={`/tags/${tag.slug}/`}
+              class="text-primary hover:underline whitespace-nowrap"
+            >
+              #{tag.name}
+            </a>
+          ))}
+        </>
+      )}
+    </div>
 </header>

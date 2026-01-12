@@ -1,46 +1,75 @@
 ---
-import { themeConfig } from '~/.config'
+// src/pages/categories/index.astro
+
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import { getCategories, getPathFromCategory } from '~/utils/index'
-import { getCollection } from 'astro:content'  // 新增：直接获取所有文章
+import { getCollection, type CollectionEntry } from 'astro:content'
+// ⭐ 必须导入这个工具
+import { generateSlug } from '~/utils/slugify'
 
 const { translate: t } = Astro.locals
+type Post = CollectionEntry<'posts'>;
 
-// 原有分类列表
-const categoryMap = await getCategories()
-const list = getListFromMap(categoryMap)
-
-function getListFromMap(map: typeof categoryMap) {
-  return Array.from(map).map(([key, value]) => ({
-    title: key,
-    href: `/categories/${getPathFromCategory(key, themeConfig.site.categoryMap)}`,
-    size: t('categories_count', value.length),
-  }))
-}
-
-// 新增：全站标签统计（从所有文章中计算）
+// 1. 获取所有文章
 const allPosts = await getCollection('posts', post => !post.data.draft)
-const tagCountMap = new Map<string, number>()
 
-allPosts.forEach(post => {
-  post.data.tags?.forEach(tag => {
-    tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1)
-  })
-})
+// 2. 构建分类列表 (实时生成 Slug)
+const categoryMap = new Map<string, { name: string, count: number, slug: string }>()
+
+allPosts.forEach((post: Post) => {
+    const categories: string[] = post.data.categories ?? [];
+
+    // ⭐ 核心修复：不再检查 categorySlugs，而是直接生成
+    if (categories.length > 0) {
+        const chineseName: string = categories[0];
+
+        // 生成逻辑与 [...category].astro 保持绝对一致
+        const rawSlug = generateSlug(chineseName);
+        const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
+
+        const entry = categoryMap.get(chineseName) || { name: chineseName, count: 0, slug: slug };
+        entry.count += 1;
+        categoryMap.set(chineseName, entry);
+    }
+});
+
+const categoryList = Array.from(categoryMap.values()).map(item => ({
+    title: item.name,
+    href: `/categories/${encodeURIComponent(item.slug)}/`, // 确保 URL 安全
+    size: t('categories_count', item.count),
+}));
+
+
+// 3. 全站标签统计 (实时生成 Slug)
+const tagCountMap = new Map<string, { count: number, slug: string }>()
+
+allPosts.forEach((post: Post) => {
+    const tags: string[] = post.data.tags ?? [];
+
+    if (tags.length > 0) {
+        tags.forEach((chineseTag: string) => {
+            // ⭐ 核心修复：实时生成 Tag Slug
+            const rawTagSlug = generateSlug(chineseTag);
+            const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
+
+            const entry = tagCountMap.get(chineseTag) || { count: 0, slug: tagSlug };
+            entry.count += 1;
+            tagCountMap.set(chineseTag, entry);
+        });
+    }
+});
 
 const sortedTags = [...tagCountMap.entries()]
-  .sort((a, b) => b[1] - a[1])  // 按数量降序
-  .slice(0, 20)  // 可选：只显示前20个热门标签，避免太多
+  .sort((a, b) => b[1].count - a[1].count)
+  .slice(0, 50) // 可以多显示一些
 ---
 
 <LayoutDefault>
   <section class="container mx-auto px-4 py-12">
     <h2 class="post-title text-4xl font-bold mb-8">{t('Categories')}</h2>
 
-    <!-- 分类列表（保持原样） -->
     <ul class="pl-6" flex="~ col gap-6 mb-16">
       {
-        list.map(({ title, href, size }) => (
+        categoryList.map(({ title, href, size }) => (
           <li class="border-b pb-4 last:border-0">
             <h3 class="post-title text-2xl font-semibold">
               <a href={href} class="hover:underline"># {title}</a>
@@ -51,26 +80,25 @@ const sortedTags = [...tagCountMap.entries()]
       }
     </ul>
 
-    <!-- 新增：全站热门标签云（从导航栏进来也能看到标签） -->
     {sortedTags.length > 0 && (
       <div class="mt-12">
         <h3 class="text-2xl font-bold mb-6">全站热门标签</h3>
         <div class="flex flex-wrap gap-3">
-          {sortedTags.map(([tag, count]) => (
+          {sortedTags.map(([chineseTag, data]) => (
             <a
-              href={`/tags/${tag}/`}
+              href={`/tags/${encodeURIComponent(data.slug)}/`}
               class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200
                      rounded-full text-base font-medium transition-colors shadow-sm hover:shadow"
             >
-              #{tag}
-              <span class="ml-2 text-sm text-gray-500">({count})</span>
+              #{chineseTag}
+              <span class="ml-2 text-sm text-gray-500">({data.count})</span>
             </a>
           ))}
         </div>
       </div>
     )}
 
-    {sortedTags.length === 0 && list.length === 0 && (
+    {sortedTags.length === 0 && categoryList.length === 0 && (
       <p class="text-center text-gray-500 py-12 text-lg">
         暂无分类或标签，快去添加内容吧～
       </p>

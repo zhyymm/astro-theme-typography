@@ -13,7 +13,7 @@ const lang = themeConfig.appearance.locale ?? 'en-us'
 const dark = themeConfig.appearance.theme === 'dark'
 ---
 
-<html lang={lang} class:list={[{ dark }]}>  <!-- 删掉 'animation-prepared' -->
+<html lang={lang} class:list={[{ dark }]}>
 
   <head>
     <slot name="seo"> <SiteSeo /> </slot>
@@ -44,39 +44,9 @@ const dark = themeConfig.appearance.theme === 'dark'
       <SiteFooter />
     </footer>
 
-    <!-- 删掉无用的首次动画监听脚本 -->
-    <!-- <script>
-      document.addEventListener('animationend', removeAnimation, false)
-      function removeAnimation() {
-        document.documentElement.classList.remove('animation-prepared')
-        document.removeEventListener('animationend', removeAnimation, false)
-      }
-    </script> -->
-
     <style>
-      /* 彻底移除首次加载动画相关规则（已注释掉） */
-
-      @keyframes fade-in-down {
-        0% {
-          transform: translateY(-1rem);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      @keyframes fade-in-left {
-        0% {
-          opacity: 0;
-          transform: translateX(1rem);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
+      /* 移除首次加载动画的keyframes */
+      /* @keyframes fade-in-down / @keyframes fade-in-left 已被移除 */
 
       /* 只保留页面过渡动画（Swup 切换页面时用） */
       html.is-animating .transition-swup-main,

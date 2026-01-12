@@ -1,18 +1,23 @@
 ---
-import { themeConfig } from '~/.config'
-import { getPathFromCategory } from '~/utils'
+// src/components/PostCategory.astro
 
+// ⚠️ 移除未使用的导入，消除 TypeScript 警告
+// import { themeConfig } from '~/.config'
+// import { getPathFromCategory } from '~/utils'
+
+interface CategoryData {
+  name: string // 中文名称
+  slug: string // 英文 Slug (用于 URL)
+}
 interface Props {
-  category: string
+  category: CategoryData // 接收包含 name 和 slug 的对象
 }
 
 const { category } = Astro.props
-
-function getCategoryUrl(category: string) {
-  return `/categories/${getPathFromCategory(category, themeConfig.site.categoryMap)}`
-}
+// 直接使用 slug 构建路径
+const path = category.slug
 ---
 
-<a href={getCategoryUrl(category)}>
-  # {category}
+<a href={`/categories/${path}/`} class="text-primary hover:underline whitespace-nowrap">
+  {category.name} {/* 显示中文名 */}
 </a>

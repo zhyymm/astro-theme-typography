@@ -1,14 +1,21 @@
 ---
+// src/components/SiteNavigation.astro
 import { themeConfig } from '~/.config'
 
 const { navLinks, socialLinks } = themeConfig.site
 const { translate: t } = Astro.locals
+
+// 假设 navLinks 结构为 { href: string, name: string }[]
+type NavLink = { href: string; name: string };
+// 假设 socialLinks 结构为 { href: string, name: string }[]
+type SocialLink = { href: string; name: string };
 ---
 
 <nav class="text-center font-bold" flex="~ col gap-4">
   <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
     {
-      navLinks.map((nav) => (
+      // ⭐ 修复 navLinks.map 的 ts(7006) 错误
+      navLinks.map((nav: NavLink) => (
         <li>
           <a class="" href={nav.href}>
             {t(nav.name)}
@@ -19,7 +26,8 @@ const { translate: t } = Astro.locals
   </ul>
   <ul flex="~ row gap-1 justify-center">
     {
-      socialLinks.map(({ href, name }) => (
+      // ⭐ 修复 socialLinks.map 的 ts(7031) 错误
+      socialLinks.map(({ href, name }: SocialLink) => (
         <li>
           <a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
             <span class:list={[`i-mdi-${name}`, 'w-6 h-6']}>{name}</span>

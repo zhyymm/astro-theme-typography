@@ -1,4 +1,5 @@
 ---
+// src/components/SiteFooter.astro
 import { themeConfig } from '~/.config'
 
 const year = new Date().getFullYear()
@@ -13,7 +14,8 @@ function parseFooter(str: string) {
 }
 ---
 
-{footer.length && footer.map((str) => <p set:html={parseFooter(str)} />)}
+{/* ⭐ 修复 ts(7006) 错误：为 str 参数添加 string 类型注解 */}
+{footer.length && footer.map((str: string) => <p set:html={parseFooter(str)} />)}
 
 <style>
   p {
