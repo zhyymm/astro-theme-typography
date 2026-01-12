@@ -40,7 +40,9 @@ function getListItems(posts: Post[]) {
 
 <LayoutDefault>
   <section>
-    <h2 class="post-title"># {name}</h2>
+  <h1 class="text-3xl md:text-4xl font-bold mb-5 text-center md:text-left">
+        # {name}
+      </h1>
 
     <!-- 新增：本分类常用标签云 -->
     {sortedTags.length > 0 && (

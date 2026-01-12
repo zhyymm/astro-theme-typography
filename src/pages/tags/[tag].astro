@@ -42,9 +42,11 @@ const posts = (await getCollection('posts'))
     <h1 class="text-2xl font-bold mb-3 flex items-center gap-3">
       <span>🏷️</span> #{tag}
     </h1>
-<a href="/tags/" class="text-blue-600 hover:underline mb-8 inline-block">
-  ← 返回所有标签
-</a>
+
+    <a href="/tags/" class="text-blue-600 hover:underline mb-8 inline-block">
+      ← 返回所有标签
+    </a>
+
     <p class="text-lg text-gray-600 mb-2">
       共找到 {posts.length} 篇文章
     </p>
@@ -57,24 +59,32 @@ const posts = (await getCollection('posts'))
       <div class="space-y-8">
         {posts.map(post => (
           <article class="border-b border-gray-200 pb-6 last:border-0">
-            <a 
+            <a
               href={`/posts/${post.id}/`}
               class="block hover:opacity-80 transition-opacity"
             >
-              <h2 class="text-2xl font-semibold mb-2">
+              <h2 class="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">
                 {post.data.title}
               </h2>
             </a>
-            
+
             <div class="text-sm text-gray-600 flex flex-wrap gap-3">
               <time>
                 {(post.data.modDate ?? post.data.pubDate).toLocaleDateString('zh-CN')}
               </time>
-              
+
               {post.data.categories?.length > 0 && (
-                <span>
-                  · {post.data.categories.join(' / ')}
-                </span>
+                <>
+                  ·
+                  {post.data.categories.map(cat => (
+                    <a
+                      href={`/categories/${cat}`}
+                      class="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+                    >
+                      {cat}
+                    </a>
+                  ))}
+                </>
               )}
             </div>
           </article>
