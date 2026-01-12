@@ -1,10 +1,10 @@
 ---
-title: Latex Example
+title: 测试文章
 pubDate: 2023-10-01
 categories: ["Examples"]
 description: "Here is a sample of some basic Latex syntax that can be used when writing Latex content in Astro."
 slug: latex-example
-draft: true
+draft: false
 ---
 
 In this post, we will showcase some basic LaTeX syntax that can be used when writing LaTeX content in Astro.
