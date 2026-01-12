@@ -44,6 +44,9 @@ importers:
       giscus:
         specifier: ^1.6.0
         version: 1.6.0
+      pinyin-pro:
+        specifier: ^3.27.0
+        version: 3.27.0
       rehype-katex:
         specifier: ^7.0.1
         version: 7.0.1
@@ -4329,6 +4332,9 @@ packages:
   pify@5.0.0:
     resolution: {integrity: sha512-eW/gHNMlxdSP6dmG6uJip6FXN0EQBwm2clYYd8Wul42Cwu/DK8HEftzsapcNdYe2MfLiIwZqsDk2RDEsTE79hA==}
     engines: {node: '>=10'}
+
+  pinyin-pro@3.27.0:
+    resolution: {integrity: sha512-Osdgjwe7Rm17N2paDMM47yW+jUIUH3+0RGo8QP39ZTLpTaJVDK0T58hOLaMQJbcMmAebVuK2ePunTEVEx1clNQ==}
 
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
@@ -10962,6 +10968,8 @@ snapshots:
   pidtree@0.6.0: {}
 
   pify@5.0.0: {}
+
+  pinyin-pro@3.27.0: {}
 
   pkg-dir@4.2.0:
     dependencies:

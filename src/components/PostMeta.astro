@@ -22,22 +22,22 @@ const { translate: t } = Astro.locals
 const categoryList: string[] = post.data.categories ?? []
 const tagList: string[] = post.data.tags ?? []
 
-// 2. ⭐ 核心改进：添加安全回退机制 (Fallback)
+// 2. 核心改进：添加安全回退机制
 const categoryLinkData: LinkData[] = categoryList.map((name: string) => {
     const generated = generateSlug(name);
     return {
         name: name,
-        // 如果 generated 为空字符串，则直接编码中文名作为路径
-        slug: (generated && generated.trim() !== '') ? generated : encodeURIComponent(name)
+        // 这里不需要 encodeURIComponent，因为 PostCategory 内部会处理，或者保持原始以匹配路由
+        slug: (generated && generated.trim() !== '') ? generated : name
     };
 });
 
-// 3. ⭐ 核心改进：对标签也应用相同的逻辑
+// 3. 对标签也应用相同的逻辑
 const tagLinkData: LinkData[] = tagList.map((name: string) => {
     const generated = generateSlug(name);
     return {
         name: name,
-        slug: (generated && generated.trim() !== '') ? generated : encodeURIComponent(name)
+        slug: (generated && generated.trim() !== '') ? generated : name
     };
 });
 ---
@@ -57,15 +57,19 @@ const tagLinkData: LinkData[] = tagList.map((name: string) => {
 
       {tagLinkData.length > 0 && (
         <>
-          <span class="text-gray-400 mx-1">|</span>
-          {tagLinkData.map((tag: LinkData) => (
-            <a
-              href={`/tags/${tag.slug}/`}
-              class="text-primary hover:underline whitespace-nowrap"
-            >
-              #{tag.name}
-            </a>
-          ))}
+                     {tagLinkData.length > 0 && (
+                  <>
+                    <span class="text-gray-400 mx-1">|</span>
+                    {tagLinkData.map((tag: LinkData) => (
+                      <a
+                        href={`/tags/${encodeURIComponent(tag.slug)}/`}
+                        class="text-primary hover:underline whitespace-nowrap"
+                      >
+                        #{tag.name}
+                      </a>
+                    ))}
+                  </>
+                )}
         </>
       )}
     </div>

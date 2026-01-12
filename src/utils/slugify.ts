@@ -1,13 +1,18 @@
-// src/utils/slugify.ts
+import { pinyin } from 'pinyin-pro';
 
 export function generateSlug(text: string): string {
   if (!text) return 'undefined';
 
-  return text
-      .toString()
+  // 1. 将中文转换为拼音（例如：巴利三藏 -> ba-li-san-zang）
+  const pinyinText = pinyin(text, { toneType: 'none', type: 'array' }).join('-');
+
+  // 2. 标准 Slug 处理
+  return pinyinText
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, '-')     // 替换空格为 -
-      .replace(/[^\w\u4e00-\u9fa5-]+/g, '') // 💡 关键：允许字母、数字、连字符以及“中文字符”
-      .replace(/--+/g, '-')     // 替换连续的 -
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '') // 移除所有非字母数字和横杠
+      .replace(/--+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
 }

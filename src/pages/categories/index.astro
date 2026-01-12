@@ -3,26 +3,19 @@
 
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import { getCollection, type CollectionEntry } from 'astro:content'
-// ⭐ 必须导入这个工具
 import { generateSlug } from '~/utils/slugify'
 
 const { translate: t } = Astro.locals
 type Post = CollectionEntry<'posts'>;
 
-// 1. 获取所有文章
 const allPosts = await getCollection('posts', post => !post.data.draft)
 
-// 2. 构建分类列表 (实时生成 Slug)
 const categoryMap = new Map<string, { name: string, count: number, slug: string }>()
 
 allPosts.forEach((post: Post) => {
     const categories: string[] = post.data.categories ?? [];
-
-    // ⭐ 核心修复：不再检查 categorySlugs，而是直接生成
     if (categories.length > 0) {
-        const chineseName: string = categories[0];
-
-        // 生成逻辑与 [...category].astro 保持绝对一致
+        const chineseName = categories[0];
         const rawSlug = generateSlug(chineseName);
         const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
 
@@ -34,20 +27,16 @@ allPosts.forEach((post: Post) => {
 
 const categoryList = Array.from(categoryMap.values()).map(item => ({
     title: item.name,
-    href: `/categories/${encodeURIComponent(item.slug)}/`, // 确保 URL 安全
+    href: `/categories/${encodeURIComponent(item.slug)}/`,
     size: t('categories_count', item.count),
 }));
 
-
-// 3. 全站标签统计 (实时生成 Slug)
 const tagCountMap = new Map<string, { count: number, slug: string }>()
 
 allPosts.forEach((post: Post) => {
     const tags: string[] = post.data.tags ?? [];
-
     if (tags.length > 0) {
         tags.forEach((chineseTag: string) => {
-            // ⭐ 核心修复：实时生成 Tag Slug
             const rawTagSlug = generateSlug(chineseTag);
             const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
 
@@ -60,7 +49,7 @@ allPosts.forEach((post: Post) => {
 
 const sortedTags = [...tagCountMap.entries()]
   .sort((a, b) => b[1].count - a[1].count)
-  .slice(0, 50) // 可以多显示一些
+  .slice(0, 50)
 ---
 
 <LayoutDefault>
@@ -87,8 +76,7 @@ const sortedTags = [...tagCountMap.entries()]
           {sortedTags.map(([chineseTag, data]) => (
             <a
               href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200
-                     rounded-full text-base font-medium transition-colors shadow-sm hover:shadow"
+              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-base font-medium transition-colors shadow-sm hover:shadow"
             >
               #{chineseTag}
               <span class="ml-2 text-sm text-gray-500">({data.count})</span>
