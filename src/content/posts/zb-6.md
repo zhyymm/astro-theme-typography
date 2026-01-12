@@ -1,9 +1,10 @@
 ---
 title: 中部6经：希望经
 pubDate: 2026-01-11
-categories: ['巴利三藏-中部']
+categories: ['巴利三藏']
 description: ''
-slug: 
+slug:
+tags: [中部]
 draft: false
 ---
 中部6经/希望经

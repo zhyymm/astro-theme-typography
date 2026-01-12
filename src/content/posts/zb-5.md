@@ -1,9 +1,10 @@
 ---
 title: 中部5经：无垢经
 pubDate: 2026-01-11
-categories: ['巴利三藏-中部']
+categories: ['巴利三藏']
 description: ''
-slug: 
+slug:
+tags: [中部]
 draft: false
 ---
 我曾听闻：一时，世尊住在舍卫城，祇树林给孤独园。那时，尊者舍利弗对众比丘说：“诸贤友，比丘们！”比丘们应诺尊者舍利弗说：“贤友！”尊者舍利弗于是说：
