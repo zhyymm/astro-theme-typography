@@ -64,6 +64,7 @@ export const defaultConfig: ThemeConfig = {
     fullText: true,
   },
   comment: {
+
     // disqus: { shortname: "typography-astro" },
   },
   analytics: {

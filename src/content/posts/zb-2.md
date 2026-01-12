@@ -1,7 +1,7 @@
 ---
 title: 中部2经 一切烦恼经
 pubDate: 2026-01-11
-categories: ['巴利三藏']
+categories: ['巴利三藏-中部']
 description: ''
 slug: 
 draft: false
