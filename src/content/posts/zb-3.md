@@ -1,5 +1,5 @@
 ---
-title: 中部3经法嗣经
+title: 中部3经：法嗣经
 pubDate: 2026-01-11
 categories: ['巴利三藏-中部']
 description: ''

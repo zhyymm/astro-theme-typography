@@ -1,5 +1,5 @@
 ---
-title: 中部1经 根本法门经
+title: 中部1经：根本法门经
 pubDate: 2026-01-11
 categories: ['巴利三藏-中部']
 description: ''

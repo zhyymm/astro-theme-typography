@@ -1,5 +1,5 @@
 ---
-title: 中部4经怖骇经
+title: 中部4经：怖骇经
 pubDate: 2026-01-11
 categories: ['巴利三藏-中部']
 description: ''

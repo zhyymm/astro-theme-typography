@@ -1,5 +1,5 @@
 ---
-title: 中部7经 衣布譬喻经
+title: 中部7经：衣布譬喻经
 pubDate: 2026-01-11
 categories: ['巴利三藏-中部']
 draft: false

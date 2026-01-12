@@ -1,5 +1,5 @@
 ---
-title: 中部5经无垢经
+title: 中部5经：无垢经
 pubDate: 2026-01-11
 categories: ['巴利三藏-中部']
 description: ''
