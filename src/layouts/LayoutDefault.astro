@@ -13,7 +13,8 @@ const lang = themeConfig.appearance.locale ?? 'en-us'
 const dark = themeConfig.appearance.theme === 'dark'
 ---
 
-<html lang={lang} class:list={['animation-prepared', { dark }]}>
+<html lang={lang} class:list={[{ dark }]}>  <!-- 删掉 'animation-prepared' -->
+
   <head>
     <slot name="seo"> <SiteSeo /> </slot>
     <LaTeX />
@@ -43,24 +44,17 @@ const dark = themeConfig.appearance.theme === 'dark'
       <SiteFooter />
     </footer>
 
-    <script>
+    <!-- 删掉无用的首次动画监听脚本 -->
+    <!-- <script>
       document.addEventListener('animationend', removeAnimation, false)
       function removeAnimation() {
         document.documentElement.classList.remove('animation-prepared')
         document.removeEventListener('animationend', removeAnimation, false)
       }
-    </script>
-    <style>
-      /* 页面首次加载动画 */
-      html.animation-prepared .transition-swup-header,
-      html.animation-prepared .transition-swup-footer {
-        animation: fade-in-down 1s linear 1;
-        --at-apply: 'lg-animate-name-fade-in-left';
-      }
+    </script> -->
 
-      html.animation-prepared .transition-swup-main {
-        animation: fade-in-down 1s linear 1;
-      }
+    <style>
+      /* 彻底移除首次加载动画相关规则（已注释掉） */
 
       @keyframes fade-in-down {
         0% {
@@ -78,27 +72,24 @@ const dark = themeConfig.appearance.theme === 'dark'
           opacity: 0;
           transform: translateX(1rem);
         }
-
         100% {
           opacity: 1;
           transform: translateX(0);
         }
       }
 
-      /* 页面过渡动画 */
-      html.is-animating .transition-swup-main {
+      /* 只保留页面过渡动画（Swup 切换页面时用） */
+      html.is-animating .transition-swup-main,
+      html.is-leaving .transition-swup-main {
         opacity: 0;
         transform: translateY(-1rem);
       }
-      html.is-leaving .transition-swup-main {
-        opacity: 0;
-        transform: translateY(1rem);
-      }
+
+      /* 默认状态强制可见（防止卡住） */
       .transition-swup-main {
-        transition-duration: 0.5s;
-        transition-timing-function: linear;
-        transform: translateY(0);
-        opacity: 1;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition: opacity 0.5s linear, transform 0.5s linear;
       }
     </style>
   </body>

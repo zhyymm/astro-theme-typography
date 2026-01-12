@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+
+import Layout from '../../layouts/LayoutDefault.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts');
+
+  const uniqueTags = new Set<string>();
+
+  allPosts.forEach(post => {
+    if (!post.data.draft) {
+      post.data.tags?.forEach(tag => {
+        if (tag && typeof tag === 'string') {
+          uniqueTags.add(tag.trim());
+        }
+      });
+    }
+  });
+
+  return Array.from(uniqueTags).map(tag => ({
+    params: { tag }
+  }));
+}
+
+const { tag } = Astro.params;
+
+const posts = (await getCollection('posts'))
+  .filter(post => 
+    !post.data.draft && 
+    post.data.tags?.includes(tag)
+  )
+  .sort((a, b) => {
+    const dateA = a.data.modDate ?? a.data.pubDate;
+    const dateB = b.data.modDate ?? b.data.pubDate;
+    return dateB.valueOf() - dateA.valueOf();
+  });
+---
+
+<Layout title={`#${tag} - 福智双修`}>
+  <main class="container mx-auto px-3 py-12">
+    <h1 class="text-3xl font-bold mb-3 flex items-center gap-3">
+      <span>🏷️</span> #{tag}
+    </h1>
+<a href="/tags/" class="text-blue-600 hover:underline mb-8 inline-block">
+  ← 返回所有标签
+</a>
+    <p class="text-lg text-gray-600 mb-10">
+      共找到 {posts.length} 篇文章
+    </p>
+
+    {posts.length === 0 ? (
+      <div class="text-center py-12 text-gray-500">
+        这个标签下暂时没有文章...
+      </div>
+    ) : (
+      <div class="space-y-8">
+        {posts.map(post => (
+          <article class="border-b border-gray-200 pb-6 last:border-0">
+            <a 
+              href={`/posts/${post.id}/`}
+              class="block hover:opacity-80 transition-opacity"
+            >
+              <h2 class="text-2xl font-semibold mb-2">
+                {post.data.title}
+              </h2>
+            </a>
+            
+            <div class="text-sm text-gray-600 flex flex-wrap gap-3">
+              <time>
+                {(post.data.modDate ?? post.data.pubDate).toLocaleDateString('zh-CN')}
+              </time>
+              
+              {post.data.categories?.length > 0 && (
+                <span>
+                  · {post.data.categories.join(' / ')}
+                </span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </main>
+</Layout>

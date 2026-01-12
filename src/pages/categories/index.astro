@@ -2,10 +2,12 @@
 import { themeConfig } from '~/.config'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import { getCategories, getPathFromCategory } from '~/utils/index'
+import { getCollection } from 'astro:content'  // 新增：直接获取所有文章
 
 const { translate: t } = Astro.locals
-const categoryMap = await getCategories()
 
+// 原有分类列表
+const categoryMap = await getCategories()
 const list = getListFromMap(categoryMap)
 
 function getListFromMap(map: typeof categoryMap) {
@@ -15,22 +17,63 @@ function getListFromMap(map: typeof categoryMap) {
     size: t('categories_count', value.length),
   }))
 }
+
+// 新增：全站标签统计（从所有文章中计算）
+const allPosts = await getCollection('posts', post => !post.data.draft)
+const tagCountMap = new Map<string, number>()
+
+allPosts.forEach(post => {
+  post.data.tags?.forEach(tag => {
+    tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1)
+  })
+})
+
+const sortedTags = [...tagCountMap.entries()]
+  .sort((a, b) => b[1] - a[1])  // 按数量降序
+  .slice(0, 20)  // 可选：只显示前20个热门标签，避免太多
 ---
 
 <LayoutDefault>
-  <section>
-    <h2 class="post-title">{t('Categories')}</h2>
-    <ul class="pl-6" flex="~ col gap-4">
+  <section class="container mx-auto px-4 py-12">
+    <h2 class="post-title text-4xl font-bold mb-8">{t('Categories')}</h2>
+
+    <!-- 分类列表（保持原样） -->
+    <ul class="pl-6" flex="~ col gap-6 mb-16">
       {
         list.map(({ title, href, size }) => (
-          <li>
-            <h3 class="post-title">
-              <a href={href}># {title}</a>
+          <li class="border-b pb-4 last:border-0">
+            <h3 class="post-title text-2xl font-semibold">
+              <a href={href} class="hover:underline"># {title}</a>
             </h3>
-            <p>{size}</p>
+            <p class="text-gray-600 mt-1">{size}</p>
           </li>
         ))
       }
     </ul>
+
+    <!-- 新增：全站热门标签云（从导航栏进来也能看到标签） -->
+    {sortedTags.length > 0 && (
+      <div class="mt-12">
+        <h3 class="text-2xl font-bold mb-6">全站热门标签</h3>
+        <div class="flex flex-wrap gap-3">
+          {sortedTags.map(([tag, count]) => (
+            <a
+              href={`/tags/${tag}/`}
+              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200
+                     rounded-full text-base font-medium transition-colors shadow-sm hover:shadow"
+            >
+              #{tag}
+              <span class="ml-2 text-sm text-gray-500">({count})</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {sortedTags.length === 0 && list.length === 0 && (
+      <p class="text-center text-gray-500 py-12 text-lg">
+        暂无分类或标签，快去添加内容吧～
+      </p>
+    )}
   </section>
 </LayoutDefault>

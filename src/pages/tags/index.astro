@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/LayoutDefault.astro';  // 保持和 [tag] 一样的 Layout 路径
+
+const allPosts = await getCollection('posts');
+
+const tagCountMap = new Map<string, number>();
+
+allPosts.forEach(post => {
+  if (!post.data.draft) {
+    post.data.tags?.forEach(tag => {
+      tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
+    });
+  }
+});
+
+const sortedTags = [...tagCountMap.entries()]
+  .sort((a, b) => b[1] - a[1]); // 按数量降序
+---
+
+<Layout title="所有标签 - 福智双修">
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center md:text-left">所有标签</h1>
+
+    {sortedTags.length === 0 ? (
+      <p class="text-center text-gray-600 py-12">
+        还没有任何标签，快去文章里添加 tags 吧～
+      </p>
+    ) : (
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+        {sortedTags.map(([tag, count]) => (
+          <a
+            href={`/tags/${tag}/`}
+            class="inline-flex items-center px-5 py-2.5 bg-gray-100 hover:bg-gray-200 
+                   dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full text-base 
+                   font-medium transition-colors duration-200 shadow-sm"
+          >
+            <span class="font-semibold">#{tag}</span>
+            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">({count})</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </main>
+</Layout>

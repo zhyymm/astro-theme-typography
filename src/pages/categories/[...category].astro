@@ -17,6 +17,17 @@ export async function getStaticPaths() {
 
 const { posts, name } = Astro.props
 
+// 新增：计算当前分类下每个 tag 的出现次数
+const tagCountMap = new Map<string, number>()
+posts.forEach((post: Post) => {
+  post.data.tags?.forEach(tag => {
+    tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1)
+  })
+})
+
+// 按数量降序排序（可选：可再加 .slice(0, 10) 限制显示前10个）
+const sortedTags = [...tagCountMap.entries()].sort((a, b) => b[1] - a[1])
+
 function getListItems(posts: Post[]) {
   const result = posts.map((post) => ({
     title: post.data.title,
@@ -30,6 +41,26 @@ function getListItems(posts: Post[]) {
 <LayoutDefault>
   <section>
     <h2 class="post-title"># {name}</h2>
+
+    <!-- 新增：本分类常用标签云 -->
+    {sortedTags.length > 0 && (
+      <div class="mt-6 mb-10">
+        <p class="text-lg font-medium mb-4 text-gray-700">本分类常用标签</p>
+        <div class="flex flex-wrap gap-3">
+          {sortedTags.map(([tag, count]) => (
+            <a
+              href={`/tags/${tag}/`}
+              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200
+                     rounded-full text-sm transition-colors shadow-sm hover:shadow"
+            >
+              <span>#{tag}</span>
+              <span class="ml-1.5 text-xs text-gray-500">({count})</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
     <ul class="pl-6 py-3" flex="~ col gap-4">
       {
         getListItems(posts).map(({ title, href, date }) => (
