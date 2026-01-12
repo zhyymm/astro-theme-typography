@@ -5,29 +5,14 @@ import type { ThemeConfig } from '~/types'
 
 export const defaultConfig: ThemeConfig = {
   site: {
-    title: '活版印字',
-    subtitle: 'Typography',
+    title: '福智双修',
+    subtitle: '原始佛教的宁静之旅',
     author: 'Moeyua',
     description: 'Rediscory the beauty of typography',
-    website: 'https://astro-theme-typography.vercel.app/',
+    website: 'https://fzsx.de5.net/',
     pageSize: 5,
     socialLinks: [
-      {
-        name: 'github',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
-      {
-        name: 'rss',
-        href: '/atom.xml',
-      },
-      {
-        name: 'twitter',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
-      {
-        name: 'mastodon',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
+
     ],
     navLinks: [
       {
