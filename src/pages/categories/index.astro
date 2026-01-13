@@ -50,43 +50,48 @@ const sortedTags = [...tagCountMap.entries()]
 ---
 
 <LayoutDefault>
-  <section class="container mx-auto px-4 py-12">
-    <h2 class="post-title text-4xl font-bold mb-10">{t('Categories')}</h2>
+  <div class="py-8">
+    <header class="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <h1 class="text-2xl font-bold mb-2">{t('Categories')}</h1>
+      <p class="text-sm opacity-50 italic">根据经藏与法义主题进行的分类汇总</p>
+    </header>
 
-    <ul class="mb-16 flex flex-col gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-16">
       {
         categoryList.map(({ title, href, count }) => (
-          <li class="group">
-            <h3 class="post-title text-2xl font-semibold mb-2">
-              <a href={href} class="hover:text-primary transition-colors">
-                # {title}
+          <div class="group flex items-center justify-between border-b border-dotted border-zinc-200 dark:border-zinc-700 pb-2">
+            <h3 class="text-lg font-medium">
+              <a href={href} class="group-hover:text-orange-500 transition-colors">
+                <span class="opacity-30 mr-1">#</span>{title}
               </a>
             </h3>
-            <p class="text-gray-400 text-base">
+            <span class="text-xs opacity-40 tabular-nums">
               {count} 篇文章
-            </p>
-          </li>
+            </span>
+          </div>
         ))
       }
-    </ul>
-
-    <hr class="border-gray-100 mb-12" />
+    </div>
 
     {sortedTags.length > 0 && (
-      <div class="mt-12">
-        <h3 class="text-2xl font-bold mb-8">全站热门标签</h3>
-        <div class="flex flex-wrap gap-4">
+      <div class="mt-20">
+        <h3 class="text-xl font-bold mb-8 flex items-center">
+          <span class="w-1.5 h-6 bg-orange-500 mr-3"></span>
+          全站热门标签
+        </h3>
+        <div class="flex flex-wrap gap-3">
           {sortedTags.map(([chineseTag, data]) => (
             <a
               href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-100 rounded-full text-base transition-all hover:shadow-sm"
+              class="inline-flex items-center px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-orange-500/10 border border-transparent hover:border-orange-500/30 rounded text-sm transition-all group"
             >
-              <span class="text-primary font-medium">#{chineseTag}</span>
-              <span class="ml-2 text-sm text-gray-400">({data.count})</span>
+              <span class="opacity-50 group-hover:text-orange-500 group-hover:opacity-100 mr-1">#</span>
+              <span class="font-medium group-hover:text-orange-500">{chineseTag}</span>
+              <span class="ml-2 text-xs opacity-30 tabular-nums">{data.count}</span>
             </a>
           ))}
         </div>
       </div>
     )}
-  </section>
+  </div>
 </LayoutDefault>

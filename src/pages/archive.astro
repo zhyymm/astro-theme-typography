@@ -1,68 +1,63 @@
 ---
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import type { Post } from '~/types'
-import { formatDate, getPosts } from '~/utils'
+import { getCollection } from 'astro:content'
+import { formatDate } from '~/utils'
 
-const posts = await getPosts(true)
-const totalCount = posts.length
+const { translate: t } = Astro.locals
+const allPosts = await getCollection('posts', post => !post.data.draft)
 
-// 定义列表项接口
-interface ListItem {
-  title: string
-  href: string
-  date: string
-}
+// 按日期降序排列
+const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 
-// 辅助函数：将 post 转换为列表项格式
-// 放在 getYearMap 之前，确保可以被正常调用
-function getListItem(post: Post): ListItem {
-  return {
-    title: post.data.title,
-    // 关键修正：使用 post.slug 并确保路径格式为 /posts/xxx/
-    href: `/posts/${post.slug || post.id}/`,
-    date: formatDate(post.data.pubDate, 'MM-DD'),
-  }
-}
+// 按年份分组逻辑
+const groups: Record<number, typeof posts> = {}
+posts.forEach((post) => {
+  const year = post.data.pubDate.getFullYear()
+  if (!groups[year]) groups[year] = []
+  groups[year].push(post)
+})
 
-function getYearMap(posts: Post[]) {
-  const result = new Map<number, ListItem[]>()
-  for (const post of posts) {
-    const year = (post.data.pubDate ?? new Date()).getFullYear()
-    const list = result.get(year) ?? []
-    list.push(getListItem(post))
-    result.set(year, list)
-  }
-  return Array.from(result.entries()).sort((a, b) => b[0] - a[0])
-}
-
-const yearMap = getYearMap(posts)
+const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a))
 ---
 
 <LayoutDefault>
-  <div flex="~ col gap-4">
-    <header class="mb-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-      <h1 class="text-2xl font-bold mb-2">归档</h1>
-      <p class="text-sm opacity-60">
-        目前共计收录了 <span class="font-bold text-orange-500">{totalCount}</span> 篇文章。
+  <div class="py-8">
+    <header class="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <div class="text-xs opacity-50 mb-2 tracking-widest uppercase text-zinc-400">Chronicle</div>
+      <h1 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+        {t('Archive')}
+      </h1>
+      <p class="text-sm opacity-40 mt-2 text-orange-600 dark:text-orange-500 font-medium">
+        共计撰写了 {posts.length} 篇文献
       </p>
     </header>
 
-    {
-      yearMap.map(([year, posts]) => (
-        <section>
-          <h2 class="post-title text-xl font-bold my-4">{year}</h2>
-          <ul class="pl-6" flex="~ col gap-4">
-            {posts.map(({ title, href, date }) => (
-              <li class="flex justify-between items-center border-b border-dotted border-zinc-200 dark:border-zinc-700 pb-1">
-                <h3 class="post-title">
-                  <a href={href} class="hover:text-orange-500 transition-colors">{title}</a>
+    <section class="flex flex-col gap-12">
+      {years.map((year) => (
+        <div class="year-group">
+          <h2 class="text-xl font-bold mb-6 flex items-center text-zinc-700 dark:text-zinc-300">
+            <span class="w-1 h-4 bg-zinc-300 dark:bg-zinc-700 mr-3"></span>
+            {year}
+          </h2>
+
+          <ul class="flex flex-col gap-4 ml-4">
+            {groups[Number(year)].map((post) => (
+              <li class="group flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-dotted border-zinc-100 dark:border-zinc-800/50 pb-2">
+                <h3 class="text-base font-medium">
+                  <a href={`/posts/${post.slug || post.id}/`} class="group-hover:text-orange-500 transition-colors">
+                    {post.data.title}
+                  </a>
                 </h3>
-                <time class="text-sm opacity-50 tabular-nums">{date}</time>
+                <div class="flex items-center gap-4">
+                   <time class="text-xs opacity-30 tabular-nums font-mono italic">
+                    {formatDate(post.data.pubDate, 'MM-DD')}
+                  </time>
+                </div>
               </li>
             ))}
           </ul>
-        </section>
-      ))
-    }
+        </div>
+      ))}
+    </section>
   </div>
 </LayoutDefault>

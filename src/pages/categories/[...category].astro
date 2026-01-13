@@ -1,119 +1,85 @@
 ---
-// src/pages/categories/[...category].astro
-
 import { getCollection } from 'astro:content';
 import LayoutDefault from '~/layouts/LayoutDefault.astro';
 import { formatDate } from '~/utils';
 import type { Post } from '~/types';
 import { generateSlug } from '~/utils/slugify';
 
-// 1. 修改 getStaticPaths 逻辑
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts', post => !post.data.draft);
-
   const categoryMap = new Map<string, { name: string, posts: Post[] }>();
 
   allPosts.forEach((post: Post) => {
-      const categories: string[] = post.data.categories ?? [];
+    const categories: string[] = post.data.categories ?? [];
+    categories.forEach(chineseName => {
+      const rawSlug = generateSlug(chineseName);
+      const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
 
-      if (categories.length > 0) {
-          const chineseName: string = categories[0];
-          const rawSlug = generateSlug(chineseName);
-          const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
-
-          if (slug) {
-              const entry = categoryMap.get(slug) || { name: chineseName, posts: [] };
-              entry.posts.push(post);
-              categoryMap.set(slug, entry);
-          }
+      if (slug) {
+        const entry = categoryMap.get(slug) || { name: chineseName, posts: [] };
+        entry.posts.push(post);
+        categoryMap.set(slug, entry);
       }
+    });
   });
 
-  return Array.from(categoryMap.entries()).map(([slug, data]) => {
-    return {
-      params: { category: slug },
-      props: { posts: data.posts, name: data.name },
-    }
-  });
+  return Array.from(categoryMap.entries()).map(([slug, data]) => ({
+    params: { category: slug },
+    props: { posts: data.posts, name: data.name },
+  }));
 }
 
 const { posts, name } = Astro.props as { posts: Post[], name: string };
 
-// 3. 修改标签计数逻辑
-const tagCountMap = new Map<string, { count: number, slug: string }>();
-
-posts.forEach((post: Post) => {
-  const tags: string[] = post.data.tags ?? [];
-  if (tags.length > 0) {
-    tags.forEach((chineseTag: string) => {
-      const rawTagSlug = generateSlug(chineseTag);
-      const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
-
-      const entry = tagCountMap.get(chineseTag) || { count: 0, slug: tagSlug };
-      entry.count += 1;
-      entry.slug = tagSlug;
-      tagCountMap.set(chineseTag, entry);
-    });
-  }
+// 逻辑统一：按日期降序排列
+const sortedPosts = posts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
 });
 
-const sortedTags = [...tagCountMap.entries()].sort((a, b) => b[1].count - a[1].count);
-
 function getListItems(posts: Post[]) {
-  const result = posts.map((post: Post) => ({
+  return posts.map((post: Post) => ({
     title: post.data.title,
-    href: `/posts/${post.slug || post.id.replace(/\.(md|mdx)$/, '')}/`, // 统一剥离后缀
-    date: formatDate(post.data.pubDate),
+    href: `/posts/${post.slug || post.id}/`,
+    date: formatDate(post.data.pubDate, 'YYYY-MM-DD'),
   }));
-  return result;
 }
+
+const listItems = getListItems(sortedPosts);
 ---
 
 <LayoutDefault>
-  <section class="container mx-auto px-4 py-12">
-    <h1 class="text-3xl md:text-3xl font-bold mb-2 text-center md:text-left">
-        # {name}
-    </h1>
+  <div class="py-8">
+    <header class="mb-10 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <div class="text-xs opacity-50 mb-2 tracking-widest uppercase text-zinc-400">Category Collection</div>
+      <h1 class="text-2xl font-bold text-orange-600 dark:text-orange-500">
+        <span class="opacity-20 mr-1">/</span> {name}
+      </h1>
+      <p class="text-sm opacity-40 mt-2">
+        该栏目下共收录 {posts.length} 篇文献
+      </p>
+    </header>
 
-    <p class="text-gray-400 text-base mb-8 text-center md:text-left">
-      该分类下共有 {posts.length} 篇文章
-    </p>
-
-    {sortedTags.length > 0 && (
-      <div class="mt-6 mb-10">
-        <p class="text-lg font-medium mb-4 text-gray-700">本分类常用标签</p>
-        <div class="flex flex-wrap gap-3">
-          {sortedTags.map(([chineseTag, data]) => (
-            <a
-              href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200
-                     rounded-full text-sm transition-colors shadow-sm hover:shadow"
-            >
-              <span>#{chineseTag}</span>
-              <span class="ml-1.5 text-xs text-gray-500">({data.count})</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
-
-    <ul class="pl-6 py-3 flex flex-col gap-6">
+    <ul class="flex flex-col gap-4">
       {
-        getListItems(posts).map((item) => (
-          <li class="border-b border-gray-50 pb-4 last:border-0">
-            <h3 class="post-title text-xl font-semibold mb-1">
-              <a href={item.href} class="hover:text-primary transition-colors">{item.title}</a>
+        listItems.map((item) => (
+          <li class="group flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-dotted border-zinc-100 dark:border-zinc-800/50 pb-2">
+            <h3 class="text-base font-medium">
+              <a href={item.href} class="group-hover:text-orange-500 transition-colors">
+                {item.title}
+              </a>
             </h3>
-            <time class="text-gray-400 text-sm">{item.date}</time>
+            <time class="text-xs opacity-30 tabular-nums font-mono italic">
+              {item.date}
+            </time>
           </li>
         ))
       }
     </ul>
 
     {posts.length === 0 && (
-        <p class="text-center text-gray-500 py-12 text-lg">
-            该分类下暂无文章。
-        </p>
+      <div class="py-20 text-center">
+        <p class="opacity-20 italic text-sm">此分类下暂无内容。</p>
+      </div>
     )}
-  </section>
+  </div>
 </LayoutDefault>

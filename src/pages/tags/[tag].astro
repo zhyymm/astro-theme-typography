@@ -14,7 +14,6 @@ export async function getStaticPaths() {
   allPosts.forEach((post: Post) => {
     const tags: string[] = post.data.tags ?? [];
     tags.forEach((chineseTag: string) => {
-      // 这里的生成逻辑必须与全站保持绝对一致
       const rawSlug = generateSlug(chineseTag);
       const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseTag;
 
@@ -32,53 +31,57 @@ export async function getStaticPaths() {
   }));
 }
 
-// 这里的 name 是标签的中文名，posts 是该标签下的文章数组
 const { posts, name } = Astro.props as { posts: Post[], name: string };
 
-// 格式化列表项数据
+// 按时间降序排列文章
+const sortedPosts = posts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+
 function getListItems(posts: Post[]) {
   return posts.map((post: Post) => ({
     title: post.data.title,
     href: `/posts/${post.slug || post.id}/`,
-    date: formatDate(post.data.pubDate),
+    date: formatDate(post.data.pubDate, 'YYYY-MM-DD'),
   }));
 }
 
-const listItems = getListItems(posts);
+const listItems = getListItems(sortedPosts);
 ---
 
 <LayoutDefault>
-  <section class="container mx-auto px-4 py-12">
-    <div class="mb-8 border-b pb-4">
-      <h1 class="text-3xl md:text-3xl font-bold text-center md:text-left">
-        # {name}
+  <div class="py-8">
+    <header class="mb-10 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <div class="text-xs opacity-50 mb-2 tracking-widest uppercase">Tag Archives</div>
+      <h1 class="text-2xl font-bold text-orange-500">
+        <span class="opacity-30">#</span> {name}
       </h1>
-      <p class="text-gray-500 mt-2 text-center md:text-left">
-        共计 {posts.length} 篇文章
+      <p class="text-sm opacity-40 mt-2">
+        共计收录 {posts.length} 篇相关文章
       </p>
-    </div>
+    </header>
 
-    <ul class="pl-6 py-3 space-y-6">
+    <ul class="flex flex-col gap-4">
       {
         listItems.map((item) => (
-          <li class="flex flex-col md:flex-row md:items-baseline gap-2">
-            <time class="text-gray-400 text-sm tabular-nums min-w-[100px]">
-              {item.date}
-            </time>
-            <h3 class="post-title text-xl font-medium">
-              <a href={item.href} class="hover:text-primary transition-colors">
+          <li class="group flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-dotted border-zinc-100 dark:border-zinc-800/50 pb-2">
+            <h3 class="text-base font-medium">
+              <a href={item.href} class="group-hover:text-orange-500 transition-colors">
                 {item.title}
               </a>
             </h3>
+            <time class="text-xs opacity-30 tabular-nums font-mono">
+              {item.date}
+            </time>
           </li>
         ))
       }
     </ul>
 
     {posts.length === 0 && (
-        <p class="text-center text-gray-500 py-12 text-lg">
-            该标签下暂无文章。
-        </p>
+        <div class="py-20 text-center">
+            <p class="opacity-30 italic text-sm">空空如也，此中无物。</p>
+        </div>
     )}
-  </section>
+  </div>
 </LayoutDefault>
