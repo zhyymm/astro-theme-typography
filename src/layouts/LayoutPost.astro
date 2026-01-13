@@ -23,3 +23,41 @@ const isPostPage = Astro.url.pathname.startsWith('/posts/')
     <Giscus />
   </section>
 )}
+<style is:global>
+  /* 1. 统一所有列表中的文章标题链接颜色 */
+  /* 确保无论从哪个页面进去，默认状态和悬停状态都一致 */
+
+  .post-title a,
+  h2 a,
+  h3 a {
+    @apply transition-colors duration-300;
+  }
+
+  /* 初始状态：黑色（深色模式下为白色） */
+  .post-title a, h2 a, h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* 悬停状态：统一为橙色（不再出现红色或纯白反色） */
+  .post-title a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  .group:hover a {
+    @apply text-orange-500 !important;
+  }
+
+  /* 2. 处理你说的“黑底白字”或“黑底红字”的边框/背景问题 */
+  /* 如果你的主题在点击时会产生背景色，这里进行重置 */
+  .post-item:active,
+  .group:active {
+    background-color: transparent !important;
+  }
+
+  /* 3. 针对分类页和标签页的特殊修复 */
+  /* 确保它们的 # 符号和文字在 hover 时同步变色 */
+  .group:hover .opacity-30,
+  .group:hover .opacity-20 {
+    @apply text-orange-500 opacity-100 transition-all;
+  }
+</style>
