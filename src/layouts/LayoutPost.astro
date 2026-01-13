@@ -9,7 +9,7 @@ interface Props {
 
 const { post } = Astro.props
 // ⭐ 判断当前路径：如果路径是 '/' 或包含 '/page/'（分页），说明是在列表页
-const isSinglePost = Astro.url.pathname !== '/' && !Astro.url.pathname.startsWith('/page/')
+const isSinglePost = Astro.url.pathname.includes('/posts/')
 ---
 
 <article class="prose">
@@ -17,8 +17,9 @@ const isSinglePost = Astro.url.pathname !== '/' && !Astro.url.pathname.startsWit
   <slot />
 </article>
 
+{/* 只有真正进入文章详情页（路径含 /posts/）时才显示评论 */}
 {isSinglePost && (
-  <div class="mt-12">
+  <div class="mt-12" data-pagefind-ignore>
     <Giscus />
   </div>
 )}

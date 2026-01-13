@@ -4,48 +4,60 @@ import type { Post } from '~/types'
 import { formatDate, getPosts } from '~/utils'
 
 const posts = await getPosts(true)
+const totalCount = posts.length
 
-const yearMap = getYearMap(posts)
-
+// 定义列表项接口
 interface ListItem {
   title: string
   href: string
   date: string
 }
 
+// 辅助函数：将 post 转换为列表项格式
+// 放在 getYearMap 之前，确保可以被正常调用
+function getListItem(post: Post): ListItem {
+  return {
+    title: post.data.title,
+    // 关键修正：使用 post.slug 并确保路径格式为 /posts/xxx/
+    href: `/posts/${post.slug || post.id}/`,
+    date: formatDate(post.data.pubDate, 'MM-DD'),
+  }
+}
+
 function getYearMap(posts: Post[]) {
   const result = new Map<number, ListItem[]>()
   for (const post of posts) {
     const year = (post.data.pubDate ?? new Date()).getFullYear()
-    const posts = result.get(year) ?? []
-    posts.push(getListItem(post))
-    result.set(year, posts)
+    const list = result.get(year) ?? []
+    list.push(getListItem(post))
+    result.set(year, list)
   }
-  return Array.from(result.entries())
+  return Array.from(result.entries()).sort((a, b) => b[0] - a[0])
 }
 
-function getListItem(post: Post): ListItem {
-  return {
-    title: post.data.title,
-    href: `/posts/${post.id}/`,
-    date: formatDate(post.data.pubDate, 'MM-DD'),
-  }
-}
+const yearMap = getYearMap(posts)
 ---
 
 <LayoutDefault>
   <div flex="~ col gap-4">
+    <header class="mb-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+      <h1 class="text-2xl font-bold mb-2">归档</h1>
+      <p class="text-sm opacity-60">
+        目前共计收录了 <span class="font-bold text-orange-500">{totalCount}</span> 篇文章。
+      </p>
+    </header>
+
     {
       yearMap.map(([year, posts]) => (
         <section>
-          <h2 class="post-title">{year}</h2>
+          <h2 class="post-title text-xl font-bold my-4">{year}</h2>
           <ul class="pl-6" flex="~ col gap-4">
             {posts.map(({ title, href, date }) => (
-              <li>
+              <li class="flex justify-between items-center border-b border-dotted border-zinc-200 dark:border-zinc-700 pb-1">
                 <h3 class="post-title">
-                  <a href={href}>{title}</a>
+                  <a href={href} class="hover:text-orange-500 transition-colors">{title}</a>
                 </h3>
-                <time>{date}</time>
+                <time class="text-sm opacity-50 tabular-nums">{date}</time>
               </li>
             ))}
           </ul>
