@@ -2,7 +2,7 @@
 // src/components/comments/Giscus.astro
 ---
 
-<div class="cusdis-container mt-12">
+<div class="cusdis-container mt-12 mb-12">
   <div id="cusdis_thread"
     data-host="https://cusdis.com"
     data-app-id="c1b2d13b-76a7-4163-a5af-87a0b90e95e7"
@@ -15,10 +15,25 @@
 </div>
 
 <script is:inline>
-  // 处理单页跳转：点击新文章时，重新初始化评论框
+  // 处理单页跳转逻辑
   document.addEventListener('astro:page-load', () => {
     if (window.renderCusdis) {
       window.renderCusdis(document.getElementById('cusdis_thread'))
+    }
+  });
+
+  // ⭐ 解决高度塌陷和滚动条问题的补丁
+  window.addEventListener('message', (e) => {
+    try {
+      const data = JSON.parse(e.data);
+      if (data.target === 'cusdis' && data.event === 'resize') {
+        const iframe = document.querySelector('#cusdis_thread iframe');
+        if (iframe) {
+          iframe.style.height = data.data + 'px';
+        }
+      }
+    } catch (err) {
+      // 忽略非 JSON 消息
     }
   });
 </script>
@@ -27,10 +42,21 @@
   .cusdis-container {
     border-top: 1px solid #eee;
     padding-top: 2rem;
-    margin-bottom: 4rem;
+    width: 100%;
+    /* 移除任何可能限制高度的容器属性 */
+    overflow: visible !important;
   }
+
+  #cusdis_thread {
+    min-height: 500px; /* ⭐ 给一个初始的大高度，确保发送按钮直接可见 */
+    width: 100%;
+  }
+
   #cusdis_thread iframe {
     width: 100% !important;
-    min-height: 200px;
+    min-height: 500px !important;
+    border: none !important;
+    /* 禁止 iframe 内部滚动，强迫它撑开 */
+    overflow: hidden !important;
   }
 </style>
