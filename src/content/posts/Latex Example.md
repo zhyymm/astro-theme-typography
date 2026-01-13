@@ -6,7 +6,7 @@ description: "Here is a sample of some basic Latex syntax that can be used when 
 
 tags: []
 
-draft: false
+draft: true
 ---
 
 In this post, we will showcase some basic LaTeX syntax that can be used when writing LaTeX content in Astro.
