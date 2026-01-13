@@ -5,63 +5,9 @@
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/astro-theme-typography.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-1.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-10.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-11.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-12.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-13.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-14.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-15.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-16.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-17.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-18.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-19.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-20.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-21.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-22.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-23.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-24.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-25.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-26.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-27.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-28.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-29.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-3.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-30.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-31.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-32.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-33.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-34.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-35.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-36.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-37.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-38.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-39.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-4.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-40.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-41.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-42.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-43.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-44.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-45.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-46.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-47.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-48.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-49.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-5.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-50.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-51.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-52.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-6.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-7.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-8.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/zb-9.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,9 +17,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="38CWSrYUEz5OUeDQifP3eP5yAzk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -86,7 +32,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "正在合并 main",
     "javascript.preferred.runtime.type.id": "node",
     "nodejs_package_manager_path": "pnpm",
     "vue.rearranger.settings.migration": "true"
