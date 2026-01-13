@@ -1,0 +1,22 @@
+---
+import LayoutDefault from '../layouts/LayoutDefault.astro'
+---
+
+<LayoutDefault>
+  <div class="prose mt-8">
+    <h2>站内搜索（由 Google 提供）</h2>
+    <p class="text-sm opacity-60">支持精确匹配。</p>
+    <hr />
+    <script async src="https://cse.google.com/cse.js?cx=e6e8c81e36480422b"></script>
+    <div class="gcse-search"></div>
+  </div>
+</LayoutDefault>
+
+<style is:global>
+  /* 这里的样式可以微调 Google 搜索框的外观，使其更符合你的主题 */
+  .gsc-control-cse {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+</style>
