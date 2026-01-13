@@ -14,9 +14,13 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
+    "@swup/astro": "^1.7.0",
     "@unocss/reset": "^66.5.12",
     "@unocss/transformer-directives": "^66.5.12",
     "astro": "^5.0.0",
+    "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^1.0.0",
+    "giscus": "^1.6.0",
     "unocss": "^66.5.12"
   }
 }
