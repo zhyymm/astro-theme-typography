@@ -9,32 +9,55 @@
     data-page-id={Astro.url.pathname}
     data-page-url={Astro.url.href}
     data-page-title={Astro.url.pathname}
+    data-lang="zh-cn"
   ></div>
-
-  <script is:inline src="https://cusdis.com/js/cusdis.es.js" async defer></script>
 </div>
 
 <script is:inline>
-  // 处理单页跳转逻辑
-  document.addEventListener('astro:page-load', () => {
-    if (window.renderCusdis) {
-      window.renderCusdis(document.getElementById('cusdis_thread'))
-    }
-  });
+  window.CUSDIS_LOCALE = {
+    "powered_by": "评论由 Cusdis 提供",
+    "post": "发布评论",
+    "submit": "发布评论",
+    "loading": "加载中",
+    "email": "邮箱 (可选)",
+    "nickname": "昵称",
+    "reply": "回复",
+    "placeholder": "请输入评论内容..."
+  };
 
-  // ⭐ 解决高度塌陷和滚动条问题的补丁
+  function renderCusdis() {
+    // 强制清理一次，重新生起
+    const container = document.getElementById('cusdis_thread');
+    if (container) {
+      container.innerHTML = '';
+      if (window.renderCusdis) {
+        window.renderCusdis(container);
+      }
+    }
+  }
+
+  // 初次加载脚本
+  if (!document.querySelector('script[src*="cusdis"]')) {
+    const script = document.createElement('script');
+    script.src = 'https://cusdis.com/js/cusdis.es.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  // 针对 Astro 的单页跳转处理
+  document.addEventListener('astro:page-load', renderCusdis);
+
+  // 监听高度信号
   window.addEventListener('message', (e) => {
     try {
       const data = JSON.parse(e.data);
       if (data.target === 'cusdis' && data.event === 'resize') {
         const iframe = document.querySelector('#cusdis_thread iframe');
         if (iframe) {
-          iframe.style.height = data.data + 'px';
+          iframe.style.height = (data.data + 50) + 'px'; // 额外加 50 像素确保不溢出
         }
       }
-    } catch (err) {
-      // 忽略非 JSON 消息
-    }
+    } catch (err) {}
   });
 </script>
 
@@ -42,21 +65,19 @@
   .cusdis-container {
     border-top: 1px solid #eee;
     padding-top: 2rem;
-    width: 100%;
-    /* 移除任何可能限制高度的容器属性 */
-    overflow: visible !important;
+    width: 100% !important;
   }
 
   #cusdis_thread {
-    min-height: 500px; /* ⭐ 给一个初始的大高度，确保发送按钮直接可见 */
-    width: 100%;
+    /* ⭐ 强行给一个大的最小高度，防止缩成一团 */
+    min-height: 480px !important;
+    width: 100% !important;
+    overflow: hidden;
   }
 
   #cusdis_thread iframe {
+    /* ⭐ 强行让里面的框架显示出来 */
+    min-height: 480px !important;
     width: 100% !important;
-    min-height: 500px !important;
-    border: none !important;
-    /* 禁止 iframe 内部滚动，强迫它撑开 */
-    overflow: hidden !important;
   }
 </style>
