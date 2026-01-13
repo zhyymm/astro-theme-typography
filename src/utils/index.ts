@@ -9,15 +9,14 @@ export async function getCategories() {
   const categories = new Map<string, Post[]>()
 
   for (const post of posts) {
-    if (post.data.categories) {
-      for (const c of post.data.categories) {
-        const posts = categories.get(c) || []
-        posts.push(post)
-        categories.set(c, posts)
-      }
-    }
-  }
+    // 从文件的 frontmatter 提取 category 字段
+    const category = post.data.category || 'Uncategorized'
 
+    if (!categories.has(category)) {
+      categories.set(category, [])
+    }
+    categories.get(category)!.push(post)
+  }
   return categories
 }
 

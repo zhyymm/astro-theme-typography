@@ -12,14 +12,16 @@ export const getStaticPaths = (async () => {
   const posts = await getPosts()
 
   return posts.map((post, idx) => {
-    // ⭐ 关键点：统一剥离后缀
+    // 自动处理路径，确保不管是几级目录都能对应上
+    // Astro v5 的 post.id 已经是相对 content/posts 的路径了
     const cleanId = post.id.replace(/\.(md|mdx)$/, '')
 
     const prev = posts[idx - 1]
     const next = posts[idx + 1]
 
     return {
-      params: { id: cleanId }, // 这里必须是剥离后的 ID
+      // 这里的 cleanId 如果是 "pali/zb/zb-60"，URL 就会变成 /posts/pali/zb/zb-60/
+      params: { id: cleanId },
       props: { entry: post, next, prev },
     }
   })

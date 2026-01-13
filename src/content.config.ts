@@ -7,11 +7,11 @@ const posts = defineCollection({
     schema: ({ image }) =>
         z.object({
             title: z.string(),
-            pubDate: z.coerce.date(),
+            pubDate: z.coerce.date().optional(),
             modDate: z.coerce.date().optional(),
 
             // 路由相关的字段，现在是可选的（因为我们手动计算 Slug）
-            categories: z.array(z.string()),
+            categories: z.array(z.string()).default([]),
             categorySlugs: z.array(z.string()).optional(),
             tags: z.array(z.string()).default([]).optional(),
             tagSlugs: z.array(z.string()).optional(),
