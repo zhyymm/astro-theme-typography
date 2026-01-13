@@ -1,15 +1,24 @@
 ---
 import PostMeta from '~/components/PostMeta.astro'
 import type { Post } from '~/types'
+import Giscus from '~/components/comments/Giscus.astro'
 
 interface Props {
   post: Post
 }
 
 const { post } = Astro.props
+// ⭐ 判断当前路径：如果路径是 '/' 或包含 '/page/'（分页），说明是在列表页
+const isSinglePost = Astro.url.pathname !== '/' && !Astro.url.pathname.startsWith('/page/')
 ---
 
 <article class="prose">
   <PostMeta post={post} />
   <slot />
 </article>
+
+{isSinglePost && (
+  <div class="mt-12">
+    <Giscus />
+  </div>
+)}

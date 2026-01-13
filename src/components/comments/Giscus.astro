@@ -1,36 +1,36 @@
 ---
-/*
-  Giscus 评论组件 - 当前版本说明：
-  - 使用 data-loading="eager" 强制立即加载（避免 lazy 在本地延迟）
-  - data-theme="light" 用于本地测试，确认显示后可改回 "preferred_color_scheme"
-  - 确认 Discussions 已启用，Discussion #1 存在
-  - 本地不显示最常见原因：浏览器隐私设置挡第三方 iframe / cookie
-  - 建议：先部署到 Vercel/Netlify 测试 production 环境
-*/
-
-const giscusTheme = 'light';
-const giscusLoading = 'eager';
+// src/components/comments/Giscus.astro
 ---
 
-<div id="giscus-container" class="w-full min-h-[600px] border-4 border-blue-500 rounded-lg p-8 bg-white dark:bg-gray-900 text-center text-xl font-bold text-blue-600">
-  Giscus 评论区加载中...
-  如果这里没变化，请检查浏览器隐私设置（允许第三方 cookie）或先部署上线测试！
+<div class="cusdis-container mt-12">
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="c1b2d13b-76a7-4163-a5af-87a0b90e95e7"
+    data-page-id={Astro.url.pathname}
+    data-page-url={Astro.url.href}
+    data-page-title={Astro.url.pathname}
+  ></div>
+
+  <script is:inline src="https://cusdis.com/js/cusdis.es.js" async defer></script>
 </div>
 
-<script
-  src="https://giscus.app/client.js"
-  data-repo="zhyymm/astro-theme-typography"
-  data-repo-id="R_kgDOQ39ToQ"
-  data-category="General"
-  data-category-id="DIC_kwDOQ39Toc4C02FO"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="bottom"
-  data-theme={giscusTheme}
-  data-lang="zh-CN"
-  data-loading={giscusLoading}
-  crossorigin="anonymous"
-  async
-></script>
+<script is:inline>
+  // 处理单页跳转：点击新文章时，重新初始化评论框
+  document.addEventListener('astro:page-load', () => {
+    if (window.renderCusdis) {
+      window.renderCusdis(document.getElementById('cusdis_thread'))
+    }
+  });
+</script>
+
+<style is:global>
+  .cusdis-container {
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+    margin-bottom: 4rem;
+  }
+  #cusdis_thread iframe {
+    width: 100% !important;
+    min-height: 200px;
+  }
+</style>
