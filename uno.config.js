@@ -38,6 +38,16 @@ const cssExtend = {
 }
 
 export default defineConfig({
+  // ⭐ 核心修复：确保构建时扫描到所有使用了样式的文件
+  content: {
+    pipeline: {
+      include: [
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+        'src/**/*.{js,ts,astro}',
+        'content/**/*.md',
+      ],
+    },
+  },
   rules: [
     [
       /^row-(\d+)-(\d)$/,
@@ -62,7 +72,6 @@ export default defineConfig({
       theme: {
         dark: {
           colors: { ...colorsDark, shadow: '#FFFFFF0A' },
-          // TODO 需要配置代码块颜色
         },
       },
     }),
@@ -79,5 +88,6 @@ export default defineConfig({
     ...themeConfig.site.socialLinks.map(social => `i-mdi-${social.name}`),
     'i-mdi-content-copy',
     'i-mdi-check',
+    'i-mdi-magnify', // 搜索图标白名单
   ],
 })
