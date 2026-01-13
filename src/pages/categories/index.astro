@@ -1,6 +1,4 @@
 ---
-// src/pages/categories/index.astro
-
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import { getCollection, type CollectionEntry } from 'astro:content'
 import { generateSlug } from '~/utils/slugify'
@@ -10,41 +8,40 @@ type Post = CollectionEntry<'posts'>;
 
 const allPosts = await getCollection('posts', post => !post.data.draft)
 
+// --- 分类统计逻辑 ---
 const categoryMap = new Map<string, { name: string, count: number, slug: string }>()
 
 allPosts.forEach((post: Post) => {
     const categories: string[] = post.data.categories ?? [];
-    if (categories.length > 0) {
-        const chineseName = categories[0];
+    categories.forEach(chineseName => {
         const rawSlug = generateSlug(chineseName);
         const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
 
         const entry = categoryMap.get(chineseName) || { name: chineseName, count: 0, slug: slug };
         entry.count += 1;
         categoryMap.set(chineseName, entry);
-    }
+    });
 });
 
 const categoryList = Array.from(categoryMap.values()).map(item => ({
     title: item.name,
     href: `/categories/${encodeURIComponent(item.slug)}/`,
-    size: t('categories_count', item.count),
+    count: item.count,
 }));
 
+// --- 标签统计逻辑 ---
 const tagCountMap = new Map<string, { count: number, slug: string }>()
 
 allPosts.forEach((post: Post) => {
     const tags: string[] = post.data.tags ?? [];
-    if (tags.length > 0) {
-        tags.forEach((chineseTag: string) => {
-            const rawTagSlug = generateSlug(chineseTag);
-            const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
+    tags.forEach((chineseTag: string) => {
+        const rawTagSlug = generateSlug(chineseTag);
+        const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
 
-            const entry = tagCountMap.get(chineseTag) || { count: 0, slug: tagSlug };
-            entry.count += 1;
-            tagCountMap.set(chineseTag, entry);
-        });
-    }
+        const entry = tagCountMap.get(chineseTag) || { count: 0, slug: tagSlug };
+        entry.count += 1;
+        tagCountMap.set(chineseTag, entry);
+    });
 });
 
 const sortedTags = [...tagCountMap.entries()]
@@ -54,42 +51,42 @@ const sortedTags = [...tagCountMap.entries()]
 
 <LayoutDefault>
   <section class="container mx-auto px-4 py-12">
-    <h2 class="post-title text-4xl font-bold mb-8">{t('Categories')}</h2>
+    <h2 class="post-title text-4xl font-bold mb-10">{t('Categories')}</h2>
 
-    <ul class="pl-6" flex="~ col gap-6 mb-16">
+    <ul class="mb-16 flex flex-col gap-10">
       {
-        categoryList.map(({ title, href, size }) => (
-          <li class="border-b pb-4 last:border-0">
-            <h3 class="post-title text-2xl font-semibold">
-              <a href={href} class="hover:underline"># {title}</a>
+        categoryList.map(({ title, href, count }) => (
+          <li class="group">
+            <h3 class="post-title text-2xl font-semibold mb-2">
+              <a href={href} class="hover:text-primary transition-colors">
+                # {title}
+              </a>
             </h3>
-            <p class="text-gray-600 mt-1">{size}</p>
+            <p class="text-gray-400 text-base">
+              {count} 篇文章
+            </p>
           </li>
         ))
       }
     </ul>
 
+    <hr class="border-gray-100 mb-12" />
+
     {sortedTags.length > 0 && (
       <div class="mt-12">
-        <h3 class="text-2xl font-bold mb-6">全站热门标签</h3>
-        <div class="flex flex-wrap gap-3">
+        <h3 class="text-2xl font-bold mb-8">全站热门标签</h3>
+        <div class="flex flex-wrap gap-4">
           {sortedTags.map(([chineseTag, data]) => (
             <a
               href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-base font-medium transition-colors shadow-sm hover:shadow"
+              class="inline-flex items-center px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-100 rounded-full text-base transition-all hover:shadow-sm"
             >
-              #{chineseTag}
-              <span class="ml-2 text-sm text-gray-500">({data.count})</span>
+              <span class="text-primary font-medium">#{chineseTag}</span>
+              <span class="ml-2 text-sm text-gray-400">({data.count})</span>
             </a>
           ))}
         </div>
       </div>
-    )}
-
-    {sortedTags.length === 0 && categoryList.length === 0 && (
-      <p class="text-center text-gray-500 py-12 text-lg">
-        暂无分类或标签，快去添加内容吧～
-      </p>
     )}
   </section>
 </LayoutDefault>

@@ -1,0 +1,46 @@
+---
+import LayoutDefault from '~/layouts/LayoutDefault.astro'
+---
+
+<LayoutDefault>
+  <section class="container mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-8 text-center md:text-left">搜索文章</h1>
+    
+    <div class="min-h-[400px]">
+      <div id="search" class="pagefind-ui"></div>
+    </div>
+  </section>
+</LayoutDefault>
+
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showImages: false,
+      translations: {
+        placeholder: "输入关键词查找正法内容...",
+        clear_search: "清除",
+        load_more: "加载更多",
+        search_label: "搜索",
+        filters_label: "筛选",
+        zero_results: "未找到相关内容 [无所得]",
+        count_results: "找到 [COUNT] 条结果",
+        no_results: "没有找到结果",
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  /* 匹配主题风格 */
+  :root {
+    --pagefind-ui-primary: var(--primary, #333);
+    --pagefind-ui-text: #333;
+    --pagefind-ui-border: #eeeeee;
+    --pagefind-ui-font: inherit;
+  }
+  .pagefind-ui .pagefind-ui__result-link {
+    font-weight: bold !important;
+  }
+</style>

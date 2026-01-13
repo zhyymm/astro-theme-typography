@@ -11,7 +11,6 @@ import { generateSlug } from '~/utils/slugify';
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts', post => !post.data.draft);
 
-  // 创建 Map 来存储 {Slug: {name: 中文名, posts: Post[]}}
   const categoryMap = new Map<string, { name: string, posts: Post[] }>();
 
   allPosts.forEach((post: Post) => {
@@ -19,10 +18,7 @@ export async function getStaticPaths() {
 
       if (categories.length > 0) {
           const chineseName: string = categories[0];
-
-          // ⭐ 关键修复逻辑：与 PostMeta 保持一致
           const rawSlug = generateSlug(chineseName);
-          // 如果 generateSlug 无法处理中文返回了空字符串，我们就直接使用中文名作为路由
           const slug = (rawSlug && rawSlug.trim() !== '') ? rawSlug : chineseName;
 
           if (slug) {
@@ -33,27 +29,23 @@ export async function getStaticPaths() {
       }
   });
 
-  // 2. 生成路径：Astro 会自动处理 params 里的中文编码
   return Array.from(categoryMap.entries()).map(([slug, data]) => {
     return {
-      params: { category: slug }, // 这里的 slug 可能是英文也可能是中文“巴利三藏”
+      params: { category: slug },
       props: { posts: data.posts, name: data.name },
     }
   });
 }
 
-// 获取 props
 const { posts, name } = Astro.props as { posts: Post[], name: string };
 
-// 3. 修改标签计数逻辑，确保这里的标签链接也不会变成 undefined
+// 3. 修改标签计数逻辑
 const tagCountMap = new Map<string, { count: number, slug: string }>();
 
 posts.forEach((post: Post) => {
   const tags: string[] = post.data.tags ?? [];
-
   if (tags.length > 0) {
     tags.forEach((chineseTag: string) => {
-      // ⭐ 同样应用安全回退逻辑
       const rawTagSlug = generateSlug(chineseTag);
       const tagSlug = (rawTagSlug && rawTagSlug.trim() !== '') ? rawTagSlug : chineseTag;
 
@@ -70,7 +62,7 @@ const sortedTags = [...tagCountMap.entries()].sort((a, b) => b[1].count - a[1].c
 function getListItems(posts: Post[]) {
   const result = posts.map((post: Post) => ({
     title: post.data.title,
-    href: `/posts/${post.slug || post.id}/`, // 建议加上 fallback 确保链接有效
+    href: `/posts/${post.slug || post.id.replace(/\.(md|mdx)$/, '')}/`, // 统一剥离后缀
     date: formatDate(post.data.pubDate),
   }));
   return result;
@@ -79,9 +71,13 @@ function getListItems(posts: Post[]) {
 
 <LayoutDefault>
   <section class="container mx-auto px-4 py-12">
-    <h1 class="text-3xl md:text-3xl font-bold mb-5 text-center md:text-left">
+    <h1 class="text-3xl md:text-3xl font-bold mb-2 text-center md:text-left">
         # {name}
     </h1>
+
+    <p class="text-gray-400 text-base mb-8 text-center md:text-left">
+      该分类下共有 {posts.length} 篇文章
+    </p>
 
     {sortedTags.length > 0 && (
       <div class="mt-6 mb-10">
@@ -101,14 +97,14 @@ function getListItems(posts: Post[]) {
       </div>
     )}
 
-    <ul class="pl-6 py-3" flex="~ col gap-4">
+    <ul class="pl-6 py-3 flex flex-col gap-6">
       {
         getListItems(posts).map((item) => (
-          <li>
-            <h3 class="post-title">
-              <a href={item.href}>{item.title}</a>
+          <li class="border-b border-gray-50 pb-4 last:border-0">
+            <h3 class="post-title text-xl font-semibold mb-1">
+              <a href={item.href} class="hover:text-primary transition-colors">{item.title}</a>
             </h3>
-            <time>{item.date}</time>
+            <time class="text-gray-400 text-sm">{item.date}</time>
           </li>
         ))
       }
