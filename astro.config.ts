@@ -6,7 +6,7 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import UnoCSS from 'unocss/astro'
 import devtoolsJson from 'vite-plugin-devtools-json'
-import pagefind from "astro-pagefind" // ⭐ 1. 导入插件
+// ❌ 已经删除了 import pagefind 行
 import { themeConfig } from './src/.config'
 
 export default defineConfig({
@@ -43,6 +43,6 @@ export default defineConfig({
     mdx({}),
     robotsTxt(),
     sitemap(),
-    pagefind(), // ⭐ 2. 添加到集成列表
+    // ❌ 已经删除了 pagefind() 集成
   ],
 })
