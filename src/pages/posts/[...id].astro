@@ -15,7 +15,7 @@ export const getStaticPaths = (async () => {
     // 自动处理路径，确保不管是几级目录都能对应上
     // Astro v5 的 post.id 已经是相对 content/posts 的路径了
     const cleanId = post.id.replace(/\.(md|mdx)$/, '')
-
+console.log("👉 正在生成的 URL 路径是: /posts/" + cleanId) // 加入这行
     const prev = posts[idx - 1]
     const next = posts[idx + 1]
 

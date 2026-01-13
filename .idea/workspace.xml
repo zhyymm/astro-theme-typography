@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="" />
+    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/src/pages/posts/[...id].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/[...id].astro" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
