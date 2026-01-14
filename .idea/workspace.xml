@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/11.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/12.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/13.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/14.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/15.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/16.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/17.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/18.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/19.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/20.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-61.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-62.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-63.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-64.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-65.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-66.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-67.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-68.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-69.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/06.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/06.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/07.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/07.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/08.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/08.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/09.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/09.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/10.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/10.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,23 +29,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zhy/astro-theme-typography/src/content/posts/ahan&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/pali/zb",
+    "nodejs_package_manager_path": "pnpm",
+    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\ahan" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -79,7 +74,7 @@
       <workItem from="1768355751043" duration="89000" />
       <workItem from="1768355842567" duration="3879000" />
       <workItem from="1768359768552" duration="3542000" />
-      <workItem from="1768373962148" duration="1734000" />
+      <workItem from="1768373962148" duration="2681000" />
     </task>
     <servers />
   </component>
