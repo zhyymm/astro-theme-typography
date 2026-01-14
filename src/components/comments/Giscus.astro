@@ -2,82 +2,35 @@
 // src/components/comments/Giscus.astro
 ---
 
-<div class="cusdis-container mt-12 mb-12">
-  <div id="cusdis_thread"
-    data-host="https://cusdis.com"
-    data-app-id="c1b2d13b-76a7-4163-a5af-87a0b90e95e7"
-    data-page-id={Astro.url.pathname}
-    data-page-url={Astro.url.href}
-    data-page-title={Astro.url.pathname}
-    data-lang="zh-cn"
-  ></div>
-</div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis-nine-drab.vercel.app"
+  data-app-id="4d68c0b7-7b1b-4e7e-a3da-6582ee7ee592"
+  data-page-id="{{ PAGE_ID }}"
+  data-page-url="{{ PAGE_URL }}"
+  data-page-title="{{ PAGE_TITLE }}"
+></div>
+
+<script async defer src="https://cusdis-nine-drab.vercel.app/js/cusdis.es.js"></script>
 
 <script is:inline>
-  window.CUSDIS_LOCALE = {
-    "powered_by": "评论由 Cusdis 提供",
-    "post": "发布评论",
-    "submit": "发布评论",
-    "loading": "加载中",
-    "email": "邮箱 (可选)",
-    "nickname": "昵称",
-    "reply": "回复",
-    "placeholder": "请输入评论内容..."
-  };
-
   function renderCusdis() {
-    // 强制清理一次，重新生起
     const container = document.getElementById('cusdis_thread');
-    if (container) {
+    if (container && window.renderCusdis) {
       container.innerHTML = '';
-      if (window.renderCusdis) {
-        window.renderCusdis(container);
-      }
+      window.renderCusdis(container);
     }
   }
 
-  // 初次加载脚本
-  if (!document.querySelector('script[src*="cusdis"]')) {
-    const script = document.createElement('script');
-    script.src = 'https://cusdis.com/js/cusdis.es.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }
-
-  // 针对 Astro 的单页跳转处理
+  // 针对 Astro 的单页跳转处理，确保切换页面后评论框依然能“生起”
   document.addEventListener('astro:page-load', renderCusdis);
-
-  // 监听高度信号
-  window.addEventListener('message', (e) => {
-    try {
-      const data = JSON.parse(e.data);
-      if (data.target === 'cusdis' && data.event === 'resize') {
-        const iframe = document.querySelector('#cusdis_thread iframe');
-        if (iframe) {
-          iframe.style.height = (data.data + 50) + 'px'; // 额外加 50 像素确保不溢出
-        }
-      }
-    } catch (err) {}
-  });
 </script>
 
 <style is:global>
-  .cusdis-container {
+  #cusdis_thread {
+    min-height: 480px !important;
+    width: 100% !important;
     border-top: 1px solid #eee;
     padding-top: 2rem;
-    width: 100% !important;
-  }
-
-  #cusdis_thread {
-    /* ⭐ 强行给一个大的最小高度，防止缩成一团 */
-    min-height: 480px !important;
-    width: 100% !important;
-    overflow: hidden;
-  }
-
-  #cusdis_thread iframe {
-    /* ⭐ 强行让里面的框架显示出来 */
-    min-height: 480px !important;
-    width: 100% !important;
   }
 </style>
