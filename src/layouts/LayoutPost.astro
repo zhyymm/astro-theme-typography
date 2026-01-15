@@ -2,44 +2,62 @@
 import PostMeta from '~/components/PostMeta.astro'
 import type { Post } from '~/types'
 import Giscus from '~/components/comments/Giscus.astro'
+import LayoutDefault from '~/layouts/LayoutDefault.astro'
 
 interface Props {
   post: Post
 }
 
 const { post } = Astro.props
-// ⭐ 判断当前路径：如果路径是 '/' 或包含 '/page/'（分页），说明是在列表页
+// 1. 判断是否为文章详情页
 const isPostPage = Astro.url.pathname.startsWith('/posts/')
----
 
+// 2. 获取作者信息（集中在这里定义）
+const author = post.data.author || "默认作者"
+---
 <article class="prose">
   <PostMeta post={post} />
   <slot />
 </article>
 
-{/* 只有真正进入文章详情页（路径含 /posts/）时才显示评论 */}
+{isPostPage && (
+  <div class="mt-12 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-orange-500/5 flex items-center justify-center text-lg shadow-sm border border-orange-500/10 font-bold text-orange-500">
+        {author.charAt(0).toUpperCase()}
+      </div>
+
+      <div class="flex flex-col">
+        <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold">本文作者</span>
+        <a href={`/authors/${author}/`} class="text-base font-bold hover:text-orange-500 transition-colors">
+          {author}
+        </a>
+      </div>
+    </div>
+
+    {/* 这里可以保持你原有的文字，或者留空，因为点击进入详情页会有更详细的 bio */}
+    <p class="text-xs opacity-50 mt-4 italic leading-relaxed">
+      如法受持，如实开示。点击作者名查看更多导师详情。
+    </p>
+  </div>
+)}
+
 {isPostPage && (
   <section class="giscus-container mt-12">
     <Giscus />
   </section>
 )}
+
+
+
 <style is:global>
-  /* 1. 统一所有列表中的文章标题链接颜色 */
-  /* 确保无论从哪个页面进去，默认状态和悬停状态都一致 */
-
-  .post-title a,
-  h2 a,
-  h3 a {
-    @apply transition-colors duration-300;
-  }
-
-  /* 初始状态：黑色（深色模式下为白色） */
+  /* 统一标题悬停颜色 */
   .post-title a, h2 a, h3 a {
+    @apply transition-colors duration-300;
     color: inherit;
     text-decoration: none;
   }
 
-  /* 悬停状态：统一为橙色（不再出现红色或纯白反色） */
   .post-title a:hover,
   h2 a:hover,
   h3 a:hover,
@@ -47,16 +65,13 @@ const isPostPage = Astro.url.pathname.startsWith('/posts/')
     @apply text-orange-500 !important;
   }
 
-  /* 2. 处理你说的“黑底白字”或“ZZ
-  黑底红字”的边框/背景问题 */
-  /* 如果你的主题在点击时会产生背景色，这里进行重置 */
+  /* 点击背景重置 */
   .post-item:active,
   .group:active {
     background-color: transparent !important;
   }
 
-  /* 3. 针对分类页和标签页的特殊修复 */
-  /* 确保它们的 # 符号和文字在 hover 时同步变色 */
+  /* 分类/标签页符号同步变色 */
   .group:hover .opacity-30,
   .group:hover .opacity-20 {
     @apply text-orange-500 opacity-100 transition-all;

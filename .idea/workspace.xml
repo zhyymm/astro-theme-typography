@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="" />
+    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/content/authors/悲鸣.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/035.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/authors/[author].astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PostMeta.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostMeta.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/容忍与自由.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/容忍与自由.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/故乡.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/故乡.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/模板.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/测试.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/羅生門.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/羅生門.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/LayoutPost.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/LayoutPost.astro" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +40,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/pali/zb",
+    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/ahan",
     "nodejs_package_manager_path": "pnpm",
     "settings.editor.selected.configurable": "editing.templates",
     "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
@@ -36,10 +49,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\ahan" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content\authors" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\authors" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali" />
     </key>
@@ -69,6 +84,7 @@
       <workItem from="1768413643330" duration="3378000" />
       <workItem from="1768455710510" duration="1268000" />
       <workItem from="1768468201259" duration="2353000" />
+      <workItem from="1768485284584" duration="8631000" />
     </task>
     <servers />
   </component>

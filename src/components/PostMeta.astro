@@ -15,24 +15,22 @@ interface LinkData {
     slug: string;
 }
 
-const { post } = Astro.props
+const { post } = Astro.props // 1. 先拿 post
 const { translate: t } = Astro.locals
+const { author } = post.data // 2. 再从 post.data 里拿 author
 
-// 1. 获取基础列表
+// 3. 准备分类和标签数据
 const categoryList: string[] = post.data.categories ?? []
 const tagList: string[] = post.data.tags ?? []
 
-// 2. 核心改进：添加安全回退机制
 const categoryLinkData: LinkData[] = categoryList.map((name: string) => {
     const generated = generateSlug(name);
     return {
         name: name,
-        // 这里不需要 encodeURIComponent，因为 PostCategory 内部会处理，或者保持原始以匹配路由
         slug: (generated && generated.trim() !== '') ? generated : name
     };
 });
 
-// 3. 对标签也应用相同的逻辑
 const tagLinkData: LinkData[] = tagList.map((name: string) => {
     const generated = generateSlug(name);
     return {
@@ -45,32 +43,41 @@ const tagLinkData: LinkData[] = tagList.map((name: string) => {
 <header flex="~ col gap-2">
   <h1 class="post-title">
       <a class="not-prose" href={`/posts/${post.slug || post.id}/`}>{post.data.title}</a>
-    </h1>
+  </h1>
 
-    <div class="text-3.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-      <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
-      <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
+  <div class="text-3.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+    <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
+    <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
 
-      {categoryLinkData.map((category: LinkData) => (
-        <PostCategory category={{ name: category.name, slug: category.slug }} />
-      ))}
+    {author && (
+      <>
+        <span class="opacity-30">·</span>
+        <a
+          href={`/authors/${author}/`}
+          class="hover:text-orange-500 transition-colors opacity-60 hover:opacity-100"
+        >
+          {author}
+        </a>
+      </>
+    )}
 
-      {tagLinkData.length > 0 && (
-        <>
-                     {tagLinkData.length > 0 && (
-                  <>
-                    <span class="text-gray-400 mx-1">|</span>
-                    {tagLinkData.map((tag: LinkData) => (
-                      <a
-                        href={`/tags/${encodeURIComponent(tag.slug)}/`}
-                        class="text-primary hover:underline whitespace-nowrap"
-                      >
-                        #{tag.name}
-                      </a>
-                    ))}
-                  </>
-                )}
-        </>
-      )}
-    </div>
+    {categoryLinkData.map((category: LinkData) => (
+      <div class="ml-2"> <PostCategory category={{ name: category.name, slug: category.slug }} />
+      </div>
+    ))}
+
+    {tagLinkData.length > 0 && (
+      <>
+        <span class="text-gray-400 mx-1">|</span>
+        {tagLinkData.map((tag: LinkData) => (
+          <a
+            href={`/tags/${encodeURIComponent(tag.slug)}/`}
+            class="text-primary hover:underline whitespace-nowrap"
+          >
+            #{tag.name}
+          </a>
+        ))}
+      </>
+    )}
+  </div>
 </header>

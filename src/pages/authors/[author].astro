@@ -1,0 +1,72 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import { formatDate } from '~/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', post => !post.data.draft);
+  const uniqueAuthors = [...new Set(allPosts.map(post => post.data.author || "默认作者"))];
+  return uniqueAuthors.map(author => ({
+    params: { author: author },
+    props: { name: author, posts: allPosts.filter(p => (p.data.author || "默认作者") === author) },
+  }));
+}
+
+const { name, posts } = Astro.props;
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// --- 核心逻辑：获取对应的 Markdown 档案 ---
+const authorEntry = await getEntry('authors', name);
+// 如果找不到对应的 MD 文件，则使用默认值
+const profile = authorEntry ? authorEntry.data : { title: "求道者", bio: "如法受持", avatar: null };
+const { Content } = authorEntry ? await authorEntry.render() : { Content: null };
+---
+
+<LayoutDefault>
+  <div class="py-8">
+    <header class="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-10 text-center md:text-left">
+      <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+        <div class="relative">
+          {profile.avatar ? (
+            <img src={profile.avatar} alt={name} class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-zinc-800 shadow-xl" />
+          ) : (
+            <div class="w-32 h-32 rounded-full bg-orange-500/5 text-orange-600 text-5xl flex items-center justify-center border border-orange-500/10 font-serif font-bold">{name.charAt(0)}</div>
+          )}
+        </div>
+
+        <div class="flex-1">
+          <h1 class="text-3xl font-bold mb-3 tracking-tight">{name}</h1>
+          <p class="text-sm opacity-60 font-medium tracking-widest text-zinc-500 dark:text-zinc-400 mb-4">{profile.title}</p>
+
+          <div class="mt-8 border-t border-zinc-100 dark:border-zinc-800 pt-8">
+            {Content ? (
+              <div class="prose prose-orange dark:prose-invert max-w-none
+                          prose-p:leading-relaxed prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+                          prose-headings:text-zinc-800 dark:prose-headings:text-zinc-200">
+                <Content />
+              </div>
+            ) : (
+              <p class="text-sm opacity-50 italic">{profile.bio}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+       <h2 class="text-lg font-bold mb-6 flex items-center opacity-80">
+        <span class="w-1 h-4 bg-orange-500 mr-2"></span> 法音集录 ({posts.length})
+      </h2>
+      <ul class="flex flex-col gap-4">
+        {sortedPosts.map((post) => (
+          <li class="group flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-dotted border-zinc-100 dark:border-zinc-800/50 pb-2">
+            <h3 class="text-base font-medium">
+              <a href={`/posts/${post.slug || post.id}/`} class="group-hover:text-orange-500 transition-colors">{post.data.title}</a>
+            </h3>
+            <time class="text-xs opacity-30 tabular-nums font-mono">{formatDate(post.data.pubDate, 'YYYY-MM-DD')}</time>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</LayoutDefault>

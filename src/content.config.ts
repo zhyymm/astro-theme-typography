@@ -41,6 +41,15 @@ const posts = defineCollection({
 
 // 2. 定义 spec 集合
 const spec = defineCollection({});
+// ⭐ 这里是新增步骤：定义 authors 集合
+const authors = defineCollection({
+    type: 'content', // 必须设置为 content，才能解析 Markdown
+    schema: z.object({
+        title: z.string(),     // 导师头衔
+        bio: z.string(),      // 一句话座右铭
+        avatar: z.string().optional(), // 头像路径（如 /images/authors/beiming.jpg）
+    }),
+});
 
 export const collections = {
     posts,
