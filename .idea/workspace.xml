@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-71.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-72.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-73.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-74.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-76.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-77.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-78.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-79.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-80.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-81.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-82.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-83.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-84.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-85.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-86.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-87.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-88.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-89.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-90.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,21 +35,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zhy/astro-theme-typography/src/content/posts/pali/zb&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/pali/zb",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "editing.templates",
+    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
@@ -72,7 +84,8 @@
       <workItem from="1768373962148" duration="3100000" />
       <workItem from="1768403366491" duration="4388000" />
       <workItem from="1768413643330" duration="3378000" />
-      <workItem from="1768455710510" duration="330000" />
+      <workItem from="1768455710510" duration="1268000" />
+      <workItem from="1768468201259" duration="2180000" />
     </task>
     <servers />
   </component>
