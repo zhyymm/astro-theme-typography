@@ -5,21 +5,34 @@ import { formatDate } from '~/utils';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts', post => !post.data.draft);
-  const uniqueAuthors = [...new Set(allPosts.map(post => post.data.author || "默认作者"))];
-  return uniqueAuthors.map(author => ({
-    params: { author: author },
-    props: { name: author, posts: allPosts.filter(p => (p.data.author || "默认作者") === author) },
+  // 这里拿到的作者通常是拼音，如 'beiming'
+  const uniqueAuthors = [...new Set(allPosts.map(post => post.data.author || "default"))];
+
+  return uniqueAuthors.map(authorSlug => ({
+    params: { author: authorSlug },
+    props: {
+      slug: authorSlug,
+      posts: allPosts.filter(p => (p.data.author || "default") === authorSlug)
+    },
   }));
 }
 
-const { name, posts } = Astro.props;
+const { slug, posts } = Astro.props;
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-// --- 核心逻辑：获取对应的 Markdown 档案 ---
-const authorEntry = await getEntry('authors', name);
-// 如果找不到对应的 MD 文件，则使用默认值
+// --- 核心逻辑：用拼音 slug 获取 Markdown 档案 ---
+const authorEntry = await getEntry('authors', slug);
+
+// 如果 Markdown 里定义了 name 字段就用它，否则用文件名首字母大写作为显示名
+const displayName = authorEntry?.data?.name || (slug.charAt(0).toUpperCase() + slug.slice(1));
 const profile = authorEntry ? authorEntry.data : { title: "求道者", bio: "如法受持", avatar: null };
-const { Content } = authorEntry ? await authorEntry.render() : { Content: null };
+
+// 只有在找到了文件时才渲染 Content
+let Content = null;
+if (authorEntry) {
+  const rendered = await authorEntry.render();
+  Content = rendered.Content;
+}
 ---
 
 <LayoutDefault>
@@ -28,14 +41,16 @@ const { Content } = authorEntry ? await authorEntry.render() : { Content: null }
       <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div class="relative">
           {profile.avatar ? (
-            <img src={profile.avatar} alt={name} class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-zinc-800 shadow-xl" />
+            <img src={profile.avatar} alt={displayName} class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-zinc-800 shadow-xl" />
           ) : (
-            <div class="w-32 h-32 rounded-full bg-orange-500/5 text-orange-600 text-5xl flex items-center justify-center border border-orange-500/10 font-serif font-bold">{name.charAt(0)}</div>
+            <div class="w-32 h-32 rounded-full bg-orange-500/5 text-orange-600 text-5xl flex items-center justify-center border border-orange-500/10 font-serif font-bold">
+              {displayName.charAt(0)}
+            </div>
           )}
         </div>
 
         <div class="flex-1">
-          <h1 class="text-3xl font-bold mb-3 tracking-tight">{name}</h1>
+          <h1 class="text-3xl font-bold mb-3 tracking-tight">{displayName}</h1>
           <p class="text-sm opacity-60 font-medium tracking-widest text-zinc-500 dark:text-zinc-400 mb-4">{profile.title}</p>
 
           <div class="mt-8 border-t border-zinc-100 dark:border-zinc-800 pt-8">

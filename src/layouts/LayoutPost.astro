@@ -12,8 +12,10 @@ const { post } = Astro.props
 // 1. 判断是否为文章详情页
 const isPostPage = Astro.url.pathname.startsWith('/posts/')
 
-// 2. 获取作者信息（集中在这里定义）
-const author = post.data.author || "默认作者"
+// 2. 获取作者信息：使用双字段逻辑
+// author 是拼音（用于链接），authorName 是中文（用于显示）
+const authorSlug = post.data.author || "admin"
+const authorDisplayName = post.data.authorName || authorSlug
 ---
 <article class="prose">
   <PostMeta post={post} />
@@ -24,18 +26,18 @@ const author = post.data.author || "默认作者"
   <div class="mt-12 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800">
     <div class="flex items-center gap-4">
       <div class="w-12 h-12 rounded-full bg-orange-500/5 flex items-center justify-center text-lg shadow-sm border border-orange-500/10 font-bold text-orange-500">
-        {author.charAt(0).toUpperCase()}
+        {/* 截取中文名字的第一个字 */}
+        {authorDisplayName.charAt(0)}
       </div>
 
       <div class="flex flex-col">
         <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold">本文作者</span>
-        <a href={`/authors/${author}/`} class="text-base font-bold hover:text-orange-500 transition-colors">
-          {author}
+        <a href={`/authors/${authorSlug}/`} class="text-base font-bold hover:text-orange-500 transition-colors">
+          {authorDisplayName}
         </a>
       </div>
     </div>
 
-    {/* 这里可以保持你原有的文字，或者留空，因为点击进入详情页会有更详细的 bio */}
     <p class="text-xs opacity-50 mt-4 italic leading-relaxed">
       如法受持，如实开示。点击作者名查看更多导师详情。
     </p>
@@ -47,8 +49,6 @@ const author = post.data.author || "默认作者"
     <Giscus />
   </section>
 )}
-
-
 
 <style is:global>
   /* 统一标题悬停颜色 */

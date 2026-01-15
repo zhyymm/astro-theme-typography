@@ -1,4 +1,5 @@
 ---
+name: "悲鸣"
 title: "法义阐释者 · 原始佛教弘扬者"
 bio: "依止《阿含经》，致力于复原佛陀时代的质朴法义，令正法久住。"
 avatar: "/images/authors/beiming.jpg"
