@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-76.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-77.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-78.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-79.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-80.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-81.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-82.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-83.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-84.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-85.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-86.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-87.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-88.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-89.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-90.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +68,7 @@
       <workItem from="1768403366491" duration="4388000" />
       <workItem from="1768413643330" duration="3378000" />
       <workItem from="1768455710510" duration="1268000" />
-      <workItem from="1768468201259" duration="2180000" />
+      <workItem from="1768468201259" duration="2353000" />
     </task>
     <servers />
   </component>
