@@ -47,3 +47,40 @@ a[href*="/intro/"] {
   font-size: 13px !important;
   padding: 6px 14px !important;
 }
+/* --- 统一主页与归档页面的预览文字 --- */
+
+/* 1. 强制归档页面的预览描述文字调大，与主页看齐 */
+.line-clamp-2,
+.line-clamp-3,
+[class*="line-clamp-"] {
+  font-size: 15px !important;    /* 统一调至 15px 或 16px */
+  line-height: 1.6 !important;   /* 增加行间距，更具呼吸感 */
+  color: #52525b !important;    /* 对应 zinc-600，比正文稍浅 */
+  margin-top: 0.5rem !important;
+}
+
+/* 2. 如果归档页面的预览文字在特定容器下，可以加固这一层 */
+article p {
+  font-size: 15px !important;
+}
+/* --- 统一文字颜色：对治色差 --- */
+
+/* 1. 强制作者列表页的“已发布文章”文字颜色变浅 */
+/* 锁定包含“已发布文章”字样的段落 */
+p[class*="text-"][class*="11px"],
+.flex-col.gap-1\.5 p,
+.flex.items-center.gap-4 p {
+  color: #a1a1aa !important; /* 对应 zinc-400，与分类页后的文字颜色达成一致 */
+}
+
+/* 2. 保持数字稍深一点点以突出重点，但也要比之前柔和 */
+p[class*="text-"][class*="11px"] span,
+.flex-col.gap-1\.5 p span {
+  color: #71717a !important; /* 对应 zinc-500 */
+}
+
+/* 3. 针对“共计 XX 篇文章”的文字（分类/归档页）统一加固 */
+.text-zinc-400,
+[class*="text-zinc-400"] {
+  color: #a1a1aa !important;
+}
