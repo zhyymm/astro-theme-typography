@@ -20,3 +20,30 @@ html {
   --at-apply: 'ease-in-out duration-300ms';
   --at-apply: 'hover:(c-background bg-primary decoration-primary)';
 }
+/* --- 仅针对服务器端透明度与特定页面字号的补丁 --- */
+
+/* 1. 确保所有背景透明，让 960px 网格线透出来 */
+html, body, main, header, footer, article, section, #swup {
+  background-color: transparent !important;
+}
+
+/* 2. 精准调大作者页面的“小字号”文字 */
+/* 不依赖特殊字符选择器，避免 esbuild 报错 */
+p[class*="text-"][class*="11px"] {
+  font-size: 13px !important;
+  color: #71717a !important; /* 对应的灰色 */
+  line-height: 1.6 !important;
+}
+
+/* 调大作者页面的统计数字 */
+p[class*="text-"][class*="11px"] span {
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: #3f3f46 !important;
+}
+
+/* 3. 针对“查看导师档案”按钮 */
+a[href*="/intro/"] {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+}

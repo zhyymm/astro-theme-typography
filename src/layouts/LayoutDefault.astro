@@ -44,42 +44,48 @@ const dark = themeConfig.appearance.theme === 'dark'
     </footer>
 
     <style is:global>
-      /* 1. 核心加固：强制背景透明 (解决服务器端背景发白遮挡网格的问题) */
-      html, body, main, header, footer, #swup, section, article {
-        background-color: transparent !important;
-      }
+          /* --- 1. 背景对治：960px 完美对齐 --- */
+          html {
+            background-color: #ffffff;
+            background-image: url('/placeholder.png') !important;
+            background-repeat: repeat !important;
+            background-attachment: fixed !important;
+            /* 你发现的正确数值：1920 / 2 = 960px */
+            background-size: 960px auto !important;
+            image-rendering: -webkit-optimize-contrast;
+          }
 
-      /* 2. 背景像素对治：确保网格如实显现 */
-      html {
-        background-image: url('/placeholder.png') !important;
-        background-repeat: repeat !important;
-        background-attachment: fixed !important;
-        background-size: 960px auto !important;
-      }
+          html.dark {
+            background-color: #18181b;
+          }
 
-      /* 3. 针对“已发布文章”那一行的字号补丁 */
-      /* 使用属性模糊匹配，避开编译报错，同时能调大字号 */
-      [class*="text-[11px]"] {
-        font-size: 13px !important; /* 稍微大一点，更清晰 */
-        color: #71717a !important; /* 对应的灰色 */
-      }
+          /* --- 2. 撕掉所有覆盖在网格上的“白纸” --- */
+          /* 确保所有层级都是透明的，网格才能从底部透出来 */
+          body,
+          main,
+          header,
+          footer,
+          #swup,
+          section,
+          article,
+          .transition-swup-main {
+            background-color: transparent !important;
+            background-image: none !important;
+          }
 
-      /* 4. 针对统计行里的数字 */
-      [class*="mx-0.5"] {
-        font-size: 15px !important;
-        font-weight: bold !important;
-      }
+          /* --- 3. 初始布局微调 --- */
+          /* 确保左侧滚动条隐藏，保持画面宁静 */
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-      /* 5. 针对“查看导师档案”按钮 */
-      a[href*="/intro/"] {
-        font-size: 13px !important;
-        padding: 6px 14px !important;
-      }
+          /* 交互：黑底白字 */
+          nav a:hover, header a:hover {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+          }
 
-      /* 6. 隐藏滚动条 */
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+        </style>
 
   </body>
 
