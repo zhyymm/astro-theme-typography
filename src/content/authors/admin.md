@@ -1,6 +1,6 @@
 ---
-name: "管理员"
+name: "恒明"
 title: "站点维护者"
 bio: "如实记录，如法传递。"
-avatar: "/images/authors/admin.jpg" 
+avatar: https://516689.xyz/Img/2026/01/20260116121558189.png
 ---

@@ -10,7 +10,7 @@ const posts = defineCollection({
 
             // 作者双字段：author 存拼音(用于链接)，authorName 存中文(用于显示)
             author: z.string().optional().default('admin'),
-            authorName: z.string().optional().default('管理员'),
+            authorName: z.string().optional().default('恒明'),
 
             categories: z.array(z.string()).default([]),
             tags: z.array(z.string()).default([]).optional(),
