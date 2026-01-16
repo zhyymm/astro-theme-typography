@@ -7,6 +7,16 @@ slug:
 tags: [中部]
 draft: false
 ---
+礼敬彼世尊、阿罗汉、正等正觉者。
+
+中部
+
+根本五十经篇
+
+根本法门品
+
+中部1经 根本法门经
+
 如是我闻。一时，世尊住在郁伽达的斯跋伽瓦那萨拉拉伽树下。在那裡，世尊对比丘们说：“比丘们！”比丘们回答世尊说：“世尊！”世尊如此说：“比丘们，我将为你们宣说一切法门的根本。你们仔细听，善加思惟，我将宣说。”比丘们回答世尊说：“是的，世尊！”世尊如此说：
 
 “在此，比丘们，无闻的凡夫，未曾见圣者，不熟悉圣法，未曾受圣法教导；未曾见善人，不熟悉善人法，未曾受善人法教导——他把地知为地；把地知为地之后，他把地当作‘我’，把地当作‘我的’，把地当作‘从地而来’，把地当作‘地是我的’，他欢喜地。这是什么原因呢？我说：‘那对他来说是未遍知的。’
@@ -103,7 +113,62 @@ draft: false
 
 世尊如此说。那些比丘们没有随喜世尊所说。
 
-根本法门经第一部已毕。
+根本法门经第一部已毕。  
 
+巴利语经文  
+Namo tassa bhagavato arahato sammāsambuddhassa.  
+Majjhimanikāyo  
+Mūlapaṇṇāsapāḷi  
+1\. Mūlapariyāyavaggo  
+MN.1/(1) Mūlapariyāyasuttaṃ  
+　　 1. Evaṃ me sutaṃ– ekaṃ samayaṃ bhagavā ukkaṭṭhāyaṃ viharati subhagavane sālarājamūle. Tatra kho bhagavā bhikkhū āmantesi– “bhikkhavo”ti. “Bhadante”ti te bhikkhū bhagavato paccassosuṃ. Bhagavā etadavoca– “sabbadhammamūlapariyāyaṃ vo, bhikkhave, desessāmi. Taṃ suṇātha, sādhukaṃ manasi karotha, bhāsissāmī”ti. “Evaṃ, bhante”ti kho te bhikkhū bhagavato paccassosuṃ. Bhagavā etadavoca–  
+　　 2. “Idha, bhikkhave, assutavā puthujjano ariyānaṃ adassāvī ariyadhammassa akovido ariyadhamme avinīto, sappurisānaṃ adassāvī sappurisadhammassa akovido sappurisadhamme avinīto– pathaviṃ pathavito sañjānāti; pathaviṃ pathavito saññatvā pathaviṃ maññati, pathaviyā maññati, pathavito maññati, pathaviṃ meti maññati pathaviṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Āpaṃ āpato sañjānāti; āpaṃ āpato saññatvā āpaṃ maññati, āpasmiṃ maññati, āpato maññati, āpaṃ meti maññati, āpaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Tejaṃ tejato sañjānāti; tejaṃ tejato saññatvā tejaṃ maññati, tejasmiṃ maññati, tejato maññati, tejaṃ meti maññati, tejaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Vāyaṃ vāyato sañjānāti; vāyaṃ vāyato saññatvā vāyaṃ maññati, vāyasmiṃ maññati, vāyato maññati, vāyaṃ meti maññati, vāyaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 3. “Bhūte bhūtato sañjānāti; bhūte bhūtato saññatvā bhūte maññati, bhūtesu maññati, bhūtato maññati, bhūte meti maññati, bhūte abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Deve devato sañjānāti; deve devato saññatvā deve maññati, devesu maññati, devato maññati, deve meti maññati, deve abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Pajāpatiṃ pajāpatito sañjānāti; pajāpatiṃ pajāpatito saññatvā pajāpatiṃ maññati, pajāpatismiṃ maññati, pajāpatito maññati, pajāpatiṃ meti maññati, pajāpatiṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Brahmaṃ brahmato sañjānāti; brahmaṃ brahmato saññatvā brahmaṃ maññati brahmasmiṃ maññati, brahmato maññati, brahmaṃ meti maññati, brahmaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Ābhassare ābhassarato sañjānāti; ābhassare ābhassarato saññatvā ābhassare maññati, ābhassaresu maññati, ābhassarato maññati, ābhassare meti maññati, ābhassare abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Subhakiṇhe subhakiṇhato sañjānāti; subhakiṇhe subhakiṇhato saññatvā subhakiṇhe maññati, subhakiṇhesu maññati, subhakiṇhato maññati, subhakiṇhe meti maññati, subhakiṇhe abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Vehapphale vehapphalato sañjānāti; vehapphale vehapphalato saññatvā vehapphale maññati, vehapphalesu maññati, vehapphalato maññati, vehapphale meti maññati, vehapphale abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Abhibhuṃ abhibhūto sañjānāti; abhibhuṃ abhibhūto saññatvā abhibhuṃ maññati, abhibhusmiṃ maññati, abhibhūto maññati, abhibhuṃ meti maññati, abhibhuṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 4. “Ākāsānañcāyatanaṃ ākāsānañcāyatanato sañjānāti; ākāsānañcāyatanaṃ ākāsānañcāyatanato saññatvā ākāsānañcāyatanaṃ maññati, ākāsānañcāyatanasmiṃ maññati, ākāsānañcāyatanato maññati, ākāsānañcāyatanaṃ meti maññati, ākāsānañcāyatanaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Viññāṇañcāyatanaṃ viññāṇañcāyatanato sañjānāti; viññāṇañcāyatanaṃ viññāṇañcāyatanato saññatvā viññāṇañcāyatanaṃ maññati, viññāṇañcāyatanasmiṃ maññati, viññāṇañcāyatanato maññati, viññāṇañcāyatanaṃ meti maññati, viññāṇañcāyatanaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Ākiñcaññāyatanaṃ ākiñcaññāyatanato sañjānāti; ākiñcaññāyatanaṃ ākiñcaññāyatanato saññatvā ākiñcaññāyatanaṃ maññati, ākiñcaññāyatanasmiṃ maññati, ākiñcaññāyatanato maññati, ākiñcaññāyatanaṃ meti maññati, ākiñcaññāyatanaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Nevasaññānāsaññāyatanaṃ nevasaññānāsaññāyatanato sañjānāti; nevasaññānāsaññāyatanaṃ nevasaññānāsaññāyatanato saññatvā nevasaññā-nāsaññāyatanaṃ maññati, nevasaññānāsaññāyatanasmiṃ maññati, nevasaññā-nāsaññāyatanato maññati, nevasaññānāsaññāyatanaṃ meti maññati, nevasaññā-nāsaññāyatanaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 5. “Diṭṭhaṃ diṭṭhato sañjānāti; diṭṭhaṃ diṭṭhato saññatvā diṭṭhaṃ maññati, diṭṭhasmiṃ maññati, diṭṭhato maññati, diṭṭhaṃ meti maññati, diṭṭhaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Sutaṃ sutato sañjānāti; sutaṃ sutato saññatvā sutaṃ maññati, sutasmiṃ maññati, sutato maññati, sutaṃ meti maññati, sutaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Mutaṃ mutato sañjānāti; mutaṃ mutato saññatvā mutaṃ maññati, mutasmiṃ maññati, mutato maññati, mutaṃ meti maññati, mutaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Viññātaṃ viññātato sañjānāti; viññātaṃ viññātato saññatvā viññātaṃ maññati, viññātasmiṃ maññati, viññātato maññati, viññātaṃ meti maññati, viññātaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 6. “Ekattaṃ ekattato sañjānāti; ekattaṃ ekattato saññatvā ekattaṃ maññati, ekattasmiṃ maññati, ekattato maññati, ekattaṃ meti maññati, ekattaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Nānattaṃ nānattato sañjānāti; nānattaṃ nānattato saññatvā nānattaṃ maññati, nānattasmiṃ maññati, nānattato maññati, nānattaṃ meti maññati, nānattaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Sabbaṃ sabbato sañjānāti; sabbaṃ sabbato saññatvā sabbaṃ maññati, sabbasmiṃ maññati, sabbato maññati, sabbaṃ meti maññati, sabbaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 “Nibbānaṃ nibbānato sañjānāti; nibbānaṃ nibbānato saññatvā nibbānaṃ maññati, nibbānasmiṃ maññati nibbānato maññati, nibbānaṃ meti maññati, nibbānaṃ abhinandati. Taṃ kissa hetu? ‘Apariññātaṃ tassā’ti vadāmi.  
+　　 Puthujjanavasena paṭhamanayabhūmiparicchedo niṭṭhito.  
+　　 7. “Yopi so, bhikkhave, bhikkhu sekkho appattamānaso anuttaraṃ yogakkhemaṃ patthayamāno viharati, sopi pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ mā maññi, pathaviyā mā maññi, pathavito mā maññi, pathaviṃ meti mā maññi, pathaviṃ mābhinandi. Taṃ kissa hetu? ‘Pariññeyyaṃ tassā’ti vadāmi.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ… nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ mā maññi, nibbānasmiṃ mā maññi, nibbānato mā maññi, nibbānaṃ meti mā maññi, nibbānaṃ mābhinandi. Taṃ kissa hetu? ‘Pariññeyyaṃ tassā’ti vadāmi.  
+　　 Sekkhavasena dutiyanayabhūmiparicchedo niṭṭhito.  
+　　 8. “Yopi so, bhikkhave, bhikkhu arahaṃ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṃyojano sammadaññā vimutto, sopi pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati. Taṃ kissa hetu? ‘Pariññātaṃ tassā’ti vadāmi.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ… nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? ‘Pariññātaṃ tassā’ti vadāmi.  
+　　 Khīṇāsavavasena tatiyanayabhūmiparicchedo niṭṭhito.  
+　　 9. “Yopi so, bhikkhave, bhikkhu arahaṃ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṃyojano sammadaññā vimutto, sopi pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati. Taṃ kissa hetu? Khayā rāgassa, vītarāgattā.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ nevasaññānāsaññāyatanaṃ diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? Khayā rāgassa, vītarāgattā.  
+　　 Khīṇāsavavasena catutthanayabhūmiparicchedo niṭṭhito.  
+　　 10. “Yopi so, bhikkhave, bhikkhu arahaṃ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṃyojano sammadaññā vimutto, sopi pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati. Taṃ kissa hetu? Khayā dosassa, vītadosattā.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ… nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? Khayā dosassa, vītadosattā.  
+　　 Khīṇāsavavasena pañcamanayabhūmiparicchedo niṭṭhito.  
+　　 11. “Yopi so, bhikkhave, bhikkhu arahaṃ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṃyojano sammadaññā vimutto, sopi pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati. Taṃ kissa hetu? Khayā mohassa, vītamohattā.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? Khayā mohassa, vītamohattā.  
+　　 Khīṇāsavavasena chaṭṭhanayabhūmiparicchedo niṭṭhito.  
+　　 12. “Tathāgatopi, bhikkhave, arahaṃ sammāsambuddho pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati Taṃ kissa hetu? ‘Pariññātantaṃ tathāgatassā’ti vadāmi.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ ākiñcaññāyatanaṃ… nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? ‘Pariññātantaṃ tathāgatassā’ti vadāmi.  
+　　 Tathāgatavasena sattamanayabhūmiparicchedo niṭṭhito.  
+　　 13. “Tathāgatopi bhikkhave, arahaṃ sammāsambuddho pathaviṃ pathavito abhijānāti; pathaviṃ pathavito abhiññāya pathaviṃ na maññati, pathaviyā na maññati, pathavito na maññati, pathaviṃ meti na maññati, pathaviṃ nābhinandati. Taṃ kissa hetu? ‘Nandī dukkhassa mūlan’ti– iti viditvā ‘bhavā jāti bhūtassa jarāmaraṇan’ti. Tasmātiha, bhikkhave, ‘tathāgato sabbaso taṇhānaṃ khayā virāgā nirodhā cāgā paṭinissaggā anuttaraṃ sammāsambodhiṃ abhisambuddho’ti vadāmi.  
+　　 “Āpaṃ …pe… tejaṃ… vāyaṃ… bhūte… deve… pajāpatiṃ… brahmaṃ… ābhassare… subhakiṇhe… vehapphale… abhibhuṃ… ākāsānañcāyatanaṃ… viññāṇañcāyatanaṃ… ākiñcaññāyatanaṃ… nevasaññānāsaññāyatanaṃ… diṭṭhaṃ… sutaṃ… mutaṃ… viññātaṃ… ekattaṃ… nānattaṃ… sabbaṃ… nibbānaṃ nibbānato abhijānāti; nibbānaṃ nibbānato abhiññāya nibbānaṃ na maññati, nibbānasmiṃ na maññati, nibbānato na maññati, nibbānaṃ meti na maññati, nibbānaṃ nābhinandati. Taṃ kissa hetu? ‘Nandī dukkhassa mūlan’ti– iti viditvā ‘bhavā jāti bhūtassa jarāmaraṇan’ti. Tasmātiha, bhikkhave, ‘tathāgato sabbaso taṇhānaṃ khayā virāgā nirodhā cāgā paṭinissaggā anuttaraṃ sammāsambodhiṃ abhisambuddho’ti vadāmī”ti.  
+　　 Tathāgatavasena aṭṭhamanayabhūmiparicchedo niṭṭhito.  
+　　 Idamavoca bhagavā. Na te bhikkhū bhagavato bhāsitaṃ abhinandunti.  
+　　 Mūlapariyāyasuttaṃ niṭṭhitaṃ paṭhamaṃ.
 
 
