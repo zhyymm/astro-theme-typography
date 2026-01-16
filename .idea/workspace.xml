@@ -2,34 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/posts/记事本" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/024.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/021.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/022.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/023.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/025.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/026.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/027.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/028.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/posts/ahan/029.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/authors/admin.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/authors/admin.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/authors/beiming.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/authors/zcj.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/01.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/01.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/02.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/02.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/03.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/03.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/035.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/04.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/04.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/05.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/05.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/06.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/06.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/07.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/07.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/08.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/08.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/09.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/09.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/10.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/10.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/11.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/11.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/12.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/12.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/13.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/13.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/14.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/14.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/15.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/15.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/16.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/16.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/17.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/17.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/18.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/18.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/19.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/19.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/20.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/ahan/20.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/ahan/36.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/authors/[author].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/authors/[author].astro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,26 +29,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zhy/astro-theme-typography/src/content/posts&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/ahan",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "editing.templates",
+    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\ahan" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\authors" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
     </key>
@@ -104,7 +86,7 @@
       <workItem from="1768455710510" duration="1268000" />
       <workItem from="1768468201259" duration="2353000" />
       <workItem from="1768485284584" duration="13577000" />
-      <workItem from="1768532541890" duration="5719000" />
+      <workItem from="1768532541890" duration="7536000" />
     </task>
     <servers />
   </component>
