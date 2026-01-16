@@ -14,13 +14,11 @@ const dark = themeConfig.appearance.theme === 'dark'
 ---
 
 <html lang={lang} class:list={[{ dark }]}>
-
   <head>
     <slot name="seo"> <SiteSeo /> </slot>
     <LaTeX />
     <Analytics />
     <ThemeScript />
-    <meta name="google-site-verification" content="RKM1t0V9xGdeEnx076dCRKmVb1Qw3ycFv6z4ZpYuPHs" />
   </head>
 
   <body
@@ -37,7 +35,7 @@ const dark = themeConfig.appearance.theme === 'dark'
       <SiteNavigation />
     </header>
 
-    <main class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none" lg="row-1-3 col-1-2 py-20 ">
+    <main class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none" lg="row-1-3 col-1-2 py-20">
       <slot />
     </main>
 
@@ -45,23 +43,48 @@ const dark = themeConfig.appearance.theme === 'dark'
       <SiteFooter />
     </footer>
 
-    <style>
-      /* 移除首次加载动画的keyframes */
-      /* @keyframes fade-in-down / @keyframes fade-in-left 已被移除 */
+    <style is:global>
+          /* --- 1. 背景对治：960px 完美对齐 --- */
+          html {
+            background-color: #ffffff;
+            background-image: url('/placeholder.png') !important;
+            background-repeat: repeat !important;
+            background-attachment: fixed !important;
+            /* 你发现的正确数值：1920 / 2 = 960px */
+            background-size: 960px auto !important;
+            image-rendering: -webkit-optimize-contrast;
+          }
 
-      /* 只保留页面过渡动画（Swup 切换页面时用） */
-      html.is-animating .transition-swup-main,
-      html.is-leaving .transition-swup-main {
-        opacity: 0;
-        transform: translateY(-1rem);
-      }
+          html.dark {
+            background-color: #18181b;
+          }
 
-      /* 默认状态强制可见（防止卡住） */
-      .transition-swup-main {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        transition: opacity 0.5s linear, transform 0.5s linear;
-      }
-    </style>
+          /* --- 2. 撕掉所有覆盖在网格上的“白纸” --- */
+          /* 确保所有层级都是透明的，网格才能从底部透出来 */
+          body,
+          main,
+          header,
+          footer,
+          #swup,
+          section,
+          article,
+          .transition-swup-main {
+            background-color: transparent !important;
+            background-image: none !important;
+          }
+
+          /* --- 3. 初始布局微调 --- */
+          /* 确保左侧滚动条隐藏，保持画面宁静 */
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+          /* 交互：黑底白字 */
+          nav a:hover, header a:hover {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+          }
+
+        </style>
   </body>
 </html>

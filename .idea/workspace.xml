@@ -2,31 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-91.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-92.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-93.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-94.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-95.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-96.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-97.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-98.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-99.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/archive/[...page].astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/authors/[author]/[...page].astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/authors/[author]/intro.astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/categories/[category]/[...page].astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/tags/[tag]/[...page].astro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-10.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-10.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-11.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-11.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-12.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-12.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-13.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-13.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-14.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-14.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-15.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-15.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-2.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-3.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-3.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-4.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-4.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-5.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-5.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-6.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-6.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-7.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-7.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-8.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-8.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-9.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-9.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Pagination.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pagination.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SiteNavigation.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SiteNavigation.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/LayoutDefault.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/LayoutDefault.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/[...page].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/[...page].astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/archive.astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/authors/[author].astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/categories/[...category].astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/tags/[tag].astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +43,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/pali/zb",
+    "last_opened_file_path": "C:/Users/zhy/astro-theme-typography/src/content/posts/pali",
     "nodejs_package_manager_path": "pnpm",
     "settings.editor.selected.configurable": "editing.templates",
     "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
@@ -62,17 +52,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\content" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\pali\zb" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts\ahan" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\posts" />
-      <recent name="C:\Users\zhy\astro-theme-typography\src\content\authors" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\zhy\astro-theme-typography\public\images\authors" />
-      <recent name="C:\Users\zhy\astro-theme-typography\src\content\authors\images" />
-      <recent name="C:\Users\zhy\astro-theme-typography\public" />
       <recent name="C:\Users\zhy\astro-theme-typography\src\content\authors" />
-      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\authors" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\authors\[author]" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\categories\[category]" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\tags\[tag]" />
+      <recent name="C:\Users\zhy\astro-theme-typography\src\pages\authors\author" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -102,7 +93,7 @@
       <workItem from="1768468201259" duration="2353000" />
       <workItem from="1768485284584" duration="13577000" />
       <workItem from="1768532541890" duration="7946000" />
-      <workItem from="1768551499616" duration="1646000" />
+      <workItem from="1768551499616" duration="32780000" />
     </task>
     <servers />
   </component>

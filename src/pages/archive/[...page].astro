@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import LayoutPost from '~/layouts/LayoutPost.astro';
+import Pagination from '~/components/Pagination.astro';
+import { getPostDescription } from '~/utils';
+
+export async function getStaticPaths({ paginate }) {
+  // 1. 采集全量文章
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+  // 2. 按发布日期倒序排列
+  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  // 3. 执行分页逻辑，并传递总数
+  return paginate(sortedPosts, {
+    props: { totalCount: sortedPosts.length },
+    pageSize: 12
+  });
+}
+
+// 获取分页数据和总数
+const { page, totalCount } = Astro.props;
+---
+
+<LayoutDefault title="归档">
+  <section class="py-8">
+    <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+      <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+        归档
+      </h1>
+      <span class="text-sm text-zinc-400 mb-1 font-medium">
+        法义库共计 {totalCount} 篇文章
+      </span>
+    </header>
+
+    <div class="flex flex-col gap-8">
+      {page.data.map(post => (
+        <LayoutPost post={post}>
+          <p class="line-clamp-4 opacity-60 text-sm mt-2">
+            {getPostDescription(post)}
+          </p>
+        </LayoutPost>
+      ))}
+    </div>
+  </section>
+
+  <Pagination
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base="/archive"
+  />
+</LayoutDefault>

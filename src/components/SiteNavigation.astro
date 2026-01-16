@@ -14,8 +14,8 @@ const ensureTrailingSlash = (href: string) => {
 }
 ---
 
-<nav class="text-center font-bold" flex="~ col gap-4">
-  <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
+<nav class="text-center font-bold flex flex-col gap-4">
+  <ul class="text-3.5 flex flex-row gap-2 justify-center lg:flex-col lg:items-start lg:text-4">
     {
       navLinks.map((nav: NavLink) => (
         <li>
@@ -32,7 +32,7 @@ const ensureTrailingSlash = (href: string) => {
     </li>
   </ul>
 
-  <ul flex="~ row gap-1 justify-center">
+  <ul class="flex flex-row gap-1 justify-center">
     {
       socialLinks.map(({ href, name }: SocialLink) => (
         <li>

@@ -1,57 +1,82 @@
 ---
-const { translate: t } = Astro.locals
+const { prev, next, current, total, base } = Astro.props;
+if (!total || total <= 1) return null;
 
-interface Props {
-  showLeft?: boolean
-  leftTitle?: string
-  leftUrl?: string
+const ensureTrailingSlash = (url: string | undefined | null) => {
+  if (!url) return null;
+  return url.endsWith('/') ? url : `${url}/`;
+};
 
-  showRight?: boolean
-  rightTitle?: string
-  rightUrl?: string
+const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+const firstPageUrl = normalizedBase;
+const lastPageUrl = `${normalizedBase}${total}/`.replace(/\/+/g, '/');
 
-  showPageCount?: boolean
-  currentPage?: number
-  totalPage?: number
+// --- 核心修正：路径破相，回归第一页真实路径 ---
+let prevUrl = ensureTrailingSlash(prev);
+if (prevUrl && (prevUrl === `${normalizedBase}1/` || prevUrl.endsWith('/1/'))) {
+  prevUrl = normalizedBase;
 }
 
-const {
-  showLeft = true,
-  showRight = true,
-  leftTitle,
-  rightTitle,
-  leftUrl,
-  rightUrl,
-  showPageCount = true,
-  currentPage,
-  totalPage,
-} = Astro.props
+const nextUrl = ensureTrailingSlash(next);
 ---
 
-<footer class="mt-5">
-  {
-    showPageCount && (
-      <div class="mb-2.5">
-        {t('page_number', currentPage)} / {t('page_count', totalPage)}
-      </div>
-    )
-  }
-  <div class="flex items-center gap-2">
-    {
-      showLeft && (
-        <a title={leftTitle} href={leftUrl}>
-          <span class="inline-block vertical-mid i-mdi-chevron-double-left w-4 h-4" />
-          {leftTitle}
-        </a>
-      )
-    }
-    {
-      showRight && (
-        <a title={rightTitle} href={rightUrl}>
-          {rightTitle}
-          <span class="inline-block vertical-mid i-mdi-chevron-double-right w-4 h-4" />
-        </a>
-      )
-    }
+<nav class="flex flex-col items-center gap-5 mt-16 mb-12 font-sans">
+  <div class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500 font-bold">
+    Page {current} <span class="mx-1 opacity-40">/</span> {total}
   </div>
-</footer>
+
+  <div class="inline-flex items-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm p-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all hover:shadow-md">
+
+    <div class="flex items-center">
+      {current > 1 ? (
+        <>
+          <a href={firstPageUrl} class="nav-link">首页</a>
+          <a href={prevUrl} class="nav-link px-3" title="上一页">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18l-6-6l6-6"/></svg>
+          </a>
+        </>
+      ) : (
+        <>
+          <span class="nav-disabled">首页</span>
+          <span class="nav-disabled px-3"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18l-6-6l6-6"/></svg></span>
+        </>
+      )}
+    </div>
+
+    <div class="w-[1px] h-5 bg-zinc-200 dark:bg-zinc-800 mx-1"></div>
+
+    <div class="flex items-center">
+      {current < total ? (
+        <>
+          <a href={nextUrl} class="nav-link px-3" title="下一页">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg>
+          </a>
+          <a href={lastPageUrl} class="nav-link">尾页</a>
+        </>
+      ) : (
+        <>
+          <span class="nav-disabled px-3"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg></span>
+          <span class="nav-disabled">尾页</span>
+        </>
+      )}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav-link {
+    @apply px-4 py-2 rounded-full text-sm font-medium text-zinc-600 dark:text-zinc-400
+           hover:text-orange-500 hover:bg-zinc-100 dark:hover:bg-zinc-800
+           transition-all duration-300 no-underline flex items-center justify-center;
+    text-decoration: none !important;
+  }
+
+  .nav-disabled {
+    @apply px-4 py-2 text-sm font-medium text-zinc-300 dark:text-zinc-700
+           cursor-not-allowed no-underline flex items-center justify-center;
+  }
+
+  nav a {
+    text-decoration: none !important;
+  }
+</style>

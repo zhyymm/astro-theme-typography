@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import LayoutPost from '~/layouts/LayoutPost.astro';
+import Pagination from '~/components/Pagination.astro';
+import { getPostDescription } from '~/utils';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const authors = [...new Set(allPosts.map(post => post.data.author || 'admin'))];
+
+  return authors.flatMap(author => {
+    const authorPosts = allPosts
+      .filter(p => (p.data.author || 'admin') === author)
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    const authorDisplayName = authorPosts[0]?.data.authorName || author;
+
+    return paginate(authorPosts, {
+      params: { author },
+      props: {
+        authorDisplayName,
+        totalCount: authorPosts.length
+      },
+      pageSize: 10
+    });
+  });
+}
+
+const { page, authorDisplayName, totalCount } = Astro.props;
+const { author } = Astro.params;
+---
+
+<LayoutDefault title={`作者: ${authorDisplayName}`}>
+  <section class="py-8">
+    <header class="mb-12 pb-8 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-5">
+      {/* 1. 头像部分 */}
+      <a href={`/authors/${author}/intro/`} class="group relative">
+        <div class="w-16 h-16 rounded-full bg-orange-500/5 flex items-center justify-center text-2xl font-bold text-orange-500 border border-orange-500/10 shadow-sm transition-all group-hover:bg-orange-500/10 group-hover:border-orange-500/30">
+          {authorDisplayName.charAt(0)}
+        </div>
+      </a>
+
+      <div class="flex flex-col gap-2">
+        <h1 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+          {authorDisplayName}
+        </h1>
+
+        <div class="flex items-center gap-5">
+          {/* 左侧：已发布文章 - 灰色，14px 适中大小 */}
+          <p class="text-[14px] text-zinc-500 dark:text-zinc-400 tracking-wide font-medium">
+            已发布文章 <span class="text-zinc-600 dark:text-zinc-300 font-bold mx-0.5">{totalCount}</span> 篇
+          </p>
+
+          {/* 右侧：查看导师档案 - 恢复原本的大小 */}
+          <a
+            href={`/authors/${author}/intro/`}
+            class="text-sm font-bold text-orange-600 hover:text-orange-500 transition-all flex items-center gap-1.5 uppercase tracking-wider bg-orange-50 dark:bg-orange-500/10 px-3.5 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 shadow-sm hover:shadow-md"
+          >
+            查看导师档案
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-7-7l7 7l-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    {/* 这里是列表渲染区，确保它在 header 闭合之后正常开启 */}
+    <div class="flex flex-col gap-7.5">
+      {page.data.map(post => (
+        <LayoutPost post={post}>
+          <p class="line-clamp-4 opacity-60 text-sm mt-2">{getPostDescription(post)}</p>
+        </LayoutPost>
+      ))}
+    </div>
+  </section>
+
+  <Pagination
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base={`/authors/${author}`}
+  />
+</LayoutDefault>

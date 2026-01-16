@@ -1,46 +1,42 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
-import { themeConfig } from '~/.config'
-import Pagination from '~/components/Pagination.astro'
-import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import LayoutPost from '~/layouts/LayoutPost.astro'
-import { getPostDescription, getPosts } from '~/utils'
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import LayoutPost from '~/layouts/LayoutPost.astro';
+import Pagination from '~/components/Pagination.astro';
+import { getPostDescription } from '~/utils';
 
-const { translate: t } = Astro.locals
+export async function getStaticPaths({ paginate }) {
+  // 1. 获取全体文章（不分标签，只除草稿）
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 
-export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getPosts()
-  posts.sort((a, b) => {
-    if (a.data.pin && !b.data.pin) return -1
-    if (!a.data.pin && b.data.pin) return 1
-    return 0
-  })
-  return paginate(posts, { pageSize: themeConfig.site.pageSize })
-}) satisfies GetStaticPaths
+  // 2. 按时间倒序排列
+  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>
+  // 3. 直接分页，不使用 flatMap 嵌套
+  return paginate(sortedPosts, {
+    pageSize: 10
+  });
+}
 
-const { page } = Astro.props
+const { page } = Astro.props;
 ---
 
-<LayoutDefault>
-  <section contain-layout flex="~ col gap-7.5">
-    {
-      page.data.map((post) => (
-        <LayoutPost post={post}>
-          <p class="line-clamp-4">{getPostDescription(post)}</p>
-        </LayoutPost>
-      ))
-    }
+<LayoutDefault title="首页">
+  <section class="flex flex-col gap-7.5 py-8">
+    {page.data.map(post => (
+      <LayoutPost post={post}>
+       <p class="line-clamp-4 opacity-70 text-base mt-4 leading-relaxed">
+          {getPostDescription(post)}
+        </p>
+      </LayoutPost>
+    ))}
   </section>
+
   <Pagination
-    showLeft={Boolean(page.url.prev)}
-    leftTitle={t('prev')}
-    leftUrl={page.url.prev}
-    showRight={Boolean(page.url.next)}
-    rightTitle={t('next')}
-    rightUrl={page.url.next}
-    currentPage={page.currentPage}
-    totalPage={page.lastPage}
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base="/"
   />
 </LayoutDefault>

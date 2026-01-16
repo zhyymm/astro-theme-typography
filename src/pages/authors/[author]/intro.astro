@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+
+export async function getStaticPaths() {
+  const authorEntries = await getCollection('authors');
+  return authorEntries.map(entry => ({
+    params: { author: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<LayoutDefault title={`导师详情: ${entry.data.name}`}>
+  <article class="py-12 max-w-screen-md mx-auto">
+    <header class="mb-10 flex flex-col md:flex-row items-center md:items-center gap-6 bg-zinc-50 dark:bg-zinc-900/50 p-6 md:px-10 md:py-8 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+      <div class="flex-shrink-0">
+        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white dark:border-zinc-800 shadow-md overflow-hidden bg-orange-500/10 flex items-center justify-center">
+          {entry.data.avatar ? (
+            <img src={entry.data.avatar} alt={entry.data.name} class="w-full h-full object-cover" />
+          ) : (
+            <span class="text-3xl font-bold text-orange-500">{entry.data.name.charAt(0)}</span>
+          )}
+        </div>
+      </div>
+
+      <div class="flex-1">
+        <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-3 text-center md:text-left">
+          <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100 tracking-tight">
+            {entry.data.name}
+          </h1>
+          <p class="text-orange-600 dark:text-orange-500 font-semibold text-xs tracking-wider uppercase">
+            {entry.data.title}
+          </p>
+        </div>
+
+        {/* 简明扼要的介绍文字 */}
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm md:text-base text-center md:text-left italic">
+          “ {entry.data.bio} ”
+        </p>
+      </div>
+    </header>
+    <div class="prose prose-zinc dark:prose-invert max-w-none
+                prose-headings:text-zinc-800 dark:prose-headings:text-zinc-100
+                prose-p:leading-8 prose-p:text-zinc-600 dark:prose-p:text-zinc-400">
+      <Content />
+    </div>
+
+    <footer class="mt-20 pt-10 border-t border-zinc-100 dark:border-zinc-800">
+      <div class="flex flex-col items-center gap-4">
+        {/* 修正点：这里的链接指向 /authors/xxx/，即列表页的根路径 */}
+        <a
+          href={`/authors/${entry.slug}/`}
+          class="group flex items-center gap-3 px-6 py-3 rounded-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-orange-500 transition-all shadow-sm"
+        >
+          <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400 group-hover:text-orange-500">
+            阅览 {entry.data.name} 的所有法义分享
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg>
+        </a>
+      </div>
+    </footer>
+  </article>
+</LayoutDefault>

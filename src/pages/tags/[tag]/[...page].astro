@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import LayoutPost from '~/layouts/LayoutPost.astro';
+import Pagination from '~/components/Pagination.astro';
+import { getPostDescription } from '~/utils';
+import { generateSlug } from '~/utils/slugify';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const tags = [...new Set(allPosts.flatMap(post => post.data.tags ?? []))];
+
+  return tags.flatMap(chineseTag => {
+    const tagSlug = generateSlug(chineseTag) || chineseTag;
+    const filteredPosts = allPosts
+      .filter(post => post.data.tags?.includes(chineseTag))
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return paginate(filteredPosts, {
+      params: { tag: tagSlug },
+      props: {
+        chineseTag,
+        totalCount: filteredPosts.length // 【新增】该标签下的文章总数
+      },
+      pageSize: 10
+    });
+  });
+}
+
+const { page, chineseTag, totalCount } = Astro.props;
+const { tag } = Astro.params;
+const base = `/tags/${tag}`;
+---
+
+<LayoutDefault title={`标签: ${chineseTag}`}>
+  <section class="py-8">
+    <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl text-orange-500/30 font-serif italic">#</span>
+        <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+          {chineseTag}
+        </h1>
+      </div>
+      <span class="text-sm text-zinc-400 mb-1 font-medium">
+        共计 {totalCount} 篇文章
+      </span>
+    </header>
+
+    <div class="flex flex-col gap-8">
+      {page.data.map(post => (
+        <LayoutPost post={post}>
+          <p class="line-clamp-4 opacity-60 text-sm mt-2">
+            {getPostDescription(post)}
+          </p>
+        </LayoutPost>
+      ))}
+    </div>
+  </section>
+
+  <Pagination
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base={base}
+  />
+</LayoutDefault>

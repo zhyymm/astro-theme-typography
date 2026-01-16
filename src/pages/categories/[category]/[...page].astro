@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutDefault from '~/layouts/LayoutDefault.astro';
+import LayoutPost from '~/layouts/LayoutPost.astro';
+import Pagination from '~/components/Pagination.astro';
+import { getPostDescription } from '~/utils';
+import { generateSlug } from '~/utils/slugify';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const categories = [...new Set(allPosts.flatMap(post => post.data.categories ?? []))];
+
+  return categories.flatMap(chineseCategory => {
+    const categorySlug = generateSlug(chineseCategory) || chineseCategory;
+    const filteredPosts = allPosts
+      .filter(post => post.data.categories?.includes(chineseCategory))
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return paginate(filteredPosts, {
+      params: { category: categorySlug },
+      props: {
+        chineseName: chineseCategory,
+        // 【新增】在此处计算并传递该分类下的文章总数
+        totalCount: filteredPosts.length
+      },
+      pageSize: 10
+    });
+  });
+}
+
+const { page, chineseName, totalCount } = Astro.props;
+const { category } = Astro.params;
+const base = `/categories/${category}`;
+---
+
+<LayoutDefault title={`分类: ${chineseName}`}>
+  <section class="py-8">
+   <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+     <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+       {chineseName}
+     </h1>
+     <span class="text-sm text-zinc-400 mb-1 font-medium">
+       共计 {totalCount} 篇文章
+     </span>
+   </header>
+
+    <div class="flex flex-col gap-8">
+      {page.data.map(post => (
+        <LayoutPost post={post}>
+          <p class="line-clamp-4 opacity-60 text-sm mt-2">{getPostDescription(post)}</p>
+        </LayoutPost>
+      ))}
+    </div>
+  </section>
+
+  <Pagination
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base={base}
+  />
+</LayoutDefault>
