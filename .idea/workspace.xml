@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SiteSeo.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SiteSeo.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-10.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/pali/zb/zb-10.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +84,7 @@
       <workItem from="1768617820823" duration="5280000" />
       <workItem from="1768625136902" duration="1654000" />
       <workItem from="1768630268107" duration="108000" />
-      <workItem from="1768630386138" duration="920000" />
+      <workItem from="1768630386138" duration="2365000" />
     </task>
     <servers />
   </component>
