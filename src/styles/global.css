@@ -91,3 +91,28 @@ a[href*="/authors/"] {
   text-decoration: none !important;
   border-bottom: none !important;
 }
+/* --- 统一文章元数据颜色：对治色差 --- */
+
+/* 1. 强制作者、分类、标签颜色统一为深色 */
+main article a[href*="/authors/"],
+main article a[href*="/categories/"],
+main article a[href*="/tags/"],
+main article .text-zinc-500 a {
+  color: #27272a !important; /* 对应 zinc-800，深黑色 */
+  opacity: 1 !important;
+  text-decoration-color: #d4d4d8 !important; /* 让下划线颜色变浅，不喧宾夺主 */
+}
+
+/* 2. 移除作者链接可能存在的淡化效果 */
+main article .opacity-60,
+main article .text-zinc-400 {
+  opacity: 1 !important;
+  color: #27272a !important;
+}
+
+/* 3. 鼠标悬停时的反馈：统一变为橙色，保持交互一致性 */
+main article a[href*="/authors/"]:hover,
+main article a[href*="/categories/"]:hover,
+main article a[href*="/tags/"]:hover {
+  color: #ea580c !important; /* orange-600 */
+}
