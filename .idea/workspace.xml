@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/authors/[author]/[...page].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/authors/[author]/[...page].astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/authors/[author]/intro.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/authors/[author]/intro.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.css" afterDir="false" />
-    </list>
+    <list default="true" id="f2d99615-1952-4791-8707-a2b02f4100d3" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +78,7 @@
       <workItem from="1768485284584" duration="13577000" />
       <workItem from="1768532541890" duration="7946000" />
       <workItem from="1768551499616" duration="36968000" />
-      <workItem from="1768617820823" duration="2829000" />
+      <workItem from="1768617820823" duration="3155000" />
     </task>
     <servers />
   </component>

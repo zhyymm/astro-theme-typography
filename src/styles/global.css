@@ -84,3 +84,10 @@ p[class*="text-"][class*="11px"] span,
 [class*="text-zinc-400"] {
   color: #a1a1aa !important;
 }
+/* 彻底清除所有带胶囊背景按钮的下划线 */
+a.rounded-full,
+a.rounded-full span,
+a[href*="/authors/"] {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
