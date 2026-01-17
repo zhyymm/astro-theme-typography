@@ -12,20 +12,21 @@
 ></div>
 
 <script is:inline>
-  // 1. 直接注入 Cusdis 核心逻辑，彻底消灭 404 隐患
   (function() {
     window.CUSDIS = {};
     let iframeInstance;
 
     function createIframe(target) {
-      if (iframeInstance) return iframeInstance;
-
-      iframeInstance = document.createElement('iframe');
-      const host = target.dataset.host || 'https://zhy.de5.net';
+      // 修正1：确保 host 结尾没有多余斜杠，避免路径拼接错误
+      const host = (target.dataset.host || 'https://zhy.de5.net').replace(/\/$/, '');
       const iframeJsPath = `${host}/js/iframe.umd.js`;
       const cssPath = `${host}/js/style.css`;
 
-      // 直接在这里硬编码生成 iframe 的内容
+      if (iframeInstance) return iframeInstance;
+
+      iframeInstance = document.createElement('iframe');
+      
+      // 修正2：在 window.__DATA__ 中显式传递 host，确保 iframe 内部知道往哪发请求
       iframeInstance.srcdoc = `<!DOCTYPE html>
         <html>
           <head>
@@ -34,6 +35,8 @@
             <script>
               window.CUSDIS_LOCALE = ${JSON.stringify(window.CUSDIS_LOCALE || {})}
               window.__DATA__ = ${JSON.stringify(target.dataset)}
+              // 强制指定数据发送的目标地址
+              window.__DATA__.host = "${host}"; 
             <\/script>
             <style>:root { color-scheme: light; }</style>
           </head>
@@ -47,7 +50,6 @@
       iframeInstance.style.border = '0';
       iframeInstance.style.minHeight = '480px';
 
-      // 监听消息（处理高度自适应等）
       window.addEventListener('message', (e) => {
         try {
           const msg = JSON.parse(e.data);
@@ -64,14 +66,13 @@
       const container = document.getElementById('cusdis_thread');
       if (container) {
         container.innerHTML = '';
+        iframeInstance = null; // 修正3：重置实例，确保切换页面时重新绑定数据
         const iframe = createIframe(container);
         container.appendChild(iframe);
       }
     }
 
-    // 适配 Astro 的视图过渡 (View Transitions)
     document.addEventListener('astro:page-load', renderCusdis);
-    // 首次加载兼容
     if (document.readyState === 'complete') {
       renderCusdis();
     } else {
@@ -84,8 +85,6 @@
   #cusdis_thread {
     min-height: 480px !important;
     width: 100% !important;
-    border-top: 1px solid #eee;
     margin-top: 2rem;
-    padding-top: 2rem;
   }
 </style>
