@@ -9,6 +9,7 @@
   data-page-id={Astro.url.pathname}
   data-page-url={Astro.url.href}
   data-page-title={Astro.props.title || ""}
+  data-theme="auto" 
 ></div>
 
 <script is:inline>
@@ -17,7 +18,6 @@
     let iframeInstance;
 
     function createIframe(target) {
-      // 修正1：确保 host 结尾没有多余斜杠，避免路径拼接错误
       const host = (target.dataset.host || 'https://zhy.de5.net').replace(/\/$/, '');
       const iframeJsPath = `${host}/js/iframe.umd.js`;
       const cssPath = `${host}/js/style.css`;
@@ -26,7 +26,7 @@
 
       iframeInstance = document.createElement('iframe');
       
-      // 修正2：在 window.__DATA__ 中显式传递 host，确保 iframe 内部知道往哪发请求
+      // 这里的 srcdoc 增加了对深色模式的兼容处理
       iframeInstance.srcdoc = `<!DOCTYPE html>
         <html>
           <head>
@@ -35,10 +35,18 @@
             <script>
               window.CUSDIS_LOCALE = ${JSON.stringify(window.CUSDIS_LOCALE || {})}
               window.__DATA__ = ${JSON.stringify(target.dataset)}
-              // 强制指定数据发送的目标地址
               window.__DATA__.host = "${host}"; 
             <\/script>
-            <style>:root { color-scheme: light; }</style>
+            <style>
+              :root { color-scheme: light dark; }
+              /* 隐藏原生的边框和外边距，让它更像原生组件 */
+              body { margin: 0; padding: 10px 0; font-family: system-ui, -apple-system, sans-serif; }
+              #root { padding: 0 !important; }
+              /* 微调按钮样式，使其更圆润 */
+              .cusdis-btn { border-radius: 8px !important; transition: all 0.2s; }
+              /* 调整输入框间距 */
+              .cusdis-input { border-radius: 6px !important; border: 1px solid #e2e8f0 !important; }
+            </style>
           </head>
           <body>
             <div id="root"></div>
@@ -49,6 +57,7 @@
       iframeInstance.style.width = '100%';
       iframeInstance.style.border = '0';
       iframeInstance.style.minHeight = '480px';
+      iframeInstance.style.display = 'block';
 
       window.addEventListener('message', (e) => {
         try {
@@ -66,7 +75,7 @@
       const container = document.getElementById('cusdis_thread');
       if (container) {
         container.innerHTML = '';
-        iframeInstance = null; // 修正3：重置实例，确保切换页面时重新绑定数据
+        iframeInstance = null;
         const iframe = createIframe(container);
         container.appendChild(iframe);
       }
@@ -82,9 +91,28 @@
 </script>
 
 <style is:global>
+  /* 外部容器的美化 */
   #cusdis_thread {
     min-height: 480px !important;
     width: 100% !important;
-    margin-top: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    /* 增加一条淡雅的分割线，像禅宗的边界 */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* 适配深色模式（如果你的博客支持） */
+  [data-theme='dark'] #cusdis_thread {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* 提示文字样式 */
+  #cusdis_thread::before {
+    content: "留言讨论";
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--tw-prose-headings, #1a202c);
   }
 </style>
