@@ -116,3 +116,49 @@ main article a[href*="/categories/"]:hover,
 main article a[href*="/tags/"]:hover {
   color: #ea580c !important; /* orange-600 */
 }
+/* --- 置顶文章：精准限定色相区域 --- */
+
+/* 1. 外层容器：只留左侧橙色线，去掉背景 */
+.is-pinned {
+  border-left: 4px solid #ea580c !important;
+  background-color: transparent !important; /* 容器透明 */
+  padding-left: 1.2rem !important;
+  margin-bottom: 2rem !important;
+  position: relative;
+}
+
+/* 2. 标题和元数据区域：仅在这里加浅橙色背景 */
+/* 我们锁定 LayoutPost 内部的前半部分 */
+.is-pinned header,
+.is-pinned .flex.items-center.gap-2,
+.is-pinned h2 {
+  background-color: rgba(234, 88, 12, 0.05) !important;
+  padding: 0.5rem 0.8rem !important;
+  border-radius: 4px;
+  width: fit-content; /* 关键：色块宽度随文字内容走，不超过标题 */
+  display: block;
+}
+
+/* 3. 置顶小标签：依然保留在标题前 */
+.is-pinned h2::before {
+  content: "置顶";
+  display: inline-block;
+  background-color: #ea580c;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 4. 确保下方的描述文字（p标签）背景透明，不被染色 */
+.is-pinned p {
+  background-color: transparent !important;
+  padding-left: 0.8rem !important; /* 与上面的标题对齐 */
+  margin-top: 0.8rem !important;
+}/* --- 替换你文件底部的相关部分 --- */
+
+/* --- 1. 左右绝对齐平：通过微调 margin 解决整体太高的问题 --- */
+/* 关键：色块随文字宽度走 */

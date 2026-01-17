@@ -6,13 +6,20 @@ import Pagination from '~/components/Pagination.astro';
 import { getPostDescription } from '~/utils';
 
 export async function getStaticPaths({ paginate }) {
-  // 1. 获取全体文章（不分标签，只除草稿）
+  // 1. 获取全体文章（只除草稿）
   const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 
-  // 2. 按时间倒序排列
-  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  // 2. 复合排序逻辑：优先 pin，再按时间
+  const sortedPosts = allPosts.sort((a, b) => {
+    // 如果 a 置顶而 b 不置顶，a 往前排 (-1)
+    if (a.data.pin && !b.data.pin) return -1;
+    // 如果 b 置顶而 a 不置顶，b 往前排 (1)
+    if (!a.data.pin && b.data.pin) return 1;
+    // 否则，按时间倒序排列
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
 
-  // 3. 直接分页，不使用 flatMap 嵌套
+  // 3. 分页
   return paginate(sortedPosts, {
     pageSize: 10
   });
@@ -24,11 +31,14 @@ const { page } = Astro.props;
 <LayoutDefault title="首页">
   <section class="flex flex-col gap-7.5 py-8">
     {page.data.map(post => (
-      <LayoutPost post={post}>
-       <p class="line-clamp-4 opacity-70 text-base mt-4 leading-relaxed">
-          {getPostDescription(post)}
-        </p>
-      </LayoutPost>
+      /* 这里的 class:list 会根据 pin 的布尔值动态决定是否添加 is-pinned 类名 */
+      <div class:list={["transition-all", { "is-pinned": post.data.pin }]}>
+        <LayoutPost post={post}>
+          <p class="line-clamp-4 opacity-70 text-base mt-4 leading-relaxed">
+            {getPostDescription(post)}
+          </p>
+        </LayoutPost>
+      </div>
     ))}
   </section>
 
