@@ -55,9 +55,10 @@ const { author } = Astro.params;
           {/* 右侧：查看导师档案 - 恢复原本的大小 */}
           <a
             href={`/authors/${author}/intro/`}
-            class="text-sm font-bold text-orange-600 hover:text-orange-500 transition-all flex items-center gap-1.5 uppercase tracking-wider bg-orange-50 dark:bg-orange-500/10 px-3.5 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 shadow-sm hover:shadow-md"
+            /* 添加了 no-underline 和 border-none 防止干扰 */
+            class="text-sm font-bold text-orange-600 hover:text-orange-500 transition-all flex items-center gap-1.5 uppercase tracking-wider bg-orange-50 dark:bg-orange-500/10 px-3.5 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 shadow-sm hover:shadow-md no-underline border-none"
           >
-            查看导师档案
+            了解导师
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24">
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-7-7l7 7l-7 7"/>
             </svg>
