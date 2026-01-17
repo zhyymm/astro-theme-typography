@@ -13,4 +13,15 @@ https://516689.xyz/Img/2026/01/20260116121558189.png
 默认头像链接：
 https://516689.xyz/Img/2026/01/20260116122346120.png
 
+source格式
+source:
+  title: "阿姜查禅师：关于定力的教导"
+  url: "https://www.ajahnchah.org/xxx"
+
+  正文插入图片：
+  <div align="center">
+    <img src="https://368868.xyz/1766609957880.jpg" width="80%" alt="图片描述" />
+    <p style="opacity: 0.6; font-size: 0.8rem;">图片下方的文字说明（可选）</p>
+  </div>
+
 

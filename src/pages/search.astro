@@ -1,43 +1,88 @@
 ---
 import LayoutDefault from '../layouts/LayoutDefault.astro'
-// 还原主页：确保这里引用的是最基础的布局，不带任何 Pagefind 干扰
+import Search from "astro-pagefind/components/Search";
 ---
 
-<LayoutDefault>
+<LayoutDefault title="站内搜索">
   <div class="prose mt-8">
     <header class="mb-8">
       <h1 class="text-2xl font-bold">站内搜索</h1>
-      <p class="text-sm opacity-60 italic">由 Google 提供技术支持，支持精确匹配与语义搜索。</p>
+      <p class="text-sm opacity-60">本地索引检索，支持即时匹配。</p>
     </header>
 
     <hr class="my-6 border-zinc-200 dark:border-zinc-800" />
 
-    <div class="google-search-container">
-      <script is:inline async src="https://cse.google.com/cse.js?cx=e6e8c81e36480422b"></script>
-      <div class="gcse-search"></div>
+    <div class="pagefind-container">
+      {/* 使用 astro-pagefind 提供的组件，彻底替换掉谷歌脚本 */}
+      <Search
+        id="search"
+        className="pagefind-ui"
+        uiOptions={{
+          showImages: false,
+          translations: {
+            placeholder: "输入关键词（如：四圣谛、八正道）",
+            clear_search: "清除内容",
+            load_more: "加载更多",
+            search_label: "搜索",
+            zero_results: "未找到关于 [SEARCH_TERM] 的内容",
+            many_results: "找到 [COUNT] 条相关内容",
+            one_result: "找到 [COUNT] 条相关内容",
+            searching: "检索中..."
+          }
+        }}
+      />
     </div>
   </div>
 </LayoutDefault>
 
 <style is:global>
-  /* 隐藏 Pagefind 遗留的任何自动生成的元素 */
-  #pagefind-search { display: none !important; }
+  :root {
+    --pagefind-ui-primary: #ea580c;
+    --pagefind-ui-text: var(--uno-colors-primary);
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-border: #e4e4e7;
+  }
 
-  /* 调整 Google 搜索框样式以适应 Typography 主题 */
-  .gsc-control-cse {
-    background-color: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    font-family: inherit !important;
+  .dark {
+    --pagefind-ui-border: #27272a;
+    --pagefind-ui-text: #d4d4d8;
   }
-  .gsc-search-button-v2 {
-    background-color: #444 !important;
-    border-color: #444 !important;
+
+  /* --- 1. 调大搜索结果标题 --- */
+  .pagefind-ui__result-link {
+    color: var(--pagefind-ui-primary) !important;
+    font-size: 1.4rem !important; /* 调大标题字号 */
+    font-weight: bold !important;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 0.25rem;
   }
-  input.gsc-input {
-    background-color: transparent !important;
-    border: 1px solid #ddd !important;
-    border-radius: 4px !important;
-    color: currentColor !important;
+
+  /* --- 2. 调大下方摘要文字 --- */
+  .pagefind-ui__result-excerpt {
+    font-size: 1.05rem !important; /* 调大摘要字号，比之前更易读 */
+    line-height: 1.7 !important;   /* 增加行高，减少拥挤感 */
+    color: var(--pagefind-ui-text) !important;
+    opacity: 0.9 !important;       /* 让文字更清晰一点 */
+  }
+
+  /* --- 3. 优化搜索结果列表的间距 --- */
+  .pagefind-ui__result {
+    border-top: 1px solid var(--pagefind-ui-border) !important;
+    padding: 1.8rem 0 !important; /* 增加每一条结果之间的呼吸感 */
+    list-style: none !important;
+  }
+
+  /* 调整高亮显示的关键词（那个黄色小背景） */
+  .pagefind-ui__result-mark {
+    background-color: rgba(234, 88, 12, 0.2) !important; /* 淡淡的橙色高亮 */
+    color: inherit !important;
+    font-weight: bold;
+    padding: 0 2px;
+  }
+
+  /* 隐藏 Pagefind 默认标志 */
+  .pagefind-ui__drawer::after {
+    display: none !important;
   }
 </style>

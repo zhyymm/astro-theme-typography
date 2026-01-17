@@ -1,22 +1,85 @@
 ---
 import LayoutDefault from '../layouts/LayoutDefault.astro'
+import Search from "astro-pagefind/components/Search";
 ---
 
-<LayoutDefault>
-  <div class="prose mt-8">
-    <h2>站内搜索（由 Google 提供）</h2>
-    <p class="text-sm opacity-60">支持精确匹配。</p>
-    <hr />
-    <script async src="https://cse.google.com/cse.js?cx=e6e8c81e36480422b"></script>
-    <div class="gcse-search"></div>
+<LayoutDefault title="站内搜索">
+  <div class="flex flex-col gap-6 mt-8">
+    <div class="flex flex-col gap-1.5">
+      <h2 class="text-2xl font-bold">站内搜索</h2>
+      <p class="text-sm opacity-60">基于本地索引，无需谷歌收录，支持全站即时检索。</p>
+    </div>
+
+    <hr class="border-zinc-200 dark:border-zinc-800" />
+
+    <div class="pagefind-container">
+      <Search
+        id="search"
+        className="pagefind-ui"
+        uiOptions={{
+          showImages: false,
+          translations: {
+            placeholder: "输入关键词（如：四圣谛、八正道）",
+            clear_search: "清除",
+            load_more: "加载更多结果",
+            search_label: "搜索",
+            filters_label: "筛选",
+            zero_results: "未能找到关于 [SEARCH_TERM] 的内容",
+            many_results: "找到 [COUNT] 条相关法义",
+            one_result: "找到 [COUNT] 条相关法义",
+            searching: "检索中...",
+            search_suggestion: "尝试搜索这些内容",
+            alt_search: "未找到内容，已显示 [SEARCH_TERM] 的建议结果"
+          }
+        }}
+      />
+    </div>
   </div>
 </LayoutDefault>
 
 <style is:global>
-  /* 这里的样式可以微调 Google 搜索框的外观，使其更符合你的主题 */
-  .gsc-control-cse {
+  /* 统一 Pagefind UI 风格与你的网站（橙色系）一致 */
+  :root {
+    --pagefind-ui-primary: #ea580c; /* 你的置顶色 */
+    --pagefind-ui-text: var(--uno-colors-primary);
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-border: #e4e4e7;
+    --pagefind-ui-font: var(--uno-fonts-ui);
+  }
+
+  .dark {
+    --pagefind-ui-border: #27272a;
+    --pagefind-ui-text: #d4d4d8;
+  }
+
+  /* 移除搜索结果的默认背景，保持清净 */
+  .pagefind-ui__result {
+    border-top: 1px solid var(--pagefind-ui-border) !important;
+    padding: 1.5rem 0 !important;
+    list-style: none !important;
+  }
+
+  .pagefind-ui__result-link {
+    color: var(--pagefind-ui-primary) !important;
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    margin-top: 0.5rem !important;
+    line-height: 1.6 !important;
+    opacity: 0.8;
+  }
+
+  .pagefind-ui__button {
     background-color: transparent !important;
-    border: none !important;
-    padding: 0 !important;
+    border: 1px solid var(--pagefind-ui-primary) !important;
+    color: var(--pagefind-ui-primary) !important;
+  }
+
+  /* 隐藏 Pagefind 默认的 logo */
+  .pagefind-ui__drawer::after {
+    display: none !important;
   }
 </style>

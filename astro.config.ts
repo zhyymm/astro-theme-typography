@@ -6,20 +6,17 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import UnoCSS from 'unocss/astro'
 import devtoolsJson from 'vite-plugin-devtools-json'
-// ❌ 已经删除了 import pagefind 行
+import pagefind from "astro-pagefind" // ✅ 恢复导入
 import { themeConfig } from './src/.config'
 
 export default defineConfig({
   site: themeConfig.site.website,
   prefetch: true,
   base: '/',
-
   trailingSlash: 'always',
-
   build: {
     format: 'directory',
   },
-
   vite: {
     plugins: [
       // @ts-ignore
@@ -27,12 +24,8 @@ export default defineConfig({
     ],
   },
   markdown: {
-    remarkPlugins: [
-      remarkMath,
-    ],
-    rehypePlugins: [
-      rehypeKatex,
-    ],
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       theme: 'dracula',
       wrap: true,
@@ -43,6 +36,6 @@ export default defineConfig({
     mdx({}),
     robotsTxt(),
     sitemap(),
-    // ❌ 已经删除了 pagefind() 集成
+    pagefind(), // ✅ 恢复集成
   ],
 })

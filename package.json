@@ -22,6 +22,7 @@
     "@unocss/reset": "^66.5.12",
     "@unocss/transformer-directives": "^66.5.12",
     "astro": "^5.0.0",
+    "astro-pagefind": "^1.8.5",
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^1.0.0",
     "dayjs": "^1.11.19",

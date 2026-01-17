@@ -19,7 +19,6 @@ const posts = defineCollection({
             description: z.string().optional(),
             pin: z.boolean().default(false).optional(),
 
-            banner: image().optional(),
             commentsUrl: z.string().optional(),
             source: z.optional(z.object({ url: z.string(), title: z.string() })),
         }),
