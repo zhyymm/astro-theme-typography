@@ -161,3 +161,37 @@ main article a[href*="/tags/"]:hover {
 
 /* --- 1. 左右绝对齐平：通过微调 margin 解决整体太高的问题 --- */
 /* 关键：色块随文字宽度走 */
+/* --- 彻底清理下划线：终极补丁 --- */
+
+/* 1. 强制移除全站所有链接的下划线和背景装饰 */
+:where(a) {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* 2. 覆盖 UnoCSS 默认的悬停装饰 */
+:where(a):hover {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  background-color: transparent !important; /* 移除悬停时的背景变色，如果不需要背景色块的话 */
+  color: #ea580c !important; /* 悬停时变为橙色，保持“信根”交互 */
+}
+
+/* 3. 特别针对标题（h1, h2, h3）内的链接，确保绝对清净 */
+h1 a, h2 a, h3 a, .post-title a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: inherit !important;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, .post-title a:hover {
+  color: #ea580c !important; /* 仅在悬停时如实显示橙色 */
+}
+
+/* 4. 移除导航栏、侧边栏的装饰 */
+nav a, .menu a, header a, footer a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
