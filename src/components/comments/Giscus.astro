@@ -91,28 +91,24 @@
 </script>
 
 <style is:global>
-  /* 外部容器的美化 */
+  /* 外部容器：去掉多余的强制边距和重复的边框 */
   #cusdis_thread {
     min-height: 480px !important;
     width: 100% !important;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    /* 增加一条淡雅的分割线，像禅宗的边界 */
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    /* 这里的边距交给 Layout 控制，组件本身保持干净 */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
   }
 
-  /* 适配深色模式（如果你的博客支持） */
-  [data-theme='dark'] #cusdis_thread {
-    border-top-color: rgba(255, 255, 255, 0.1);
-  }
-
-  /* 提示文字样式 */
+  /* 如果你想保留组件自带的标题，可以留着；
+     如果你想用 Layout 里的对齐样式，就把 ::before 这段删掉 */
   #cusdis_thread::before {
     content: "留言讨论";
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.1rem; /* 稍微调小一点，更精致 */
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--tw-prose-headings, #1a202c);
   }
 </style>
