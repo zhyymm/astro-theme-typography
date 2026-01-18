@@ -275,3 +275,22 @@ main article a {
     margin-top: 2.2 !important;
   }
 }
+/* --- 详情页：仅提升正文内容，标题不动 --- */
+
+/* 1. 消除标题区域（header）到底部的外边距 */
+.post-detailed header {
+  margin-bottom: 0.5rem !important; /* 压缩标题与正文的距离 */
+}
+
+/* 2. 消除正文第一个元素的顶部边距 */
+/* Typography主题通常会在 content 容器或第一个 p 标签加间距 */
+.post-detailed .prose > *:first-child,
+.post-detailed #post-content-wrapper > *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 3. 如果还是有间距，直接针对包裹层进行负位移 */
+#post-content-wrapper {
+  margin-top: -1rem !important; /* 这个值可以根据需要继续加大，比如 -1.5rem */
+}
