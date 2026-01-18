@@ -48,9 +48,12 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
         <slot />
       </main>
     ) : (
-      <main 
+     <main 
       data-pagefind-body={isPostPage}
-      class:list={["transition-swup-main overflow-y-scroll scrollbar-hide outline-none", isPostPage ? "post-page-main" : "home-page-main"]}
+      class:list={[
+        "transition-swup-main overflow-y-scroll scrollbar-hide outline-none",
+        isPostPage ? "main-post-detail" : "main-home-list"
+      ]}
       lg="row-1-3 col-1-2"
     >
       <slot />
