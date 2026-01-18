@@ -11,6 +11,9 @@ import '~/styles/global.css'
 
 const lang = themeConfig.appearance.locale ?? 'en-us'
 const dark = themeConfig.appearance.theme === 'dark'
+
+// --- 核心逻辑：判断当前是否为文章详情页 ---
+const isPostPage = Astro.url.pathname.includes('/posts/')
 ---
 
 <html lang={lang} class:list={[{ dark }]}>
@@ -27,6 +30,7 @@ const dark = themeConfig.appearance.theme === 'dark'
     lg="grid gap-x-6 cols-[3fr_1fr] rows-[1fr_9rem]"
   >
     <header
+      data-pagefind-ignore
       class="transition-swup-header flex flex-col gap-2.5"
       m="7.5 lg:(x-0 t-20 b-4)"
       lg="row-1-2 col-2-3 justify-between items-start"
@@ -35,58 +39,56 @@ const dark = themeConfig.appearance.theme === 'dark'
       <SiteNavigation />
     </header>
 
-    <main class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none" lg="row-1-3 col-1-2 py-20">
-      <slot />
-    </main>
+    {isPostPage ? (
+      <main 
+        data-pagefind-body
+        class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none" 
+        lg="row-1-3 col-1-2 py-20"
+      >
+        <slot />
+      </main>
+    ) : (
+      <main 
+        data-pagefind-ignore
+        class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none" 
+        lg="row-1-3 col-1-2 py-20"
+      >
+        <slot />
+      </main>
+    )}
 
-    <footer class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3">
+    <footer data-pagefind-ignore class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3">
       <SiteFooter />
     </footer>
 
     <style is:global>
-          /* --- 1. 背景对治：960px 完美对齐 --- */
-          html {
-            background-color: #ffffff;
-            background-image: url('/placeholder.png') !important;
-            background-repeat: repeat !important;
-            background-attachment: fixed !important;
-            /* 你发现的正确数值：1920 / 2 = 960px */
-            background-size: 960px auto !important;
-            image-rendering: -webkit-optimize-contrast;
-          }
+      /* --- 背景与布局样式保持不变 --- */
+      html {
+        background-color: #ffffff;
+        background-image: url('/placeholder.png') !important;
+        background-repeat: repeat !important;
+        background-attachment: fixed !important;
+        background-size: 960px auto !important;
+        image-rendering: -webkit-optimize-contrast;
+      }
 
-          html.dark {
-            background-color: #18181b;
-          }
+      html.dark {
+        background-color: #18181b;
+      }
 
-          /* --- 2. 撕掉所有覆盖在网格上的“白纸” --- */
-          /* 确保所有层级都是透明的，网格才能从底部透出来 */
-          body,
-          main,
-          header,
-          footer,
-          #swup,
-          section,
-          article,
-          .transition-swup-main {
-            background-color: transparent !important;
-            background-image: none !important;
-          }
+      body, main, header, footer, #swup, section, article, .transition-swup-main {
+        background-color: transparent !important;
+        background-image: none !important;
+      }
 
-          /* --- 3. 初始布局微调 --- */
-          /* 确保左侧滚动条隐藏，保持画面宁静 */
-          .scrollbar-hide::-webkit-scrollbar { display: none; }
-          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-          /* 交互：黑底白字 */
-          nav a:hover, header a:hover {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-            text-decoration: none !important;
-          }
-
-        </style>
-
+      nav a:hover, header a:hover {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+    </style>
   </body>
-
 </html>

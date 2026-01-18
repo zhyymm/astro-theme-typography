@@ -36,7 +36,7 @@ const tagLinkData: LinkData[] = tagList.map((name: string) => {
 
 <header flex="~ col gap-2">
   <h1 class="post-title">
-      <a class="not-prose" href={`/posts/${post.slug || post.id}/`}>{post.data.title}</a>
+      <a data-pagefind-meta="title" class="not-prose" href={`/posts/${post.slug || post.id}/`}>{post.data.title}</a>
   </h1>
 
   <div class="text-3.5 flex flex-wrap items-center gap-x-3 gap-y-1">
