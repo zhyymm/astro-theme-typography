@@ -195,3 +195,40 @@ nav a, .menu a, header a, footer a {
   text-decoration: none !important;
   border-bottom: none !important;
 }
+/* --- 左右齐平：向上对齐“福”字 --- */
+
+/* 1. 消除电脑端 header 到底部（正文）的多余间距 */
+header {
+  margin-bottom: 0 !important;
+  padding-bottom: 1rem !important; /* 保留一点点呼吸感，不至于贴死 */
+}
+
+/* 2. 强制主内容区上提 */
+main {
+  margin-top: -2rem !important; /* 使用负外边距，像抽水一样把文章提上来 */
+}
+
+/* 3. 针对手机端的特殊处理：提得更多一点 */
+@media (max-width: 768px) {
+  header {
+    margin-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  
+  main {
+    margin-top: -0.5rem !important;
+  }
+
+  /* 缩小导航菜单与标题的间距，进一步腾出空间 */
+  nav {
+    margin-top: 0.2rem !important;
+  }
+}
+
+/* 4. 确保右侧侧边栏不会跟着乱跳 */
+@media (min-width: 1024px) {
+  aside {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
