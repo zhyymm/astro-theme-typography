@@ -294,18 +294,32 @@ main article a {
 #post-content-wrapper {
   margin-top: -1rem !important; /* 这个值可以根据需要继续加大，比如 -1.5rem */
 }
-/* 详情页专用间距补丁 */
-.post-main-spacing {
-  /* 确保顶部标题不顶头 (5rem = 80px) */
-  padding-top: 5rem !important;
-  /* 确保底部评论区不留白 (1rem = 16px) */
-  padding-bottom: 1rem !important;
+/* 1. 如果是文章详情页：强制标题下移，别顶着头 */
+.post-page-main {
+  margin-top: 0 !important;      /* 停止上提 */
+  padding-top: 60px !important;  /* 标题上方留出 60 像素 */
+  padding-bottom: 0 !important;  /* 底部不要留白 */
 }
 
-/* 兼容手机端 */
+/* 2. 如果是首页/列表页：强制上提，对齐右边 */
+.home-page-main {
+  margin-top: -32px !important;  /* 向上提一点，对齐侧边栏 */
+  padding-bottom: 80px !important;
+}
+
+/* 3. 手机端的特殊补丁 */
 @media (max-width: 768px) {
-  .post-main-spacing {
-    padding-top: 2.5rem !important; /* 手机端顶部稍微小一点 */
-    padding-bottom: -1.5rem !important;
+  .post-page-main {
+    padding-top: 30px !important; /* 手机上标题上方留 30 像素就够了 */
   }
+  .home-page-main {
+    margin-top: 0 !important;     /* 手机上不需要上提 */
+  }
+}
+
+/* 4. 彻底杀掉评论区底部的巨大空白 */
+#cusdis_thread, iframe {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  height: auto !important;
 }
