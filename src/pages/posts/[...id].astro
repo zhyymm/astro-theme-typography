@@ -1,7 +1,5 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
-import Comments from '~/components/Comments.astro'
-import Pagination from '~/components/Pagination.astro'
 import SiteSeo from '~/components/SiteSeo.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import LayoutPost from '~/layouts/LayoutPost.astro'
@@ -12,15 +10,11 @@ export const getStaticPaths = (async () => {
   const posts = await getPosts()
 
   return posts.map((post, idx) => {
-    // 自动处理路径，确保不管是几级目录都能对应上
-    // Astro v5 的 post.id 已经是相对 content/posts 的路径了
     const cleanId = post.id.replace(/\.(md|mdx)$/, '')
-
     const prev = posts[idx - 1]
     const next = posts[idx + 1]
 
     return {
-      // 这里的 cleanId 如果是 "pali/zb/zb-60"，URL 就会变成 /posts/pali/zb/zb-60/
       params: { id: cleanId },
       props: { entry: post, next, prev },
     }
@@ -31,52 +25,15 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { entry, prev, next } = Astro.props
 const { Content } = await render(entry)
-const { translate: t } = Astro.locals
-
-function getUrl(id: string | undefined) {
-  if (!id) return '#'
-  const cleanId = id.replace(/\.(md|mdx)$/, '')
-  return `/posts/${cleanId}/`
-}
 ---
 
 <LayoutDefault>
   <SiteSeo slot="seo" title={entry.data.title} desc={entry.data.description} banner={entry.data.banner} />
 
-  {/* 核心修正：在这里把计算好的 prev 和 next 传进去 */}
+  {/* 所有的导航、作者栏、评论逻辑都已经封装在 LayoutPost 内部了 */}
   <LayoutPost post={entry} prev={prev} next={next}>
     <Content />
   </LayoutPost>
-
-</LayoutDefault>
-
-  {(prev || next) && (
-    <nav class="flex flex-col sm:flex-row justify-between items-stretch gap-4 mt-16 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800">
-      <div class="flex-1">
-        {prev && (
-          <a href={getUrl(prev.id)} class="group flex flex-col gap-2 p-4 rounded-xl border border-transparent hover:border-orange-500/20 hover:bg-orange-500/5 transition-all no-underline">
-            <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400">上一篇 / Previous</span>
-            <span class="text-sm font-bold group-hover:text-orange-500 transition-colors line-clamp-2">
-              ← {prev.data.title}
-            </span>
-          </a>
-        )}
-      </div>
-      
-      <div class="flex-1 text-right">
-        {next && (
-          <a href={getUrl(next.id)} class="group flex flex-col gap-2 p-4 rounded-xl border border-transparent hover:border-orange-500/20 hover:bg-orange-500/5 transition-all no-underline">
-            <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400">下一篇 / Next</span>
-            <span class="text-sm font-bold group-hover:text-orange-500 transition-colors line-clamp-2">
-              {next.data.title} →
-            </span>
-          </a>
-        )}
-      </div>
-    </nav>
-  )}
-
-  <Comments post={entry} />
 </LayoutDefault>
 
 <script>
@@ -104,7 +61,6 @@ function getUrl(id: string | undefined) {
     copyButton.innerHTML = icon
 
     codeBlock.appendChild(copyButton)
-
     codeBlock.parentNode?.insertBefore(wrapper, codeBlock)
     wrapper.appendChild(codeBlock)
   }
@@ -125,7 +81,6 @@ function getUrl(id: string | undefined) {
     align-items: center;
     border-radius: 0.25rem;
   }
-
   .clipboard-copy:hover {
     background-color: #30363d;
   }
