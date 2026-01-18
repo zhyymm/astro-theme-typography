@@ -272,6 +272,6 @@ main article a {
 /* 3. 手机端适配：手机端通常是上下堆叠，不需要这个下移量 */
 @media (max-width: 768px) {
   .post-detailed {
-    margin-top: 2.3 !important;
+    margin-top: 2 !important;
   }
 }
