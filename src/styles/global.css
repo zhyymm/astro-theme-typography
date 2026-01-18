@@ -255,3 +255,23 @@ div[class*="text-zinc-600"] {
 main article a {
   color: inherit;
 }
+/* --- 详情页对齐补丁：对准右侧侧边栏 --- */
+
+/* 1. 专门针对详情页的文章容器进行下移 */
+.post-detailed {
+  /* 将文章内容向下推，1.5rem 到 2.5rem 之间通常能达到视觉齐平 */
+  margin-top: 2.2rem !important; 
+}
+
+/* 2. 同时微调 Meta 信息（标题、日期等）的间距，确保紧凑感 */
+.post-detailed header {
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* 3. 手机端适配：手机端通常是上下堆叠，不需要这个下移量 */
+@media (max-width: 768px) {
+  .post-detailed {
+    margin-top: 0 !important;
+  }
+}
