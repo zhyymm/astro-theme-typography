@@ -64,19 +64,70 @@ const nextUrl = ensureTrailingSlash(next);
 </nav>
 
 <style>
-  .nav-link {
-    @apply px-4 py-2 rounded-full text-sm font-medium text-zinc-600 dark:text-zinc-400
-           hover:text-orange-500 hover:bg-zinc-100 dark:hover:bg-zinc-800
-           transition-all duration-300 no-underline flex items-center justify-center;
+  /* 1. 强制容器：整体左对齐、垂直堆叠、紧贴正文 */
+  nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* 核心：强制左对齐 */
+    justify-content: flex-start !important;
+    
+    /* 距离调节：保持您满意的近距离 */
+    margin-top: -1rem !important;    
+    margin-bottom: 3rem !important;
+    
+    width: 100% !important;
+    padding-left: 0 !important;        /* 确保不缩进，对齐正文边缘 */
+    gap: 0.5rem !important;            /* 两行之间保持紧凑 */
+  }
+
+  /* 2. 第一行：Page X / Y (居左) */
+  nav > div:first-child {
+    display: block !important;
+    text-align: left !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    font-size: 10px !important;        /* 稍微缩小，显得更精致 */
+    font-weight: bold !important;
+    color: #a1a1aa !important;         /* 柔和的灰色，不喧宾夺主 */
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase;
+  }
+
+  /* 3. 第二行：胶囊按钮容器 (居左) */
+  nav > div.inline-flex {
+    display: inline-flex !important;
+    margin: 0 !important;              /* 彻底取消居中，强制靠左 */
+    
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    padding: 2px !important;
+    border-radius: 999px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* 4. 按钮样式：取消冗余边距，确保整齐 */
+  .nav-link, .nav-disabled {
+    @apply px-3 py-1.5 rounded-full text-xs font-medium no-underline flex items-center justify-center;
     text-decoration: none !important;
+    border: none !important;
+    min-width: 3.2rem !important;      /* 统一宽度，看起来更像“组件” */
+  }
+
+  .nav-link {
+    @apply text-zinc-600 dark:text-zinc-400 hover:text-orange-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors;
   }
 
   .nav-disabled {
-    @apply px-4 py-2 text-sm font-medium text-zinc-300 dark:text-zinc-700
-           cursor-not-allowed no-underline flex items-center justify-center;
+    @apply text-zinc-300 dark:text-zinc-700 cursor-not-allowed;
   }
 
-  nav a {
-    text-decoration: none !important;
+  /* 5. 按钮间的细竖线微调 */
+  nav div.bg-zinc-200 {
+    height: 12px !important;           /* 缩短竖线，更透气 */
+    margin: 0 4px !important;
+    opacity: 0.5 !important;
   }
 </style>
