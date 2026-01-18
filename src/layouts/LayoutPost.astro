@@ -96,12 +96,12 @@ const authorDisplayName = post.data.authorName || authorSlug
     if (!wrapper || !btn) return;
 
     // 检查内容高度
-    if (wrapper.scrollHeight <= 800) {
+    if (wrapper.scrollHeight <= 1200) {
       wrapper.style.maxHeight = 'none';
       container.style.display = 'none';
       mask.style.display = 'none';
     } else {
-      wrapper.style.maxHeight = '800px';
+      wrapper.style.maxHeight = '1200px';
       container.style.display = 'flex';
       mask.style.display = 'block';
     }
