@@ -43,19 +43,38 @@ function getUrl(id: string | undefined) {
 <LayoutDefault>
   <SiteSeo slot="seo" title={entry.data.title} desc={entry.data.description} banner={entry.data.banner} />
 
-  <LayoutPost post={entry}>
+  {/* 核心修正：在这里把计算好的 prev 和 next 传进去 */}
+  <LayoutPost post={entry} prev={prev} next={next}>
     <Content />
   </LayoutPost>
 
-  <Pagination
-    showLeft={Boolean(prev)}
-    leftTitle={`${t('prev_post')}: ${prev?.data.title}`}
-    leftUrl={getUrl(prev?.id)}
-    showRight={Boolean(next)}
-    rightTitle={`${t('next_post')}: ${next?.data.title}`}
-    rightUrl={getUrl(next?.id)}
-    showPageCount={false}
-  />
+</LayoutDefault>
+
+  {(prev || next) && (
+    <nav class="flex flex-col sm:flex-row justify-between items-stretch gap-4 mt-16 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800">
+      <div class="flex-1">
+        {prev && (
+          <a href={getUrl(prev.id)} class="group flex flex-col gap-2 p-4 rounded-xl border border-transparent hover:border-orange-500/20 hover:bg-orange-500/5 transition-all no-underline">
+            <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400">上一篇 / Previous</span>
+            <span class="text-sm font-bold group-hover:text-orange-500 transition-colors line-clamp-2">
+              ← {prev.data.title}
+            </span>
+          </a>
+        )}
+      </div>
+      
+      <div class="flex-1 text-right">
+        {next && (
+          <a href={getUrl(next.id)} class="group flex flex-col gap-2 p-4 rounded-xl border border-transparent hover:border-orange-500/20 hover:bg-orange-500/5 transition-all no-underline">
+            <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400">下一篇 / Next</span>
+            <span class="text-sm font-bold group-hover:text-orange-500 transition-colors line-clamp-2">
+              {next.data.title} →
+            </span>
+          </a>
+        )}
+      </div>
+    </nav>
+  )}
 
   <Comments post={entry} />
 </LayoutDefault>

@@ -6,9 +6,11 @@ import LayoutDefault from '~/layouts/LayoutDefault.astro'
 
 interface Props {
   post: Post
+  prev?: any  // 新增
+  next?: any  // 新增
 }
 
-const { post } = Astro.props
+const { post, prev, next } = Astro.props
 const { source, commentsUrl } = post.data
 
 const isPostPage = Astro.url.pathname.startsWith('/posts/')
@@ -78,7 +80,40 @@ const authorDisplayName = post.data.authorName || authorSlug
     </p>
   </div>
 )}
-
+{/* --- 优雅版文字导航 --- */}
+{isPostPage && (prev || next) && (
+  <nav class="not-prose mt-16 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between gap-6">
+    <div class="flex-1">
+      {prev && (
+        <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">上一篇 / Previous</div>
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline gap-1">
+            <span class="shrink-0">←</span>
+            <span>{prev.data.title}</span>
+          </div>
+        </a>
+      )}
+    </div>
+    
+    <div class="flex-1 sm:text-right">
+      {next && (
+        <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">下一篇 / Next</div>
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline justify-end gap-1">
+            <span>{next.data.title}</span>
+            <span class="shrink-0">→</span>
+          </div>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+{/* 5. 评论区 */}
+{isPostPage && (
+  <section class="giscus-container mt-12">
+    <Giscus />
+  </section>
+)}
 {/* 5. 评论区 */}
 {isPostPage && (
   <section class="giscus-container mt-12">
