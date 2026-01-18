@@ -306,6 +306,6 @@ main article a {
 @media (max-width: 768px) {
   .post-main-spacing {
     padding-top: 2.5rem !important; /* 手机端顶部稍微小一点 */
-    padding-bottom: 0.5rem !important;
+    padding-bottom: -1.5rem !important;
   }
 }
