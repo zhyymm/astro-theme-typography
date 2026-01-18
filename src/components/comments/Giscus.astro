@@ -91,24 +91,21 @@
 </script>
 
 <style is:global>
-  /* 外部容器：去掉多余的强制边距和重复的边框 */
   #cusdis_thread {
-    min-height: 200 !important;
+    /* 1. 彻底取消最小高度限制，让它根据评论内容自动撑开 */
+    min-height: auto !important; 
     width: 100% !important;
-    /* 这里的边距交给 Layout 控制，组件本身保持干净 */
+    /* 2. 强制归零所有可能导致空白的间距 */
     margin-top: 0 !important;
+    margin-bottom: 0 !important;
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
     border-top: none !important;
   }
 
-  /* 如果你想保留组件自带的标题，可以留着；
-     如果你想用 Layout 里的对齐样式，就把 ::before 这段删掉 */
-  #cusdis_thread::before {
-    content: "留言讨论";
-    display: block;
-    font-size: 1.1rem; /* 稍微调小一点，更精致 */
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--tw-prose-headings, #1a202c);
+  /* 针对 iframe 内部可能存在的下边距进行微调 */
+  #cusdis_thread iframe {
+    margin-bottom: 0 !important;
+    display: block !important;
   }
 </style>
