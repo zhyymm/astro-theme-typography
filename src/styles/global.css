@@ -294,3 +294,18 @@ main article a {
 #post-content-wrapper {
   margin-top: -1rem !important; /* 这个值可以根据需要继续加大，比如 -1.5rem */
 }
+/* 详情页专用间距补丁 */
+.post-main-spacing {
+  /* 确保顶部标题不顶头 (5rem = 80px) */
+  padding-top: 5rem !important;
+  /* 确保底部评论区不留白 (1rem = 16px) */
+  padding-bottom: 1rem !important;
+}
+
+/* 兼容手机端 */
+@media (max-width: 768px) {
+  .post-main-spacing {
+    padding-top: 2.5rem !important; /* 手机端顶部稍微小一点 */
+    padding-bottom: 0.5rem !important;
+  }
+}
