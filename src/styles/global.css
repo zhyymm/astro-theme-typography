@@ -232,3 +232,26 @@ main {
     padding-top: 0 !important;
   }
 }
+/* --- 首页预览文字变黑：强效补丁 --- */
+
+/* 1. 穿透主题容器锁定首页摘要 */
+article .line-clamp-2,
+article .line-clamp-3,
+.prose p,
+div[class*="text-zinc-500"],
+div[class*="text-zinc-600"] {
+  color: #18181b !important; /* 调至 zinc-900，比之前更黑一点 */
+  opacity: 1 !important;
+  --un-text-opacity: 1 !important; /* 针对 UnoCSS 的透明度变量进行重置 */
+}
+
+/* 2. 确保首页列表中的描述文字没有被滤镜干扰 */
+.flex-col.gap-2 article p,
+.post-preview-content {
+  color: #18181b !important;
+}
+
+/* 3. 检查是否是链接颜色的问题（如果摘要整体是可点击的） */
+main article a {
+  color: inherit;
+}
