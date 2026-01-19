@@ -51,18 +51,18 @@ const sortedTags = [...tagCountMap.entries()]
 
 <LayoutDefault>
   <div class="py-8">
-    <header class="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+    <header class="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6 lg:pl-2">
       <h1 class="text-2xl font-bold mb-2">{t('Categories')}</h1>
       <p class="text-sm opacity-50 italic">根据经藏与法义主题进行的分类汇总</p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-16 lg:px-2">
       {
         categoryList.map(({ title, href, count }) => (
           <div class="group flex items-center justify-between border-b border-dotted border-zinc-200 dark:border-zinc-700 pb-2">
             <h3 class="text-lg font-medium">
-              <a href={href} class="group-hover:text-orange-500 transition-colors">
-                <span class="opacity-30 mr-1">#</span>{title}
+              <a href={href} class="inline-flex items-center px-3 py-1 bg-transparent text-zinc-700 dark:text-zinc-300 rounded-md hover:!bg-zinc-800 hover:!text-orange-500 transition-all no-underline text-sm md:text-base">
+                <span class="opacity-30 mr-1 font-light group-hover:!text-orange-500/50">#</span>{title}
               </a>
             </h3>
             <span class="text-xs opacity-40 tabular-nums">
@@ -74,7 +74,7 @@ const sortedTags = [...tagCountMap.entries()]
     </div>
 
     {sortedTags.length > 0 && (
-      <div class="mt-20">
+      <div class="mt-20 lg:px-2">
         <h3 class="text-xl font-bold mb-8 flex items-center">
           <span class="w-1.5 h-6 bg-orange-500 mr-3"></span>
           全站热门标签
@@ -83,16 +83,15 @@ const sortedTags = [...tagCountMap.entries()]
           {sortedTags.map(([chineseTag, data]) => (
             <a
               href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-orange-500/10 border border-transparent hover:border-orange-500/30 rounded text-sm transition-all group"
+              class="inline-flex items-center px-3 py-1.5 bg-transparent text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded hover:!bg-zinc-800 hover:!text-orange-500 hover:border-zinc-800 transition-all group text-sm no-underline"
             >
-              <span class="opacity-50 group-hover:text-orange-500 group-hover:opacity-100 mr-1">#</span>
-              <span class="font-medium group-hover:text-orange-500">{chineseTag}</span>
-              <span class="ml-2 text-xs opacity-30 tabular-nums">{data.count}</span>
+              <span class="opacity-40 group-hover:!text-orange-500/50 mr-1">#</span>
+              <span class="font-medium">{chineseTag}</span>
+              <span class="ml-2 text-[10px] opacity-30 tabular-nums group-hover:!text-orange-500/50">{data.count}</span>
             </a>
           ))}
         </div>
       </div>
     )}
   </div>
-  
 </LayoutDefault>

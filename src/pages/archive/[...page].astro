@@ -25,18 +25,14 @@ const { page, totalCount } = Astro.props;
 
 <LayoutDefault title="归档">
   <section class="py-8">
-    <div class="max-w-[1200px] mx-auto px-6 md:px-16 lg:px-24">
-      
-      <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800"  style="transform: translateX(-0.2rem); ">
-        <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
-          归档
-        </h1>
-        <span class="text-sm text-zinc-400 mb-1 font-medium">
-          法义库共计 {totalCount} 篇文章
-        </span>
-      </header>
-
-    </div>
+    <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+      <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+        归档
+      </h1>
+      <span class="text-sm text-zinc-400 mb-1 font-medium">
+        法义库共计 {totalCount} 篇文章
+      </span>
+    </header>
 
     <div class="flex flex-col gap-8">
       {page.data.map(post => (
@@ -49,5 +45,11 @@ const { page, totalCount } = Astro.props;
     </div>
   </section>
 
-  <Pagination ... />
+  <Pagination
+    prev={page.url.prev}
+    next={page.url.next}
+    current={page.currentPage}
+    total={page.lastPage}
+    base="/archive"
+  />
 </LayoutDefault>
