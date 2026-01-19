@@ -83,13 +83,19 @@ const sortedTags = [...tagCountMap.entries()]
         <div class="flex flex-wrap gap-3">
           {sortedTags.map(([chineseTag, data]) => (
             <a
-              href={`/tags/${encodeURIComponent(data.slug)}/`}
-              class="inline-flex items-center px-3 py-1.5 bg-transparent text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded hover:!bg-zinc-800 hover:!text-orange-500 hover:border-zinc-800 transition-all group text-sm no-underline"
-            >
-              <span class="opacity-40 group-hover:!text-orange-500/50 mr-1">#</span>
-              <span class="font-medium">{chineseTag}</span>
-              <span class="ml-2 text-[10px] opacity-30 tabular-nums group-hover:!text-orange-500/50">{data.count}</span>
-            </a>
+  href={`/tags/${encodeURIComponent(data.slug)}/`}
+  /* 1. 提升默认文字颜色：从 zinc-600 提升到 zinc-800（深灰） */
+  /* 2. 悬停逻辑保持不变：!bg-zinc-800 和 !text-orange-500 */
+  class="inline-flex items-center px-3 py-1.5 bg-transparent text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 rounded-none hover:!bg-zinc-800 hover:!text-orange-500 hover:border-zinc-800 transition-all group text-sm no-underline"
+>
+  <span class="text-zinc-400 group-hover:!text-orange-500/50 mr-1">#</span>
+  
+  <span class="font-bold">{chineseTag}</span>
+  
+  <span class="ml-2 text-[11px] opacity-60 tabular-nums group-hover:!text-orange-500/50">
+    {data.count}
+  </span>
+</a>
           ))}
         </div>
       </div>

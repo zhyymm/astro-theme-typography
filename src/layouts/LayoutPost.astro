@@ -89,7 +89,8 @@ const authorDisplayName = post.data.authorName || authorSlug
     <div class="flex-1">
       {prev && (
         <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
-          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">上一篇 / Previous</div>
+          {/* 去掉了 / Previous */}
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">上一篇</div>
           <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline gap-1">
             <span class="shrink-0">←</span>
             <span>{prev.data.title}</span>
@@ -101,7 +102,8 @@ const authorDisplayName = post.data.authorName || authorSlug
     <div class="flex-1 sm:text-right">
       {next && (
         <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
-          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">下一篇 / Next</div>
+          {/* 去掉了 / Next */}
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">下一篇</div>
           <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline justify-end gap-1">
             <span>{next.data.title}</span>
             <span class="shrink-0">→</span>
