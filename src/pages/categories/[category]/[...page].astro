@@ -37,20 +37,7 @@ const base = `/categories/${category}`;
   <section class="py-8">
    <div class="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-12">
   
-  <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800" style="transform: translateX(2.5rem);  /* 只有当屏幕宽度大于 1024px（大显示器）时才应用这个位移 */
-  @media (min-width: 1024px) {
-    header {
-      /* 这里保持你调好的那个数值 */
-      transform: translateX(-1rem);
-    }
-  }
-
-  /* 当屏幕较小时，自动归零，防止标题在手机上跑偏 */
-  @media (max-width: 1500px) {
-    header {
-      transform: -2rem !important;
-    }
-  }">
+  <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800" style="transform: translateX(2.5rem);">
      
     <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
       
