@@ -62,68 +62,63 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     </footer>
 
     <style is:global>
-  /* --- 1. 背景与基础（保持你原本满意的样式） --- */
-  html {
-    background-color: #ffffff;
-    background-image: url('/placeholder.png') !important;
-    background-repeat: repeat !important;
-    background-attachment: fixed !important;
-    background-size: 960px auto !important;
-    image-rendering: -webkit-optimize-contrast;
+  /* --- 1. 基础布局还原：保证左右齐平 --- */
+  main {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
-  html.dark { background-color: #18181b; }
 
-  body, main, header, footer, #swup, section, article, .transition-swup-main {
+  /* --- 2. 交互规范：全站统一橙字，侧边栏专属黑底 --- */
+  a:hover {
+    color: #ea580c !important; /* 全站默认悬停变橙 */
     background-color: transparent !important;
-    background-image: none !important;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-
-  /* 导航悬停黑底白字 */
-  nav a:hover, header a:hover {
-    background-color: #000000 !important;
-    color: #ffffff !important;
     text-decoration: none !important;
   }
 
-  /* --- 2. 核心布局：主容器 --- */
-  main {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    max-width: 1200px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  /* 精准锁定侧边栏链接：黑底白字 */
+  aside a:hover, 
+  [class*="sidebar"] a:hover,
+  .flex-shrink-0 a:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important; /* 强制白字 */
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
   }
 
-  /* --- 3. 电脑端精准修复：只在宽屏下移动归档标题 --- */
-  @media (min-width: 1024px) {
-    /* 锁定归档页标题容器 */
+  /* --- 3. 电脑端专项：解决抬头偏左 --- */
+  @media (min-width: 1025px) {
+    /* 仅在宽屏下，给“归档”标题和描述加左边距，使其对齐下方文章 */
     main > h1:first-of-type,
-    .mb-10.flex.items-end {
-      /* 向右平移 2.2rem，使其视觉上与下方的文章标题完美对齐 */
-      transform: translateX(2.2rem) !important;
+    main > div.mb-10 {
+      margin-left: 2.2rem !important; 
     }
   }
 
-  /* --- 4. 手机端专项修复：收紧底部 + 还原标题 --- */
-  @media (max-width: 768px) {
+  /* --- 4. 手机端专项：解决标题跑偏 + 底部过长 --- */
+  @media (max-width: 1024px) {
+    /* 强制重置标题位置，防止在手机上出列 */
+    main > h1:first-of-type,
+    main > div.mb-10 {
+      margin-left: 0 !important;
+      text-align: left !important;
+    }
+
+    /* 缩短底部留白 */
     main {
-      padding-left: 1rem !important;
-      padding-right: 1rem !important;
-      /* 解决你最关心的手机端下边距过长问题 */
-      padding-bottom: 0.5rem !important; 
+      padding-bottom: 0.5rem !important;
     }
-    
-    /* 强制还原标题位置，防止标题在手机上跑偏 */
-    main > h1:first-of-type,
-    .mb-10.flex.items-end {
-      transform: translateX(0) !important;
-    }
-
     footer {
       margin-top: 0 !important;
       padding: 1rem !important;
+    }
+
+    /* 分页居中 */
+    nav[data-pagefind-ignore] {
+      display: flex !important;
+      justify-content: center !important;
+      margin: 1rem 0 !important;
     }
   }
 </style>
