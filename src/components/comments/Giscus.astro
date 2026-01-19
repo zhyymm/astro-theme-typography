@@ -26,7 +26,6 @@
 
       iframeInstance = document.createElement('iframe');
       
-      // 这里的 srcdoc 增加了对深色模式的兼容处理
       iframeInstance.srcdoc = `<!DOCTYPE html>
         <html>
           <head>
@@ -39,12 +38,10 @@
             <\/script>
             <style>
               :root { color-scheme: light dark; }
-              /* 隐藏原生的边框和外边距，让它更像原生组件 */
-              body { margin: 0; padding: 10px 0; font-family: system-ui, -apple-system, sans-serif; }
+              /* 【修改点 1】将 padding 从 10px 改为 0，彻底贴合 */
+              body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
               #root { padding: 0 !important; }
-              /* 微调按钮样式，使其更圆润 */
               .cusdis-btn { border-radius: 8px !important; transition: all 0.2s; }
-              /* 调整输入框间距 */
               .cusdis-input { border-radius: 6px !important; border: 1px solid #e2e8f0 !important; }
             </style>
           </head>
@@ -56,7 +53,8 @@
 
       iframeInstance.style.width = '100%';
       iframeInstance.style.border = '0';
-      iframeInstance.style.minHeight = '480px';
+      /* 【修改点 2】将 480px 改为 150px 甚至更小，防止下方出现大片空白 */
+      iframeInstance.style.minHeight = '150px'; 
       iframeInstance.style.display = 'block';
 
       window.addEventListener('message', (e) => {
@@ -92,18 +90,16 @@
 
 <style is:global>
   #cusdis_thread {
-    /* 1. 彻底取消最小高度限制，让它根据评论内容自动撑开 */
     min-height: auto !important; 
     width: 100% !important;
-    /* 2. 强制归零所有可能导致空白的间距 */
     margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    /* 【修改点 3】增加一个负边距尝试抵消一些外部组件带来的强制空白（可选） */
+    margin-bottom: -20px !important; 
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     border-top: none !important;
   }
 
-  /* 针对 iframe 内部可能存在的下边距进行微调 */
   #cusdis_thread iframe {
     margin-bottom: 0 !important;
     display: block !important;
