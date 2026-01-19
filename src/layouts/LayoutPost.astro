@@ -83,15 +83,15 @@ const authorDisplayName = post.data.authorName || authorSlug
     </p>
   </div>
 )}
-{/* --- 优雅版文字导航 --- */}
+{/* --- 手机端优化导航：修复悬停黑底黑字问题 --- */}
 {isPostPage && (prev || next) && (
   <nav class="not-prose mt-16 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between gap-6">
     <div class="flex-1">
       {prev && (
-        <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
-          {/* 去掉了 / Previous */}
-          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">上一篇</div>
-          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline gap-1">
+        <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} 
+           class="group no-underline block px-3 py-2 rounded-none transition-all hover:!bg-zinc-800">
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider group-hover:!text-orange-500/60">上一篇</div>
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 transition-colors flex items-baseline gap-1 group-hover:!text-orange-500">
             <span class="shrink-0">←</span>
             <span>{prev.data.title}</span>
           </div>
@@ -101,10 +101,10 @@ const authorDisplayName = post.data.authorName || authorSlug
     
     <div class="flex-1 sm:text-right">
       {next && (
-        <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline transition-all block">
-          {/* 去掉了 / Next */}
-          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider">下一篇</div>
-          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-baseline justify-end gap-1">
+        <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} 
+           class="group no-underline block px-3 py-2 rounded-none transition-all hover:!bg-zinc-800">
+          <div class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider group-hover:!text-orange-500/60">下一篇</div>
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 transition-colors flex items-baseline sm:justify-end gap-1 group-hover:!text-orange-500">
             <span>{next.data.title}</span>
             <span class="shrink-0">→</span>
           </div>
