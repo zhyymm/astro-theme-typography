@@ -62,33 +62,63 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     </footer>
 
     <style is:global>
-      /* --- 背景与布局样式保持不变 --- */
-      html {
-        background-color: #ffffff;
-        background-image: url('/placeholder.png') !important;
-        background-repeat: repeat !important;
-        background-attachment: fixed !important;
-        background-size: 960px auto !important;
-        image-rendering: -webkit-optimize-contrast;
-      }
+  /* --- 1. 背景与基础样式（保持不变） --- */
+  html {
+    background-color: #ffffff;
+    background-image: url('/placeholder.png') !important;
+    background-repeat: repeat !important;
+    background-attachment: fixed !important;
+    background-size: 960px auto !important;
+    image-rendering: -webkit-optimize-contrast;
+  }
 
-      html.dark {
-        background-color: #18181b;
-      }
+  html.dark {
+    background-color: #18181b;
+  }
 
-      body, main, header, footer, #swup, section, article, .transition-swup-main {
-        background-color: transparent !important;
-        background-image: none !important;
-      }
+  body, main, header, footer, #swup, section, article, .transition-swup-main {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
 
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-      nav a:hover, header a:hover {
-        background-color: #000000 !important;
-        color: #ffffff !important;
-        text-decoration: none !important;
-      }
-    </style>
+  nav a:hover, header a:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  /* --- 2. 布局样式（保持原本满意的左右齐平） --- */
+  main {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* --- 3. 电脑端：只修归档/分类抬头对齐（不挤压内容） --- */
+  @media (min-width: 769px) {
+    main > h1:first-of-type,
+    main > div.mb-10.flex.items-end {
+      transform: translateX(2.5rem); /* 向右位移，对齐正文标题 */
+    }
+  }
+
+  /* --- 4. 手机端：保持左右，仅收紧底部 --- */
+  @media (max-width: 768px) {
+    main {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      padding-bottom: 1rem !important; /* 收紧底部 */
+    }
+    footer {
+      margin-top: 0 !important;
+      padding: 1rem !important;
+    }
+  }
+</style>
   </body>
 </html>
