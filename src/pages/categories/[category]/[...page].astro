@@ -35,15 +35,35 @@ const base = `/categories/${category}`;
 
 <LayoutDefault title={`分类: ${chineseName}`}>
   <section class="py-8">
-   <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
-     <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
-       {chineseName}
-     </h1>
-     <span class="text-sm text-zinc-400 mb-1 font-medium">
-       共计 {totalCount} 篇文章
-     </span>
-   </header>
+   <div class="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-12">
+  
+  <header class="mb-12 flex items-end gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800" style="transform: translateX(2.5rem);  /* 只有当屏幕宽度大于 1024px（大显示器）时才应用这个位移 */
+  @media (min-width: 1024px) {
+    header {
+      /* 这里保持你调好的那个数值 */
+      transform: translateX(-1rem);
+    }
+  }
 
+  /* 当屏幕较小时，自动归零，防止标题在手机上跑偏 */
+  @media (max-width: 1023px) {
+    header {
+      transform: none !important;
+    }
+  }">
+     
+    <h1 class="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+      
+      {chineseName}
+      
+    </h1>
+    <span class="text-sm text-zinc-400 mb-1 font-medium">
+      共计 {totalCount} 篇文章
+    </span>
+    
+  </header>
+
+</div>
     <div class="flex flex-col gap-8">
       {page.data.map(post => (
         <LayoutPost post={post}>
@@ -53,7 +73,6 @@ const base = `/categories/${category}`;
     </div>
   </section>
   
-
   <Pagination
     prev={page.url.prev}
     next={page.url.next}
