@@ -66,31 +66,40 @@ const authorDisplayName = post.data.authorName || authorSlug
             {/* 上一篇 */}
             <div class="flex flex-col">
               {prev && (
-                <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline block">
-                  <div class="text-[10px] font-bold text-zinc-400 mb-1 uppercase tracking-widest">上一篇</div>
-                  <div class="text-[14px] font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-orange-500 transition-colors flex items-start gap-1">
-                    <span class="shrink-0 mt-0.5">←</span>
-                    <span class="line-clamp-2">{prev.data.title}</span>
-                  </div>
-                </a>
+               <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline block not-underline-hover nav-card-hover">
+  <div class="text-[10px] font-bold text-zinc-400 mb-1 uppercase tracking-widest">上一篇</div>
+  <div class="text-[14px] font-medium text-zinc-700 dark:text-zinc-300 flex items-start gap-1 title-text">
+    <span class="shrink-0 mt-0.5 arrow">←</span>
+    <span class="line-clamp-2">{prev.data.title}</span>
+  </div>
+</a>
+
               )}
             </div>
             
             {/* 下一篇 */}
             <div class="flex flex-col sm:items-end sm:text-right">
               {next && (
-                <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline block">
-                  <div class="text-[10px] font-bold text-zinc-400 mb-1 uppercase tracking-widest">下一篇</div>
-                  <div class="text-[14px] font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-orange-500 transition-colors flex items-start sm:justify-end gap-1">
-                    <span class="line-clamp-2">{next.data.title}</span>
-                    <span class="shrink-0 mt-0.5">→</span>
-                  </div>
-                </a>
+                <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} class="group no-underline block not-underline-hover nav-card-hover">
+  <div class="text-[10px] font-bold text-zinc-400 mb-1 uppercase tracking-widest sm:text-right">下一篇</div>
+  <div class="text-[14px] font-medium text-zinc-700 dark:text-zinc-300 flex items-start sm:justify-end gap-1 title-text">
+    <span class="line-clamp-2 text-right">{next.data.title}</span>
+    <span class="shrink-0 mt-0.5 arrow">→</span>
+  </div>
+</a>
               )}
             </div>
           </div>
         </nav>
       )}
+      <style>
+  /* 强制锁定：只要鼠标进入 a 标签，内部所有 span 必须变橙色 */
+  .nav-card-hover:hover .title-text,
+  .nav-card-hover:hover .title-text span {
+    color: #ea580c !important;
+    --un-text-opacity: 1 !important;
+  }
+</style>
 
       {/* 评论区 */}
       <div class="not-prose !mt-0">

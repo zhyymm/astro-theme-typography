@@ -11,7 +11,6 @@ const normalizedBase = base.endsWith('/') ? base : `${base}/`;
 const firstPageUrl = normalizedBase;
 const lastPageUrl = `${normalizedBase}${total}/`.replace(/\/+/g, '/');
 
-// --- 核心修正：路径破相，回归第一页真实路径 ---
 let prevUrl = ensureTrailingSlash(prev);
 if (prevUrl && (prevUrl === `${normalizedBase}1/` || prevUrl.endsWith('/1/'))) {
   prevUrl = normalizedBase;
@@ -20,18 +19,19 @@ if (prevUrl && (prevUrl === `${normalizedBase}1/` || prevUrl.endsWith('/1/'))) {
 const nextUrl = ensureTrailingSlash(next);
 ---
 
-<nav class="flex flex-col items-center gap-5 mt-16 mb-12 font-sans">
-  <div class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500 font-bold">
+<nav class="flex flex-col items-start justify-start gap-3 mt-8 mb-12 w-full font-sans" data-pagefind-ignore>
+  
+  <div class="text-sm text-zinc-500 font-medium tracking-wide ml-1">
     Page {current} <span class="mx-1 opacity-40">/</span> {total}
   </div>
 
-  <div class="inline-flex items-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm p-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all hover:shadow-md">
+  <div class="inline-flex items-center bg-zinc-100/50 dark:bg-zinc-800/50 p-1 rounded-full border border-zinc-200/50 dark:border-zinc-700/50">
 
     <div class="flex items-center">
       {current > 1 ? (
         <>
-          <a href={firstPageUrl} class="nav-link">首页</a>
-          <a href={prevUrl} class="nav-link px-3" title="上一页">
+          <a href={firstPageUrl} class="nav-link not-underline-hover">首页</a>
+          <a href={prevUrl} class="nav-link px-3 not-underline-hover" title="上一页">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18l-6-6l6-6"/></svg>
           </a>
         </>
@@ -43,15 +43,15 @@ const nextUrl = ensureTrailingSlash(next);
       )}
     </div>
 
-    <div class="w-[1px] h-5 bg-zinc-200 dark:bg-zinc-800 mx-1"></div>
+    <div class="w-[1px] h-4 bg-zinc-300 dark:bg-zinc-600 mx-1 opacity-50"></div>
 
     <div class="flex items-center">
       {current < total ? (
         <>
-          <a href={nextUrl} class="nav-link px-3" title="下一页">
+          <a href={nextUrl} class="nav-link px-3 not-underline-hover" title="下一页">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg>
           </a>
-          <a href={lastPageUrl} class="nav-link">尾页</a>
+          <a href={lastPageUrl} class="nav-link not-underline-hover">尾页</a>
         </>
       ) : (
         <>
@@ -64,68 +64,19 @@ const nextUrl = ensureTrailingSlash(next);
 </nav>
 
 <style>
-  /* 1. 强制容器：整体左对齐、垂直堆叠 */
-  nav {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important; 
-    justify-content: flex-start !important;
-    
-    margin-top: -1rem !important;    
-    margin-bottom: 4rem !important;
-    
-    width: 100% !important;
-    padding-left: 0 !important;
-    gap: 0.8rem !important;            /* 稍微拉开一点间距，更有呼吸感 */
-  }
-
-  /* 2. 第一行：Page 文字（同步正文字号） */
-  nav > div:first-child {
-    display: block !important;
-    text-align: left !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    
-    /* 核心修改：同步正文字号 */
-    font-size: 14px !important;        
-    font-weight: 500 !important;       /* 中等字重，不至于太粗 */
-    color: #71717a !important;         /* 对应 zinc-500，比正文稍浅 */
-    letter-spacing: 0.05em !important;
-    text-transform: none !important;   /* 取消全大写，回归自然排版 */
-  }
-
-  /* 3. 第二行：胶囊按钮容器 (居左) */
-  nav > div.inline-flex {
-    display: inline-flex !important;
-    margin: 0 !important;
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 0, 0, 0.05) !important;
-    padding: 3px !important;
-    border-radius: 999px !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-  }
-
-  /* 4. 按钮样式 */
-  .nav-link, .nav-disabled {
-    @apply px-4 py-1.5 rounded-full text-sm font-medium no-underline flex items-center justify-center;
-    text-decoration: none !important;
-    border: none !important;
-  }
-
+  /* 使用标准类名，移除 !important，避免干扰全局 */
   .nav-link {
-    @apply text-zinc-600 dark:text-zinc-400 hover:text-orange-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors;
+    @apply px-4 py-1.5 rounded-full text-sm font-medium transition-all flex items-center justify-center;
+    color: #52525b; /* zinc-600 */
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    background-color: #f4f4f5;
+    color: #ea580c; /* 悬停变橙色 */
   }
 
   .nav-disabled {
-    @apply text-zinc-300 dark:text-zinc-700 cursor-not-allowed;
-  }
-
-  /* 5. 竖线微调 */
-  nav div.bg-zinc-200 {
-    height: 14px !important;
-    margin: 0 6px !important;
-    opacity: 0.4 !important;
+    @apply px-4 py-1.5 rounded-full text-sm font-medium text-zinc-300 dark:text-zinc-700 cursor-not-allowed flex items-center justify-center;
   }
 </style>
