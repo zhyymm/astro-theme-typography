@@ -62,7 +62,7 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     </footer>
 
     <style is:global>
-  /* --- 1. 背景与基础样式（保持不变） --- */
+  /* --- 1. 背景与基础（保持你原本满意的样式） --- */
   html {
     background-color: #ffffff;
     background-image: url('/placeholder.png') !important;
@@ -71,10 +71,7 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     background-size: 960px auto !important;
     image-rendering: -webkit-optimize-contrast;
   }
-
-  html.dark {
-    background-color: #18181b;
-  }
+  html.dark { background-color: #18181b; }
 
   body, main, header, footer, #swup, section, article, .transition-swup-main {
     background-color: transparent !important;
@@ -82,15 +79,15 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
   }
 
   .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
+  /* 导航悬停黑底白字 */
   nav a:hover, header a:hover {
     background-color: #000000 !important;
     color: #ffffff !important;
     text-decoration: none !important;
   }
 
-  /* --- 2. 布局样式（保持原本满意的左右齐平） --- */
+  /* --- 2. 核心布局：主容器 --- */
   main {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -99,21 +96,31 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     margin-right: auto !important;
   }
 
-  /* --- 3. 电脑端：只修归档/分类抬头对齐（不挤压内容） --- */
-  @media (min-width: 769px) {
+  /* --- 3. 电脑端精准修复：只在宽屏下移动归档标题 --- */
+  @media (min-width: 1024px) {
+    /* 锁定归档页标题容器 */
     main > h1:first-of-type,
-    main > div.mb-10.flex.items-end {
-      transform: translateX(2.5rem); /* 向右位移，对齐正文标题 */
+    .mb-10.flex.items-end {
+      /* 向右平移 2.2rem，使其视觉上与下方的文章标题完美对齐 */
+      transform: translateX(2.2rem) !important;
     }
   }
 
-  /* --- 4. 手机端：保持左右，仅收紧底部 --- */
+  /* --- 4. 手机端专项修复：收紧底部 + 还原标题 --- */
   @media (max-width: 768px) {
     main {
       padding-left: 1rem !important;
       padding-right: 1rem !important;
-      padding-bottom: 1rem !important; /* 收紧底部 */
+      /* 解决你最关心的手机端下边距过长问题 */
+      padding-bottom: 0.5rem !important; 
     }
+    
+    /* 强制还原标题位置，防止标题在手机上跑偏 */
+    main > h1:first-of-type,
+    .mb-10.flex.items-end {
+      transform: translateX(0) !important;
+    }
+
     footer {
       margin-top: 0 !important;
       padding: 1rem !important;
