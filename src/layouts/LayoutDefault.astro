@@ -62,48 +62,53 @@ const isPostPage = Astro.url.pathname.includes('/posts/')
     </footer>
 
     <style is:global>
-      /* --- 背景与布局样式保持不变 --- */
-      html {
-        background-color: #ffffff;
-        background-image: url('/placeholder.png') !important;
-        background-repeat: repeat !important;
-        background-attachment: fixed !important;
-        background-size: 960px auto !important;
-        image-rendering: -webkit-optimize-contrast;
-      }
+  /* --- 保持你现有的背景与布局，完全不动 --- */
+  html {
+    background-color: #ffffff;
+    background-image: url('/placeholder.png') !important;
+    background-repeat: repeat !important;
+    background-attachment: fixed !important;
+    background-size: 960px auto !important;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  html.dark { background-color: #18181b; }
 
-      html.dark {
-        background-color: #18181b;
-      }
+  body, main, header, footer, #swup, section, article, .transition-swup-main {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
 
-      body, main, header, footer, #swup, section, article, .transition-swup-main {
-        background-color: transparent !important;
-        background-image: none !important;
-      }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  /* 保持你原本的导航悬停风格 */
+  nav a:hover, header a:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
 
-      nav a:hover, header a:hover {
-        background-color: #000000 !important;
-        color: #ffffff !important;
-        text-decoration: none !important;
-      }
-      main {
-    padding-left: 1.5rem !important;  /* 约 24px */
+  /* 保持你满意的左右对齐样式 */
+  main {
+    padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
-    max-width: 1200px !important;    /* 限制最大宽度，防止在大屏幕上拉得太开 */
-    margin-left: auto !important;     /* 配合 max-width 实现整体居中 */
+    max-width: 1200px !important;
+    margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* 适配手机端：间距缩小一点 */
+  /* --- 手机端专项微调：只增加底部收紧，不改左右 --- */
   @media (max-width: 768px) {
     main {
       padding-left: 1rem !important;
       padding-right: 1rem !important;
+      /* 核心修复：收紧手机端底部，防止留白过长 */
+      padding-bottom: 0.5rem !important; 
     }
+    /* 收紧页脚和分页的间距 */
+    footer { padding: 1rem !important; margin-top: 0 !important; }
+    nav[data-pagefind-ignore] { margin: 1rem 0 !important; display: flex; justify-content: center; }
   }
-    </style>
+</style>
   </body>
 </html>
