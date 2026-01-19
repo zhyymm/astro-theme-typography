@@ -63,20 +63,41 @@ const nextUrl = ensureTrailingSlash(next);
   </div>
 </nav>
 
-<style>
-  /* 使用标准类名，移除 !important，避免干扰全局 */
-  .nav-link {
-    @apply px-4 py-1.5 rounded-full text-sm font-medium transition-all flex items-center justify-center;
-    color: #52525b; /* zinc-600 */
-    text-decoration: none;
+<style is:global>
+  /* 1. 保持居中，并缩小与内容的距离 */
+  nav[data-pagefind-ignore] {
+    display: flex !important;
+    justify-content: center !important; /* 核心：保持居中 */
+    align-items: center !important;
+    gap: 1rem !important;
+    
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    
+    /* 调节此处数值：1rem 或 1.5rem 通常比较紧凑美观 */
+    margin-top: -1.5rem !important; 
+    margin-bottom: 1rem !important;
+    
+    clear: both !important;
   }
 
-  .nav-link:hover {
-    background-color: #f4f4f5;
-    color: #ea580c; /* 悬停变橙色 */
+  /* 2. 这里的样式确保分页按钮悬停时只有字变色，没有黑色块 */
+  nav[data-pagefind-ignore] a {
+    color: #71717a !important; 
+    transition: color 0.3s ease !important;
+    background: transparent !important;
+    text-decoration: none !important;
   }
 
-  .nav-disabled {
-    @apply px-4 py-1.5 rounded-full text-sm font-medium text-zinc-300 dark:text-zinc-700 cursor-not-allowed flex items-center justify-center;
+  nav[data-pagefind-ignore] a:hover {
+    color: #ea580c !important; /* 悬停变橙 */
+    background: transparent !important;
+  }
+
+  /* 3. 当前页码数字颜色 */
+  nav[data-pagefind-ignore] span {
+    color: #18181b !important;
+    font-weight: 500 !important;
   }
 </style>
