@@ -1,4 +1,5 @@
 ---
+/* JS 逻辑部分保持完全一致 */
 const { prev, next, current, total, base } = Astro.props;
 if (!total || total <= 1) return null;
 
@@ -11,93 +12,140 @@ const normalizedBase = base.endsWith('/') ? base : `${base}/`;
 const firstPageUrl = normalizedBase;
 const lastPageUrl = `${normalizedBase}${total}/`.replace(/\/+/g, '/');
 
+let start = Math.max(1, current);
+let end = Math.min(total, start + 9);
+if (end - start < 9) { start = Math.max(1, end - 9); }
+const range = Array.from({ length: (end - start) + 1 }, (_, i) => start + i);
+
 let prevUrl = ensureTrailingSlash(prev);
 if (prevUrl && (prevUrl === `${normalizedBase}1/` || prevUrl.endsWith('/1/'))) {
   prevUrl = normalizedBase;
 }
-
 const nextUrl = ensureTrailingSlash(next);
 ---
 
-<nav class="flex flex-col items-start justify-start gap-3 mt-8 mb-12 w-full font-sans" data-pagefind-ignore>
-  
-  <div class="text-sm text-zinc-500 font-medium tracking-wide ml-1">
-    Page {current} <span class="mx-1 opacity-40">/</span> {total}
-  </div>
+<nav class="pg-container" data-pagefind-ignore>
+  <div class="pg-row">
+    {/* 首页：手机端只显示符号 */}
+    <a href={firstPageUrl} class={`pg-btn ${current === 1 ? 'is-disabled' : ''}`}>
+      <span class="pc-only">首页</span><span class="m-only">«</span>
+    </a>
 
-  <div class="inline-flex items-center bg-zinc-100/50 dark:bg-zinc-800/50 p-1 rounded-full border border-zinc-200/50 dark:border-zinc-700/50">
+    {/* 上一页箭头 */}
+    <a href={prevUrl} class={`pg-btn arrow ${current === 1 ? 'is-disabled' : ''}`}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m15 18l-6-6l6-6"/></svg>
+    </a>
 
-    <div class="flex items-center">
-      {current > 1 ? (
-        <>
-          <a href={firstPageUrl} class="nav-link not-underline-hover">首页</a>
-          <a href={prevUrl} class="nav-link px-3 not-underline-hover" title="上一页">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18l-6-6l6-6"/></svg>
-          </a>
-        </>
-      ) : (
-        <>
-          <span class="nav-disabled">首页</span>
-          <span class="nav-disabled px-3"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18l-6-6l6-6"/></svg></span>
-        </>
-      )}
+    {/* 数字区域：强制不换行 */}
+    <div class="pg-numbers">
+      {range.map((num) => (
+        <a
+          href={num === 1 ? firstPageUrl : `${normalizedBase}${num}/`}
+          class={`pg-btn num ${current === num ? 'is-active' : ''}`}
+        >
+          {num}
+        </a>
+      ))}
     </div>
 
-    <div class="w-[1px] h-4 bg-zinc-300 dark:bg-zinc-600 mx-1 opacity-50"></div>
+    {/* 下一页箭头 */}
+    <a href={nextUrl} class={`pg-btn arrow ${current === total ? 'is-disabled' : ''}`}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m9 18l6-6l-6-6"/></svg>
+    </a>
 
-    <div class="flex items-center">
-      {current < total ? (
-        <>
-          <a href={nextUrl} class="nav-link px-3 not-underline-hover" title="下一页">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg>
-          </a>
-          <a href={lastPageUrl} class="nav-link not-underline-hover">尾页</a>
-        </>
-      ) : (
-        <>
-          <span class="nav-disabled px-3"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg></span>
-          <span class="nav-disabled">尾页</span>
-        </>
-      )}
-    </div>
+    {/* 尾页：手机端只显示符号 */}
+    <a href={lastPageUrl} class={`pg-btn ${current === total ? 'is-disabled' : ''}`}>
+      <span class="pc-only">尾页</span><span class="m-only">»</span>
+    </a>
+
+    {/* 页码：1/19 紧跟其后 */}
+    <span class="pg-info">{current}/{total}</span>
   </div>
 </nav>
 
 <style is:global>
-  /* 1. 保持居中，并缩小与内容的距离 */
-  nav[data-pagefind-ignore] {
-    display: flex !important;
-    justify-content: center !important; /* 核心：保持居中 */
-    align-items: left !important;
-    gap: 1rem !important;
-    
+  .pg-container {
+    margin: -2.5rem 0;
     width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    
-    /* 调节此处数值：1rem 或 1.5rem 通常比较紧凑美观 */
-    margin-top: -2.5rem !important; 
-    margin-bottom: 0rem !important;
-    
-    clear: both !important;
+    display: block !important;
   }
 
-  /* 2. 这里的样式确保分页按钮悬停时只有字变色，没有黑色块 */
-  nav[data-pagefind-ignore] a {
-    color: #71717a !important; 
-    transition: color 0.3s ease !important;
-    background: transparent !important;
+  .pg-row {
+    display: flex !important;
+    flex-wrap: nowrap !important; /* 核心：严禁换行 */
+    align-items: center;
+    gap: 0px; /* 间距由内部 padding 控制 */
+  }
+
+  .pg-numbers {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .pg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 6px;
+    font-size: 13px;
+    color: #71717a !important;
     text-decoration: none !important;
+    transition: all 0.2s;
+    min-width: 22px;
   }
 
-  nav[data-pagefind-ignore] a:hover {
-    color: #ea580c !important; /* 悬停变橙 */
-    background: transparent !important;
+  .pg-btn.num {
+    min-width: 24px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
-  /* 3. 当前页码数字颜色 */
-  nav[data-pagefind-ignore] span {
-    color: #18181b !important;
-    font-weight: 500 !important;
+  .pg-info {
+    font-size: 11px;
+    color: #a1a1aa;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  /* 状态样式 */
+  .pg-btn:not(.is-disabled):hover,
+  .pg-btn.is-active {
+    background-color: #27272a !important;
+    color: #ea580c !important;
+  }
+
+  .is-disabled {
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* 隐藏控制 */
+  .m-only { display: none; }
+
+  @media (max-width: 640px) {
+    .pc-only { display: none; }
+    .m-only { display: inline-block; font-weight: bold; font-size: 14px; }
+    
+    .pg-btn {
+      height: 24px;
+      padding: 0 3px;
+      font-size: 12px;
+      min-width: 18px;
+    }
+    
+    .pg-btn.num {
+      min-width: 20px;
+    }
+
+    .pg-info {
+      margin-left: 5px;
+      font-size: 10px;
+    }
+  }
+
+  /* 针对极其狭窄的屏幕（如 iPhone SE）进一步压缩 */
+  @media (max-width: 380px) {
+    .pg-btn { padding: 0 2px; min-width: 16px; }
+    .pg-info { display: none; } /* 实在放不下就隐藏统计 */
   }
 </style>
