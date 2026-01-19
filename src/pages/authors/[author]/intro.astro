@@ -52,16 +52,22 @@ const { Content } = await entry.render();
     <footer class="mt-20 pt-10 border-t border-zinc-100 dark:border-zinc-800">
       <div class="flex flex-col items-center gap-4">
         {/* 修正点：这里的链接指向 /authors/xxx/，即列表页的根路径 */}
-       <a
-         href={`/authors/${entry.slug}/`}
-         /* 重点：加入了 no-underline (去装饰线) 和 border-none (去边框线) */
-         class="group flex items-center gap-3 px-6 py-3 rounded-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-orange-500 transition-all shadow-sm no-underline border-none"
-       >
-         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24">
-           <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12H5m7-7l-7 7l7 7"/>
-         </svg>
-         <span class="no-underline">返回名录</span>
-       </a>
+     <a
+  href={`/authors/${entry.slug}/`}
+  /* 平时：浅橙背景 (bg-orange-50), 橙字 (text-orange-600) */
+  /* 悬停：黑底 (hover:!bg-zinc-800), 白字 (hover:!text-white) */
+  class="group inline-flex items-center gap-2 px-5 py-2 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold text-sm uppercase tracking-wider transition-all no-underline hover:!bg-zinc-800 hover:!text-white shadow-sm border-none"
+>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    /* 箭头也跟随文字颜色变化：平时橙，悬停白 */
+    class="w-4 h-4 transition-colors group-hover:!text-white" 
+    viewBox="0 0 24 24"
+  >
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12H5m7-7l-7 7l7 7"/>
+  </svg>
+  <span>返回名录</span>
+</a>
       </div>
     </footer>
   </article>
