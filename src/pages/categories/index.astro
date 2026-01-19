@@ -61,9 +61,10 @@ const sortedTags = [...tagCountMap.entries()]
         categoryList.map(({ title, href, count }) => (
           <div class="group flex items-center justify-between border-b border-dotted border-zinc-200 dark:border-zinc-700 pb-2">
             <h3 class="text-lg font-medium">
-              <a href={href} class="inline-flex items-center px-3 py-1 bg-transparent text-zinc-700 dark:text-zinc-300 rounded-md hover:!bg-zinc-800 hover:!text-orange-500 transition-all no-underline text-sm md:text-base">
-                <span class="opacity-30 mr-1 font-light group-hover:!text-orange-500/50">#</span>{title}
-              </a>
+              <span class="opacity-30 mr-1 font-light group-hover:!text-orange-500/50">#</span>
+              <a href={href} class="inline-flex items-center px-3 py-1 bg-transparent text-zinc-700 dark:text-zinc-300  hover:!bg-zinc-800 hover:!text-orange-500 transition-all no-underline text-sm md:text-base">
+                {title}
+              
             </h3>
             <span class="text-xs opacity-40 tabular-nums">
               {count} 篇文章
