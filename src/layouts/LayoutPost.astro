@@ -83,52 +83,41 @@ const authorDisplayName = post.data.authorName || authorSlug
     </p>
   </div>
 )}
-<nav class="not-prose mt-12 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<nav class="not-prose mt-10 pt-6 border-t border-dashed border-zinc-200 dark:border-zinc-800 text-sm">
+  <div class="flex flex-wrap gap-x-6 gap-y-3 items-center text-zinc-600 dark:text-zinc-400">
     
-    {/* 上一篇：靠左 */}
-    <div class="flex justify-start">
-      {prev ? (
-        <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} 
-           class="group flex flex-col items-start p-3 transition-all hover:bg-zinc-900 dark:hover:bg-zinc-100 no-underline max-w-full">
-          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-500">上一篇</span>
-          <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-center gap-2">
-            <span class="shrink-0">←</span>
-            <span class="line-clamp-1">{prev.data.title}</span>
-          </span>
-        </a>
-      ) : <div />}
-    </div>
+    {/* 上一篇 */}
+    {prev && (
+      <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} 
+         class="group no-underline hover:text-orange-600 transition-colors flex items-center gap-1">
+        <span class="shrink-0 text-zinc-400">« 上一篇:</span>
+        <span class="underline decoration-zinc-300 group-hover:decoration-orange-500 underline-offset-4 line-clamp-1">
+          {prev.data.title}
+        </span>
+      </a>
+    )}
 
-    {/* 下一篇：靠右 */}
-    <div class="flex justify-end">
-      {next ? (
-        <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} 
-           class="group flex flex-col items-end p-3 transition-all hover:bg-zinc-900 dark:hover:bg-zinc-100 no-underline max-w-full text-right">
-          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-500">下一篇</span>
-          <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-orange-500 transition-colors flex items-center gap-2">
-            <span class="line-clamp-1">{next.data.title}</span>
-            <span class="shrink-0">→</span>
-          </span>
-        </a>
-      ) : <div />}
-    </div>
+    {/* 下一篇 */}
+    {next && (
+      <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} 
+         class="group no-underline hover:text-orange-600 transition-colors flex items-center gap-1">
+        <span class="shrink-0 text-zinc-400">下一篇:</span>
+        <span class="underline decoration-zinc-300 group-hover:decoration-orange-500 underline-offset-4 line-clamp-1">
+          {next.data.title}
+        </span>
+        <span class="shrink-0 text-zinc-400">»</span>
+      </a>
+    )}
 
   </div>
 </nav>
 
-<style>
-  /* 确保悬停时文字颜色的高优先级 */
-  .group:hover span {
-    /* 悬停时，标题和箭头变橙色，小字变灰色 */
-  }
-  
-  /* 适配深色模式：黑底变白底，字变黑 */
-  :global(.dark) .group:hover {
-    background-color: #f4f4f5 !important; /* zinc-100 */
-  }
-  :global(.dark) .group:hover span:last-child {
-    color: #ea580c !important; /* orange-600 */
+<style is:global>
+  /* 彻底移除之前尝试过的所有背景色和复杂按钮样式 */
+  .not-prose a.group {
+    background: transparent !important;
+    padding: 0 !important;
+    display: inline-flex !important;
   }
 </style>
 {/* 5. 评论区 */}
