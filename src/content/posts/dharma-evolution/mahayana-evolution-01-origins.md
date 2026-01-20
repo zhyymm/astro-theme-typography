@@ -6,7 +6,7 @@ description: ''
 slug: 
 draft: false
 tags: [大乘佛教演变史]
-pin: true
+pin: false
 
 ---
 
