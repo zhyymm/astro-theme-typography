@@ -65,35 +65,87 @@ const nextUrl = ensureTrailingSlash(next);
 
 <style is:global>
   .pg-container {
-    /* 1. 消除顶部多余空隙，让它紧贴文章 */
-    margin: 0.5rem 0 2rem 0 !important; 
-    
-    /* 2. 关键：将 display 改为 flex 而非 block，防止在手机端产生奇怪的占位感 */
-    display: flex !important;
+    margin: 0rem 0;
     width: 100% !important;
-    clear: both !important;
-    
-    /* 3. 消除可能导致“上下移动”的溢出属性 */
-    overflow: visible !important; 
-    touch-action: pan-x; /* 只允许横向触摸，防止垂直滑屏时分页条抖动 */
+    display: block !important;
   }
 
   .pg-row {
     display: flex !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: 100%;
-    /* 4. 移除 overflow-x: auto，除非页码真的多到溢出屏幕 */
-    /* 这样可以消除手机端那种“小窗口”内部滚动的框架感 */
-    overflow: visible !important; 
+    flex-wrap: nowrap !important; /* 核心：严禁换行 */
+    align-items: center;
+    gap: 0px; /* 间距由内部 padding 控制 */
   }
 
-  /* 5. 确保在手机端没有额外的阴影或背景色干扰 */
+  .pg-numbers {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .pg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 6px;
+    font-size: 16px;
+    color: #71717a !important;
+    text-decoration: none !important;
+    transition: all 0.2s;
+    min-width: 22px;
+  }
+
+  .pg-btn.num {
+    min-width: 24px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .pg-info {
+    font-size: 11px;
+    color: #a1a1aa;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  /* 状态样式 */
+  .pg-btn:not(.is-disabled):hover,
+  .pg-btn.is-active {
+    background-color: #27272a !important;
+    color: #ea580c !important;
+  }
+
+  .is-disabled {
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* 隐藏控制 */
+  .m-only { display: none; }
+
   @media (max-width: 640px) {
-    .pg-container {
-      background: transparent !important;
-      border: none !important;
+    .pc-only { display: none; }
+    .m-only { display: inline-block; font-weight: bold; font-size: 14px; }
+    
+    .pg-btn {
+      height: 24px;
+      padding: 0 3px;
+      font-size: 14px;
+      min-width: 24px;
     }
+    
+    .pg-btn.num {
+      min-width: 20px;
+    }
+
+    .pg-info {
+      margin-left: 5px;
+      font-size: 10px;
+    }
+  }
+
+  /* 针对极其狭窄的屏幕（如 iPhone SE）进一步压缩 */
+  @media (max-width: 380px) {
+    .pg-btn { padding: 0 2px; min-width: 16px; }
+    .pg-info { display: none; } /* 实在放不下就隐藏统计 */
   }
 </style>
