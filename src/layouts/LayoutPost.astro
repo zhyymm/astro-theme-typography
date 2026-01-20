@@ -83,7 +83,76 @@ const authorDisplayName = post.data.authorName || authorSlug
     </p>
   </div>
 )}
+{/* --- 手机端优化导航：强制锁定橙色逻辑 --- */}
+{isPostPage && (prev || next) && (
+  <nav class="not-prose mt-16 pt-8 border-t border-dashed border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between gap-6">
+    <div class="flex-1">
+      {prev && (
+        <a href={`/posts/${prev.id.replace(/\.(md|mdx)$/, '')}/`} 
+           class="group no-underline block px-4 py-3 rounded-none transition-all hover:!bg-zinc-800 border border-transparent">
+          {/* 小字部分：悬停变暗橙 */}
+          <span class="block text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider transition-colors group-hover:!text-orange-500/60">
+            上一篇
+          </span>
+          {/* 标题部分：悬停变亮橙 */}
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 transition-colors flex items-baseline gap-1 group-hover:!text-orange-500">
+            <span class="shrink-0">←</span>
+            <span>{prev.data.title}</span>
+          </div>
+        </a>
+      )}
+    </div>
+    
+    <div class="flex-1 sm:text-right">
+      {next && (
+        <a href={`/posts/${next.id.replace(/\.(md|mdx)$/, '')}/`} 
+           class="group no-underline block px-4 py-3 rounded-none transition-all hover:!bg-zinc-800 border border-transparent">
+          {/* 小字部分 */}
+          <span class="block text-[11px] font-bold text-zinc-400 dark:text-zinc-500 mb-1 uppercase tracking-wider transition-colors group-hover:!text-orange-500/60">
+            下一篇
+          </span>
+          {/* 标题部分 */}
+          <div class="text-base font-medium text-zinc-800 dark:text-zinc-200 transition-colors flex items-baseline sm:justify-end gap-1 group-hover:!text-orange-500">
+            <span>{next.data.title}</span>
+            <span class="shrink-0">→</span>
+          </div>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+<style is:global>
+  /* 1. 锁定根容器，防止移动端高度计算错误 */
+  html, body {
+    height: -webkit-fill-available; /* 适配移动端浏览器工具栏 */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 防止左右晃动 */
+    overscroll-behavior-y: none; /* 可选：禁用系统回弹，彻底消除框架感 */
+  }
 
+  /* 2. 针对 LayoutPost 的主容器进行扁平化处理 */
+  /* 请根据你主题的实际类名调整，通常是 main 或 #app */
+  main, article {
+    /* 消除 Margin 塌陷：这是导致“十几像素位移”的元凶 */
+    display: flow-root; 
+    /* 确保滑动时背景是整体 */
+    background-attachment: scroll;
+    -webkit-overflow-scrolling: touch; /* 恢复原生丝滑滚动 */
+  }
+
+  /* 3. 消除详情页底部可能的空白“死区” */
+  footer {
+    margin-top: 0 !important;
+    padding-top: 2rem;
+  }
+
+  /* 4. 检查是否有带阴影或边框的容器包裹了正文 */
+  .prose, #post-content {
+    box-shadow: none !important;
+    border: none !important;
+  }
+</style>
 {/* 5. 评论区 */}
 {isPostPage && (
   <section class="giscus-container mt-12">
