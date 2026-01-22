@@ -1,11 +1,11 @@
 ---
 title: 001.怎樣才是真正的讚歎佛陀？
-pubDate: 2026-01-20 01:36:26
+pubDate: 2026-01-22 20:32:12
 categories: ['阿含經故事選']
 description: ''
 slug: 
 tags: []
-draft: true
+draft: false
 author: "zcj"
 authorName: '莊春江'
 ---
