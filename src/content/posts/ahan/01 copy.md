@@ -5,7 +5,7 @@ categories: ['阿含經故事選']
 description: '「如果能修習隨死念，多修習後，就會有很好的成效。怎麼修呢？應當以隨死念分別配合念覺分、擇法覺分、精進覺分、猗覺分、喜覺分、定覺分、捨覺分，把握依遠離、依無欲、依滅、向於捨的實踐來修。」'
 slug: 
 tags: []
-draft: false
+draft: true
 author: "zcj"
 authorName: '莊春江'
 ---
